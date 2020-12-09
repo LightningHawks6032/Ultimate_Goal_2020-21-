@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import java.util.ArrayList;
+
 
 @TeleOp(name = "Drivtrain TeleOp", group = "Iterative Opmode")
 //@Disabled
@@ -19,17 +21,21 @@ public class DrivetrainTeleOp extends OpMode {
     DcMotor frontRight;
     DcMotor backRight;
 
+    ArrayList<DcMotor> drivetrain = new ArrayList<DcMotor>();
+
 
     public void init(){
-        frontLeft = hardwareMap.get(DcMotor.class, "fl");
-        frontLeft.setDirection(DcMotor.Direction.FORWARD);
-        backLeft = hardwareMap.get(DcMotor.class, "bl");
-        backLeft.setDirection(DcMotor.Direction.FORWARD);
 
-        frontRight = hardwareMap.get(DcMotor.class, "fr");
-        frontRight.setDirection(DcMotor.Direction.REVERSE);
-        backRight = hardwareMap.get(DcMotor.class, "br");
-        backRight.setDirection(DcMotor.Direction.REVERSE);
+        drivetrain.add(hardwareMap.get(DcMotor.class, "fl"));
+        drivetrain.add(hardwareMap.get(DcMotor.class, "bl"));
+        drivetrain.get(0).setDirection(DcMotor.Direction.FORWARD);
+        drivetrain.get(1).setDirection(DcMotor.Direction.FORWARD);
+
+        drivetrain.add(hardwareMap.get(DcMotor.class, "fr"));
+        drivetrain.add(hardwareMap.get(DcMotor.class, "br"));
+        drivetrain.get(2).setDirection(DcMotor.Direction.REVERSE);
+        drivetrain.get(3).setDirection(DcMotor.Direction.REVERSE);
+
 
 
     }
@@ -39,21 +45,22 @@ public class DrivetrainTeleOp extends OpMode {
 
     public void loop(){
 
-        frontLeft.setPower(gamepad1.left_stick_y);
-        backLeft.setPower(gamepad1.left_stick_y);
-        frontRight.setPower(gamepad1.right_stick_y);
-        backRight.setPower(gamepad1.right_stick_y);
+
+        drivetrain.get(0).setPower(2*gamepad1.left_stick_y);
+        drivetrain.get(1).setPower(2*gamepad1.left_stick_y);
+        drivetrain.get(2).setPower(2*gamepad1.right_stick_y);
+        drivetrain.get(3).setPower(2*gamepad1.right_stick_y);
 
         if(gamepad1.left_trigger>gamepad1.left_stick_y){
-            frontLeft.setPower(-gamepad1.left_trigger);
-            backLeft.setPower(gamepad1.left_trigger);
-            frontRight.setPower(-gamepad1.left_trigger);
-            backRight.setPower(gamepad1.left_trigger);
+            drivetrain.get(0).setPower(-gamepad1.left_trigger);
+            drivetrain.get(1).setPower(gamepad1.left_trigger);
+            drivetrain.get(2).setPower(-gamepad1.left_trigger);
+            drivetrain.get(3).setPower(gamepad1.left_trigger);
         }else if(gamepad1.right_trigger>gamepad1.right_stick_y){
-            frontLeft.setPower(gamepad1.right_trigger);
-            backLeft.setPower(-gamepad1.right_trigger);
-            frontRight.setPower(gamepad1.right_trigger);
-            backRight.setPower(-gamepad1.right_trigger);
+            drivetrain.get(0).setPower(gamepad1.right_trigger);
+            drivetrain.get(1).setPower(-gamepad1.right_trigger);
+            drivetrain.get(2).setPower(gamepad1.right_trigger);
+            drivetrain.get(3).setPower(-gamepad1.right_trigger);
         }
 
 
