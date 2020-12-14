@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.drive;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class DriveController {
     private DcMotor motorFL = null;
@@ -10,11 +11,18 @@ public class DriveController {
     private MotorClipMode clipMode;
 
 
-    public DriveController(MotorClipMode clipMode) {
+    public DriveController(MotorClipMode clipMode, HardwareMap hardwareMap) {
         this.clipMode = clipMode;
-    }
-    public DriveController() {
-        this(null);
+
+        motorFL = hardwareMap.get(DcMotor.class, "fl");
+        motorFL.setDirection(DcMotor.Direction.FORWARD);
+        motorBL = hardwareMap.get(DcMotor.class, "bl");
+        motorBL.setDirection(DcMotor.Direction.FORWARD);
+
+        motorFR = hardwareMap.get(DcMotor.class, "fr");
+        motorFR.setDirection(DcMotor.Direction.REVERSE);
+        motorBR = hardwareMap.get(DcMotor.class, "br");
+        motorBR.setDirection(DcMotor.Direction.REVERSE);
     }
 
     public void setMotorBL(DcMotor motorBL) { this.motorBL = motorBL; }
@@ -22,16 +30,38 @@ public class DriveController {
     public void setMotorFL(DcMotor motorFL) { this.motorFL = motorFL; }
     public void setMotorFR(DcMotor motorFR) { this.motorFR = motorFR; }
 
-    public void setClipMode(MotorClipMode clipMode) { this.clipMode = clipMode; }
-
-    public void updateMotors(double moveY, double moveX, double rotate){
+    protected void checkMotorsPresent() {
         if (motorBL == null || motorBR == null || motorFL == null || motorFR == null)
             throw new IllegalStateException("DriveController: motor(s) were unset!");
+    }
+
+    public void updateMotors_YXR(double moveY, double moveX, double rotate){
+        checkMotorsPresent();
 
         double powerFL = moveY + moveX - rotate;
         double powerFR = moveY + moveX + rotate;
         double powerBL = moveY - moveX - rotate;
         double powerBR = moveY - moveX + rotate;
+
+        setMotorsClamped(powerFL,powerFR,powerBL,powerBR);
+    }
+    public void updateMotors_LRX(double moveL, double moveR, double moveX){
+        checkMotorsPresent();
+
+        double powerFL = moveL + moveX;
+        double powerBL = moveL - moveX;
+        double powerFR = moveR + moveX;
+        double powerBR = moveR - moveX;
+
+        setMotorsClamped(powerFL,powerFR,powerBL,powerBR);
+    }
+
+    private void setMotorsClamped(double fl, double fr, double bl, double br) {
+
+        double powerFL = fl;
+        double powerFR = fr;
+        double powerBL = bl;
+        double powerBR = br;
 
         double maxPower = Math.max(Math.max(powerBL,powerBR),Math.max(powerFL,powerFR));
 
@@ -49,7 +79,7 @@ public class DriveController {
                 powerBR /= maxPower;
                 break;
             default:
-             break;
+                break;
         }
 
         motorFL.setPower(powerFL);
