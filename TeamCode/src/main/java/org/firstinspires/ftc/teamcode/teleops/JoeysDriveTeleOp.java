@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.drive.DriveController;
 
 @TeleOp(group = "what does this do?", name = "Joey's Drive TeleOp")
-@Disabled
+//@Disabled
 public class JoeysDriveTeleOp extends OpMode {
 
     DriveController driveController;
