@@ -7,35 +7,36 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import org.firstinspires.ftc.teamcode.drive.imu.IMUAccelerationIntegrator;
 import org.firstinspires.ftc.teamcode.hardware.HardwareConstants;
+import org.firstinspires.ftc.teamcode.hardware.HardwareMapKeys;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AutoController {
 
-    List<Position> waypoints;
+    final List<Position> waypoints;
     IMUAccelerationIntegrator accInt;
 
-    BNO055IMU imu;
+    final BNO055IMU imu;
 
-    DriveMotors motors;
+    final DriveMotors motors;
 
     public AutoController(HardwareMap hardwaremap) {
         waypoints = new ArrayList<>();
         motors = new DriveMotors(hardwaremap);
+
+        imu = hardwaremap.get(BNO055IMU.class, HardwareMapKeys.IMU);
     }
 
-    public void init(BNO055IMU imuIn) {
+    public void init() {
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();
         params.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         params.mode = BNO055IMU.SensorMode.IMU;
         params.calibrationData = new BNO055IMU.CalibrationData();
         accInt = new IMUAccelerationIntegrator();
 
-        imuIn.initialize(params);
+        imu.initialize(params);
         accInt.initialize(params,new Position(),new Velocity());
-
-        imu = imuIn;
     }
 
     public void addPoint(Position pos) {

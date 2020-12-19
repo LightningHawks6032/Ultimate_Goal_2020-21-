@@ -3,23 +3,23 @@ package org.firstinspires.ftc.teamcode.drive;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.hardware.HardwareMaps;
+import org.firstinspires.ftc.teamcode.hardware.HardwareMapKeys;
 
 public class DriveMotors {
-    public DcMotor fl = null;
-    public DcMotor bl = null;
-    public DcMotor fr = null;
-    public DcMotor br = null;
+    public final DcMotor fl;
+    public final DcMotor bl;
+    public final DcMotor fr;
+    public final DcMotor br;
 
     public DriveMotors(HardwareMap hardwareMap) {
-        fl = hardwareMap.get(DcMotor.class, HardwareMaps.DRIVE.motorFL);
+        fl = hardwareMap.get(DcMotor.class, HardwareMapKeys.MOTOR_FL);
         fl.setDirection(DcMotor.Direction.FORWARD);
-        bl = hardwareMap.get(DcMotor.class, HardwareMaps.DRIVE.motorBL);
+        bl = hardwareMap.get(DcMotor.class, HardwareMapKeys.MOTOR_BL);
         bl.setDirection(DcMotor.Direction.FORWARD);
 
-        fr = hardwareMap.get(DcMotor.class, HardwareMaps.DRIVE.motorFR);
+        fr = hardwareMap.get(DcMotor.class, HardwareMapKeys.MOTOR_FR);
         fr.setDirection(DcMotor.Direction.REVERSE);
-        br = hardwareMap.get(DcMotor.class, HardwareMaps.DRIVE.motorBR);
+        br = hardwareMap.get(DcMotor.class, HardwareMapKeys.MOTOR_BR);
         br.setDirection(DcMotor.Direction.REVERSE);
     }
 

@@ -1,12 +1,12 @@
 package org.firstinspires.ftc.teamcode.drive.imu;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
+import org.jetbrains.annotations.NotNull;
 
 public class IMUAccelerationIntegrator implements BNO055IMU.AccelerationIntegrator
 {
@@ -15,7 +15,7 @@ public class IMUAccelerationIntegrator implements BNO055IMU.AccelerationIntegrat
     Position pos;
     Velocity vel;
 
-    @Override public void initialize(BNO055IMU.Parameters parameters, Position initialPosition, Velocity initialVelocity)
+    @Override public void initialize(@NotNull BNO055IMU.Parameters parameters, Position initialPosition, Velocity initialVelocity)
     {
         this.parameters = parameters;
         pos = initialPosition == null ? new Position() : initialPosition;

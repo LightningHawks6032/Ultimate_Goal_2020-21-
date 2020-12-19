@@ -3,12 +3,12 @@ package org.firstinspires.ftc.teamcode.drive;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class DriveController {
-    private DriveMotors.MotorClipMode clipMode;
-    private DriveMotors motors;
+    private final DriveMotors.MotorClipMode clipMode;
+    private final DriveMotors motors;
 
     public DriveController(DriveMotors.MotorClipMode clipMode, HardwareMap hardwareMap) {
         this.clipMode = clipMode;
-
+        this.motors = new DriveMotors(hardwareMap);
     }
 
     protected void checkMotorsPresent() {
