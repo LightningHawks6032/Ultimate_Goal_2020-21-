@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.drive.DriveController;
+import org.firstinspires.ftc.teamcode.drive.DriveMotors;
 
 
 @TeleOp(name = "Drivtrain TeleOp", group = "Iterative Opmode")
@@ -15,7 +16,7 @@ public class DrivetrainTeleOp extends OpMode {
     DriveController driveController;
 
     public void init(){
-        driveController = new DriveController(DriveController.MotorClipMode.CLAMP, hardwareMap);
+        driveController = new DriveController(DriveMotors.MotorClipMode.CLAMP, hardwareMap);
 
     }
 
