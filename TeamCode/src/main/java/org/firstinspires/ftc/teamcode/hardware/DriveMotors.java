@@ -1,26 +1,20 @@
-package org.firstinspires.ftc.teamcode.drive;
+package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.hardware.HardwareMapKeys;
+import org.firstinspires.ftc.teamcode.drive.DcMotorRampable;
 
 public class DriveMotors {
-    public final DcMotor fl;
-    public final DcMotor bl;
-    public final DcMotor fr;
-    public final DcMotor br;
+    public final DcMotorRampable fl;
+    public final DcMotorRampable bl;
+    public final DcMotorRampable fr;
+    public final DcMotorRampable br;
 
-    public DriveMotors(HardwareMap hardwareMap) {
-        fl = hardwareMap.get(DcMotor.class, HardwareMapKeys.MOTOR_FL);
-        fl.setDirection(DcMotor.Direction.FORWARD);
-        bl = hardwareMap.get(DcMotor.class, HardwareMapKeys.MOTOR_BL);
-        bl.setDirection(DcMotor.Direction.FORWARD);
-
-        fr = hardwareMap.get(DcMotor.class, HardwareMapKeys.MOTOR_FR);
-        fr.setDirection(DcMotor.Direction.REVERSE);
-        br = hardwareMap.get(DcMotor.class, HardwareMapKeys.MOTOR_BR);
-        br.setDirection(DcMotor.Direction.REVERSE);
+    public DriveMotors(DcMotor motor_fl, DcMotor motor_fr, DcMotor motor_bl, DcMotor motor_br) {
+        fl = new DcMotorRampable(motor_fl);
+        fr = new DcMotorRampable(motor_fr);
+        bl = new DcMotorRampable(motor_bl);
+        br = new DcMotorRampable(motor_br);
     }
 
     public boolean checkMotorsPresent() {

@@ -1,13 +1,9 @@
 package org.firstinspires.ftc.teamcode.drive;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
-import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
-import org.firstinspires.ftc.teamcode.drive.imu.IMUAccelerationIntegrator;
-import org.firstinspires.ftc.teamcode.hardware.HardwareConstants;
-import org.firstinspires.ftc.teamcode.hardware.HardwareMapKeys;
+import org.firstinspires.ftc.teamcode.hardware.IMUAccelerationIntegrator;
+import org.firstinspires.ftc.teamcode.hardware.BotHardwareInfo;
+import org.firstinspires.ftc.teamcode.hardware.BotHardware;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,26 +13,14 @@ public class AutoController {
     final List<Position> waypoints;
     IMUAccelerationIntegrator accInt;
 
-    final BNO055IMU imu;
+    final BotHardware hardware;
 
-    final DriveMotors motors;
-
-    public AutoController(HardwareMap hardwaremap) {
+    public AutoController(BotHardware hardware) {
         waypoints = new ArrayList<>();
-        motors = new DriveMotors(hardwaremap);
-
-        imu = hardwaremap.get(BNO055IMU.class, HardwareMapKeys.IMU);
+        this.hardware = hardware;
     }
 
     public void init() {
-        BNO055IMU.Parameters params = new BNO055IMU.Parameters();
-        params.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        params.mode = BNO055IMU.SensorMode.IMU;
-        params.calibrationData = new BNO055IMU.CalibrationData();
-        accInt = new IMUAccelerationIntegrator();
-
-        imu.initialize(params);
-        accInt.initialize(params,new Position(),new Velocity());
     }
 
     public void addPoint(Position pos) {
@@ -44,8 +28,8 @@ public class AutoController {
     }
 
     public String update(boolean e) {
-        motors.fr.setTargetPosition(e ? (int) (HardwareConstants.TICKS_PER_REV) : 0);
-        motors.fr.setPower(1f-(motors.fr.getCurrentPosition()-motors.fr.getTargetPosition())/100f);
-        return ";"+motors.fr.getCurrentPosition()+";"+motors.fr.getTargetPosition();
+        hardware.motors.fr.setTargetPosition(e ? (int) (BotHardwareInfo.TICKS_PER_REV) : 0);
+        hardware.motors.fr.setPower(1f-(hardware.motors.fr.getCurrentPosition()-hardware.motors.fr.getTargetPosition())/100f);
+        return ";"+hardware.motors.fr.getCurrentPosition()+";"+hardware.motors.fr.getTargetPosition();
     }
 }

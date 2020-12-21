@@ -4,7 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.drive.DriveController;
-import org.firstinspires.ftc.teamcode.drive.DriveMotors;
+import org.firstinspires.ftc.teamcode.hardware.BotHardware;
+import org.firstinspires.ftc.teamcode.hardware.DriveMotors;
 
 @TeleOp(group = "what does this do?", name = "Joey's Drive TeleOp")
 //@Disabled
@@ -13,7 +14,7 @@ public class JoeysDriveTeleOp extends OpMode {
     DriveController driveController;
 
     public void init(){
-        driveController = new DriveController(DriveMotors.MotorClipMode.CLAMP, hardwareMap);
+        driveController = new DriveController(DriveMotors.MotorClipMode.CLAMP, new BotHardware(hardwareMap));
     }
 
 

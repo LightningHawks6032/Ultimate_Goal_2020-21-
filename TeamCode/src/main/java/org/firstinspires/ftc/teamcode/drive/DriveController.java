@@ -1,18 +1,19 @@
 package org.firstinspires.ftc.teamcode.drive;
 
-import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.teamcode.hardware.BotHardware;
+import org.firstinspires.ftc.teamcode.hardware.DriveMotors;
 
 public class DriveController {
     private final DriveMotors.MotorClipMode clipMode;
-    private final DriveMotors motors;
+    private final BotHardware hardware;
 
-    public DriveController(DriveMotors.MotorClipMode clipMode, HardwareMap hardwareMap) {
+    public DriveController(DriveMotors.MotorClipMode clipMode, BotHardware hardware) {
         this.clipMode = clipMode;
-        this.motors = new DriveMotors(hardwareMap);
+        this.hardware = hardware;
     }
 
     protected void checkMotorsPresent() {
-        if (!motors.checkMotorsPresent())
+        if (!hardware.motors.checkMotorsPresent())
             throw new IllegalStateException("DriveController: motor(s) were unset!");
     }
 
@@ -24,7 +25,7 @@ public class DriveController {
         double powerBL = moveY - moveX - rotate;
         double powerBR = moveY - moveX + rotate;
 
-        motors.setPowerClamped(powerFL,powerFR,powerBL,powerBR,clipMode);
+        hardware.motors.setPowerClamped(powerFL,powerFR,powerBL,powerBR,clipMode);
     }
     public void updateMotors_LRX(double moveL, double moveR, double moveX){
         checkMotorsPresent();
@@ -34,7 +35,7 @@ public class DriveController {
         double powerFR = moveR + moveX;
         double powerBR = moveR - moveX;
 
-        motors.setPowerClamped(powerFL,powerFR,powerBL,powerBR,clipMode);
+        hardware.motors.setPowerClamped(powerFL,powerFR,powerBL,powerBR,clipMode);
     }
 
 }
