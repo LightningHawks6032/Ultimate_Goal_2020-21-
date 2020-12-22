@@ -34,6 +34,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.Camera;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.CameraManager;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.CameraName;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
@@ -43,10 +45,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import static com.sun.tools.javac.jvm.ByteCodes.error;
 import static org.firstinspires.ftc.robotcore.external.navigation.AngleUnit.DEGREES;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.XYZ;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.YZX;
@@ -128,19 +133,27 @@ public class ConceptVuforiaUltimateGoalNavigationWebcam extends LinearOpMode {
      * This is the webcam we are to use. As with other hardware devices such as motors and
      * servos, this device is identified using the robot configuration tool in the FTC application.
      */
-    WebcamName webcamName = null;
-    //CameraName webcamName = null;
+    //WebcamName webcamName = null;
+    CameraName webcamName = null;
+
+    //copid from conceptWebcam
+    private Camera camera;
+    private CameraManager cameraManager;
+    private static final int secondsPermissionTimeout = Integer.MAX_VALUE;
 
     private boolean targetVisible = false;
     private float phoneXRotate    = 0;
     private float phoneYRotate    = 0;
     private float phoneZRotate    = 0;
 
+
+
     @Override public void runOpMode() {
         /*
          * Retrieve the camera we are to use.
          */
         webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
+        cameraManager = ClassFactory.getInstance().getCameraManager();
 
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
@@ -162,9 +175,14 @@ public class ConceptVuforiaUltimateGoalNavigationWebcam extends LinearOpMode {
 
         // Make sure extended tracking is disabled for this example.
         parameters.useExtendedTracking = false;
+        parameters.cameraDirection = CAMERA_CHOICE;
 
         telemetry.addLine("hello!");
+
         telemetry.update();
+
+        //test openCamera()
+        openCamera();
 
         //  Instantiate the Vuforia engine
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
@@ -277,7 +295,7 @@ public class ConceptVuforiaUltimateGoalNavigationWebcam extends LinearOpMode {
         // CONSEQUENTLY do not put any driving commands in this loop.
         // To restore the normal opmode structure, just un-comment the following line:
 
-        // waitForStart();
+        //waitForStart();
 
         // Note: To use the remote camera preview:
         // AFTER you hit Init on the Driver Station, use the "options menu" to select "Camera Stream"
@@ -322,5 +340,18 @@ public class ConceptVuforiaUltimateGoalNavigationWebcam extends LinearOpMode {
 
         // Disable Tracking when we are done;
         targetsUltimateGoal.deactivate();
+    }
+
+
+
+    private void openCamera() {
+        if (camera != null) return; // be idempotent
+
+        Deadline deadline = new Deadline(secondsPermissionTimeout, TimeUnit.SECONDS);
+        camera = cameraManager.requestPermissionAndOpenCamera(deadline, webcamName, null);
+        if (camera == null) {
+            telemetry.addLine("no!");
+            telemetry.update();
+        }
     }
 }
