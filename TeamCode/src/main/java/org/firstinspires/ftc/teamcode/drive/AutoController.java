@@ -27,9 +27,8 @@ public class AutoController {
         waypoints.add(pos);
     }
 
-    public String update(boolean e) {
-        hardware.motors.fr.setTargetPosition(e ? (int) (BotHardwareInfo.TICKS_PER_REV) : 0);
-        hardware.motors.fr.setPower(1f-(hardware.motors.fr.getCurrentPosition()-hardware.motors.fr.getTargetPosition())/100f);
-        return ";"+hardware.motors.fr.getCurrentPosition()+";"+hardware.motors.fr.getTargetPosition();
+    public void update(boolean e) {
+        hardware.motors.fr.setPower(e?1:-1);
+
     }
 }

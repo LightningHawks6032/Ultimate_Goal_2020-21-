@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DcMotorRampable {
     public final DcMotor motor;
-    public float value;
+    public double value;
 
     private final List<Point> points = new ArrayList<>();
 
@@ -22,15 +22,33 @@ public class DcMotorRampable {
             points.remove(0);
         }
 
+
+        motor.setPower(value);
     }
 
-    private class Point {
-        public final double time;
-        public final float value;
+    public void setPower(double value) {
+        this.value = value;
+    }
 
-        private Point(double time, float value) {
+
+
+    private static class Point {
+        public final boolean useEncoderTickTarget;
+        public final double time;
+        public final double value;
+        public final int target;
+
+        private Point(double time, double value) {
             this.time = time;
             this.value = value;
+            this.useEncoderTickTarget = false;
+            this.target = 0;
+        }
+        private Point(double time, int target) {
+            this.time = time;
+            this.value = 0f;
+            this.useEncoderTickTarget = true;
+            this.target = target;
         }
     }
 }
