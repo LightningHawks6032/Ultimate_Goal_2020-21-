@@ -145,6 +145,7 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
         parameters.cameraDirection   = CAMERA_CHOICE;
         parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
 
+
         // Make sure extended tracking is disabled for this example.
         parameters.useExtendedTracking = false;
 

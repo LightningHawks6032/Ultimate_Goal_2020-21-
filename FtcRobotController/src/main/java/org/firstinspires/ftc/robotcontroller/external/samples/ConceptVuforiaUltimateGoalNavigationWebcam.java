@@ -183,6 +183,10 @@ public class ConceptVuforiaUltimateGoalNavigationWebcam extends LinearOpMode {
 
         //test openCamera()
         openCamera();
+        parameters.camera = camera;
+        parameters.cameraName = webcamName;
+        telemetry.addLine(parameters.toString());
+        telemetry.update();
 
         //  Instantiate the Vuforia engine
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
