@@ -20,15 +20,16 @@ public class AutoController {
         this.hardware = hardware;
     }
 
-    public void init() {
+    public void init(double t) {
+        hardware.motors.fr.init(t);
     }
 
     public void addPoint(Position pos) {
         waypoints.add(pos);
     }
 
-    public void update(boolean e) {
-        hardware.motors.fr.setPower(e?1:-1);
+    public void update(double t) {
+        hardware.motors.fr.update(t);
 
     }
 }
