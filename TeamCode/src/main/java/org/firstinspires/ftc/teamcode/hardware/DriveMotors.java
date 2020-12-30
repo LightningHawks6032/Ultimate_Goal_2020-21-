@@ -2,19 +2,19 @@ package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.drive.DcMotorRampable;
+import org.firstinspires.ftc.teamcode.drive.DcMotorController;
 
 public class DriveMotors {
-    public final DcMotorRampable fl;
-    public final DcMotorRampable bl;
-    public final DcMotorRampable fr;
-    public final DcMotorRampable br;
+    public final DcMotorController fl;
+    public final DcMotorController bl;
+    public final DcMotorController fr;
+    public final DcMotorController br;
 
     public DriveMotors(DcMotor motor_fl, DcMotor motor_fr, DcMotor motor_bl, DcMotor motor_br) {
-        fl = new DcMotorRampable(motor_fl);
-        fr = new DcMotorRampable(motor_fr);
-        bl = new DcMotorRampable(motor_bl);
-        br = new DcMotorRampable(motor_br);
+        fl = new DcMotorController(motor_fl);
+        fr = new DcMotorController(motor_fr);
+        bl = new DcMotorController(motor_bl);
+        br = new DcMotorController(motor_br);
     }
 
     public boolean checkMotorsPresent() {
