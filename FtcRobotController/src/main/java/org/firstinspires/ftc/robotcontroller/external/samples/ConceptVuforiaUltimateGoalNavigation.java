@@ -141,10 +141,13 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
 
         // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
+
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraDirection   = CAMERA_CHOICE;
-        parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
 
+        /*
+        parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
+        */
 
         // Make sure extended tracking is disabled for this example.
         parameters.useExtendedTracking = false;
