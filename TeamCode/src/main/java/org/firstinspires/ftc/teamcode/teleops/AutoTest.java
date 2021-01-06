@@ -17,46 +17,18 @@ public class AutoTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-
         BotHardware bh = new BotHardware(hardwareMap);
         controller = new AutoController(bh);
-
         waitForStart();
 
+        controller.init(getRuntime());
         while (true) {
-            telemetry.addLine("YEET");
-            telemetry.update();
-            while (!gamepad1.a) Thread.sleep(10);
-
-            Random r = new Random();
-
-            int dist = r.nextBoolean() ? 0 : 12;
-            telemetry.addLine(dist+"in");
-            telemetry.update();
-
-            bh.motors.fl.init(getRuntime());
-            bh.motors.fr.init(getRuntime());
-            bh.motors.bl.init(getRuntime());
-            bh.motors.br.init(getRuntime());
-
-            bh.motors.fl.setTargetDist(dist);
-            bh.motors.fr.setTargetDist(dist);
-            bh.motors.bl.setTargetDist(dist);
-            bh.motors.br.setTargetDist(dist);
-
-            while (true) {
-                Thread.sleep(10);
-                bh.motors.fl.update(getRuntime());
-                bh.motors.fr.update(getRuntime());
-                bh.motors.bl.update(getRuntime());
-                bh.motors.br.update(getRuntime());
-                int count = 0;
-                if (bh.motors.fl.getDone()) count++;
-                if (bh.motors.fr.getDone()) count++;
-                if (bh.motors.bl.getDone()) count++;
-                if (bh.motors.br.getDone()) count++;
-                if (count == 4) break;
-            }
+            double x = gamepad1.left_stick_x*12;
+            double y = gamepad1.left_stick_y*12;
+            controller.setTarget(new AutoController.RobotPos(x,y,0));
+            controller.update(getRuntime());
+            if (gamepad1.a)
+                controller.resetBasePos();
         }
     }
 
