@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 
 public class MRGyro {
-    private GyroSensor gyroSensor; // Hardware Device Object
-    public MRGyro(GyroSensor gyro, boolean calibrate) {
+    private ModernRoboticsI2cGyro gyroSensor; // Hardware Device Object
+    public MRGyro(ModernRoboticsI2cGyro gyro, boolean calibrate) {
         gyroSensor = gyro;
 
         if (calibrate)

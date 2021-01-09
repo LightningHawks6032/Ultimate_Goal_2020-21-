@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.GyroSensor;
@@ -41,7 +42,7 @@ public class BotHardware {
         accInt.initialize(params,new Position(),new Velocity());
 
 
-        gyro = new MRGyro(hardwareMap.get(GyroSensor.class,BotHardwareInfo.MapKeys.GYRO),true);
+        gyro = new MRGyro(hardwareMap.get(ModernRoboticsI2cGyro.class,BotHardwareInfo.MapKeys.GYRO),true);
     }
 
 

@@ -13,7 +13,7 @@ public class AutoController {
 
     public AutoController(BotHardware hardware) {
         this.hardware = hardware;
-        this.driveController = new DriveController(DriveMotors.MotorClipMode.CLAMP,hardware);
+        this.driveController = new DriveController(DriveMotors.MotorClipMode.SCALE,hardware);
     }
 
     public void init(double t) {
@@ -45,6 +45,8 @@ public class AutoController {
         dX = Math.signum(dX)*Math.max(0,Math.min(12,Math.abs(dX)-0.5))/12;
         dY = Math.signum(dY)*Math.max(0,Math.min(12,Math.abs(dY)-0.5))/12;
         dR = Math.signum(dR)*Math.max(0,Math.min(1,Math.abs(dR)-0.1))/1;
+        dX = Math.cos(dR)*dX+Math.sin(dR)*dY;
+        dY = Math.cos(dR)*dY-Math.sin(dR)*dX;
         driveController.setMotors_YXR(dY,dX,dR);
     }
 
