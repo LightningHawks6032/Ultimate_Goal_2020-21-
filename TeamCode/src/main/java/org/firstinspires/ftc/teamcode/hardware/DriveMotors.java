@@ -10,11 +10,11 @@ public class DriveMotors {
     public final DcMotorController fr;
     public final DcMotorController br;
 
-    public DriveMotors(DcMotor motor_fl, DcMotor motor_fr, DcMotor motor_bl, DcMotor motor_br) {
-        fl = new DcMotorController(motor_fl);
-        fr = new DcMotorController(motor_fr);
-        bl = new DcMotorController(motor_bl);
-        br = new DcMotorController(motor_br);
+    public DriveMotors(DcMotor motor_fl, DcMotor motor_fr, DcMotor motor_bl, DcMotor motor_br, BotHardware hardware) {
+        fl = new DcMotorController(motor_fl,hardware);
+        fr = new DcMotorController(motor_fr,hardware);
+        bl = new DcMotorController(motor_bl,hardware);
+        br = new DcMotorController(motor_br,hardware);
     }
 
     public boolean checkMotorsPresent() {

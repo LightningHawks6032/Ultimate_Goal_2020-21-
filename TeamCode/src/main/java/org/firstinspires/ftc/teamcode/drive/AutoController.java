@@ -1,25 +1,23 @@
 package org.firstinspires.ftc.teamcode.drive;
 
-import org.firstinspires.ftc.teamcode.hardware.IMUAccelerationIntegrator;
+import org.firstinspires.ftc.teamcode.hardware.BotHardwareInfo;
+import org.firstinspires.ftc.teamcode.hardware.DriveMotors;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
 
 public class AutoController {
-
     RobotPos target = null;
     RobotPos pos = null;
-    IMUAccelerationIntegrator accInt;
 
+    final DriveController driveController;
     final BotHardware hardware;
 
     public AutoController(BotHardware hardware) {
         this.hardware = hardware;
+        this.driveController = new DriveController(DriveMotors.MotorClipMode.CLAMP,hardware);
     }
 
     public void init(double t) {
-        hardware.motors.fl.init(t);
-        hardware.motors.fr.init(t);
-        hardware.motors.bl.init(t);
-        hardware.motors.br.init(t);
+        driveController.initMotors(t);
         pos = new RobotPos(t);
     }
 
@@ -27,55 +25,39 @@ public class AutoController {
 
     public void update(double t) {
         if (target == null) {
-            hardware.motors.fl.update(t);
-            hardware.motors.fl.setPower(0);
-            hardware.motors.bl.update(t);
-            hardware.motors.bl.setPower(0);
-            hardware.motors.fr.update(t);
-            hardware.motors.fr.setPower(0);
-            hardware.motors.br.update(t);
-            hardware.motors.br.setPower(0);
+            driveController.setMotors_YXR(0,0,0);
+            driveController.updateMotors(t);
             return;
         }
+        driveController.updateMotors(t);
 
+        double dmFL = hardware.motors.fl.getStepDisplacement();
+        double dmFR = hardware.motors.fr.getStepDisplacement();
+        double dmBL = hardware.motors.bl.getStepDisplacement();
+        double dmBR = hardware.motors.br.getStepDisplacement();
+        double dY = dmFL + dmFR + dmBL + dmBR;  dY *= 1/4.0;
+        double dX = dmFL + dmFR -(dmBL + dmBR); dX *= 1/4.0;
+        double dR = dmFR + dmBR -(dmFL + dmBL); dR *= BotHardwareInfo.ROTPOW_TO_RAD/2.0;
+        pos = pos.integrateRelFwd(dY, dX, dR, t);
 
-
-        hardware.motors.fl.update(t);
-        hardware.motors.fr.update(t);
-        hardware.motors.bl.update(t);
-        hardware.motors.br.update(t);
-
-        /*
-
-        double powerFL = moveY + moveX - rotate;
-        double powerFR = moveY + moveX + rotate;
-        double powerBL = moveY - moveX - rotate;
-        double powerBR = moveY - moveX + rotate;
-         */
-        double dmFL = hardware.motors.fl.currentDist - hardware.motors.fl.lastDist;
-        double dmFR = hardware.motors.fr.currentDist - hardware.motors.fr.lastDist;
-        double dmBL = hardware.motors.bl.currentDist - hardware.motors.bl.lastDist;
-        double dmBR = hardware.motors.br.currentDist - hardware.motors.br.lastDist;
-
-
-        double dY = dmFL+dmFR+dmBL+dmBR;
-        double dX = dmFL+dmFR-(dmBL+dmBR);
-        double dR = dmFR+dmBR-(dmFL+dmBL);
-
-        target = pos.integrateRelFwd(dY,dX,dR,t);
+        RobotPos diff = pos.getDifferenceTo(target);
+        dX = diff.x; dY = diff.y; dR = diff.r;
+        dX = Math.signum(dX)*Math.max(0,Math.min(12,Math.abs(dX)-0.5))/12;
+        dY = Math.signum(dY)*Math.max(0,Math.min(12,Math.abs(dY)-0.5))/12;
+        dR = Math.signum(dR)*Math.max(0,Math.min(1,Math.abs(dR)-0.1))/1;
+        driveController.setMotors_YXR(dY,dX,dR);
     }
 
     public void resetBasePos() {
         setBaseDist(0);
     }
     public void setBaseDist(double dist) {
-        hardware.motors.fl.adjustBaseDist(hardware.motors.fl.getDist()+dist);
-        hardware.motors.bl.adjustBaseDist(hardware.motors.bl.getDist()+dist);
-        hardware.motors.fr.adjustBaseDist(hardware.motors.fr.getDist()+dist);
-        hardware.motors.br.adjustBaseDist(hardware.motors.br.getDist()+dist);
+        hardware.motors.fl.adjustBaseDist(hardware.motors.fl.calculateDist()+dist);
+        hardware.motors.bl.adjustBaseDist(hardware.motors.bl.calculateDist()+dist);
+        hardware.motors.fr.adjustBaseDist(hardware.motors.fr.calculateDist()+dist);
+        hardware.motors.br.adjustBaseDist(hardware.motors.br.calculateDist()+dist);
     }
 
-    // INCHES
     public static class RobotPos {
         public final double x;
         public final double y;
@@ -93,11 +75,6 @@ public class AutoController {
         public RobotPos(double x, double y, double r) { this(x,y,r,0); }
         public RobotPos(RobotPos pos) { this(pos.x,pos.y,pos.r,pos.aqTime); }
 
-        public double getAqTime() { return aqTime; }
-        public double getX() { return x; }
-        public double getY() { return y; }
-        public double getR() { return r; }
-
         public RobotPos integrateRelFwd(double dx_, double dy_, double dr, double newAqTime) {
             double dx = dx_*Math.cos(r)+dy_*Math.sin(r);
             double dy = dy_*Math.cos(r)-dx_*Math.sin(r);
@@ -109,6 +86,9 @@ public class AutoController {
         }
         public RobotPos integrateVelRelFwd(double vx, double vy, double vr, double dt) {
             return this.integrateRelFwd(x*dt,vy*dt,  vr*dt,aqTime+dt);
+        }
+        public RobotPos getDifferenceTo(RobotPos other) {
+            return new RobotPos(other.x-x,other.y-y,other.r-r);
         }
     }
 }

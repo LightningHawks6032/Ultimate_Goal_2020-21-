@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.teleops;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.Hardware;
 
 import org.firstinspires.ftc.teamcode.drive.DriveController;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
@@ -11,7 +10,7 @@ import org.firstinspires.ftc.teamcode.hardware.DriveMotors;
 
 
 @TeleOp(name = "Drivtrain TeleOp", group = "Iterative Opmode")
-@Disabled
+//@Disabled
 public class DrivetrainTeleOp extends OpMode {
 
     DriveController driveController;
@@ -30,7 +29,7 @@ public class DrivetrainTeleOp extends OpMode {
         double triggerL = gamepad1.left_trigger;
         double triggerR = gamepad1.right_trigger;
 
-        driveController.updateMotors_LRX(powerL,powerR,triggerR-triggerL);
+        driveController.setMotors_LRX(powerL,powerR,triggerR-triggerL);
 
         telemetry.update();
     }

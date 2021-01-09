@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.drive.DriveController;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
 import org.firstinspires.ftc.teamcode.hardware.DriveMotors;
 
-@TeleOp(group = "what does this do?", name = "Joey's Drive TeleOp")
+@TeleOp(group = "drive", name = "Joey's Drive TeleOp")
 //@Disabled
 public class JoeysDriveTeleOp extends OpMode {
 
@@ -23,7 +23,7 @@ public class JoeysDriveTeleOp extends OpMode {
         double moveY = gamepad1.left_stick_y; // +: Right; -: Left;
         double rotate = gamepad1.left_bumper?0:gamepad1.left_stick_x; // +: CW; -: CCW
 
-        driveController.updateMotors_YXR(moveY,moveX,rotate);
+        driveController.setMotors_YXR(moveY,moveX,rotate);
 
         telemetry.update();
     }

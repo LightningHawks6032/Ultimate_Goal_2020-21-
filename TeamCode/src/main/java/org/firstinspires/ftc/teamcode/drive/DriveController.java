@@ -17,7 +17,7 @@ public class DriveController {
             throw new IllegalStateException("DriveController: motor(s) were unset!");
     }
 
-    public void updateMotors_YXR(double moveY, double moveX, double rotate){
+    public void setMotors_YXR(double moveY, double moveX, double rotate){
         checkMotorsPresent();
 
         double powerFL = moveY + moveX - rotate;
@@ -27,7 +27,7 @@ public class DriveController {
 
         hardware.motors.setPowerClamped(powerFL,powerFR,powerBL,powerBR,clipMode);
     }
-    public void updateMotors_LRX(double moveL, double moveR, double moveX){
+    public void setMotors_LRX(double moveL, double moveR, double moveX){
         checkMotorsPresent();
 
         double powerFL = moveL + moveX;
@@ -36,6 +36,18 @@ public class DriveController {
         double powerBR = moveR - moveX;
 
         hardware.motors.setPowerClamped(powerFL,powerFR,powerBL,powerBR,clipMode);
+    }
+    public void initMotors(double t) {
+        hardware.motors.fl.init(t);
+        hardware.motors.fr.init(t);
+        hardware.motors.bl.init(t);
+        hardware.motors.br.init(t);
+    }
+    public void updateMotors(double t) {
+        hardware.motors.fl.update(t);
+        hardware.motors.fr.update(t);
+        hardware.motors.bl.update(t);
+        hardware.motors.br.update(t);
     }
 
 }
