@@ -50,15 +50,15 @@ public class AutoController {
         driveController.setMotors_YXR(dY,dX,dR);
     }
 
-    public void resetBasePos() {
-        setBaseDist(0);
-    }
+    public void resetBasePos() { setBaseDist(0); }
     public void setBaseDist(double dist) {
         hardware.motors.fl.adjustBaseDist(hardware.motors.fl.calculateDist()+dist);
         hardware.motors.bl.adjustBaseDist(hardware.motors.bl.calculateDist()+dist);
         hardware.motors.fr.adjustBaseDist(hardware.motors.fr.calculateDist()+dist);
         hardware.motors.br.adjustBaseDist(hardware.motors.br.calculateDist()+dist);
     }
+    public void setPos(RobotPos pos) { this.pos = new RobotPos(pos); }
+    public RobotPos getPos() { return pos; }
 
     public static class RobotPos {
         public final double x;
@@ -91,6 +91,11 @@ public class AutoController {
         }
         public RobotPos getDifferenceTo(RobotPos other) {
             return new RobotPos(other.x-x,other.y-y,other.r-r);
+        }
+
+        @Override
+        public String toString() {
+            return "[RobotPos{x:"+x+",y:"+y+",r:"+r+"}]";
         }
     }
 }

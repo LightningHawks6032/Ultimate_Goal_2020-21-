@@ -21,7 +21,7 @@ public class BotHardware {
     public final IMUAccelerationIntegrator accInt;
 
     private double motorBoost = 0.3;
-    private double motorMax = 1.3;
+    private double motorMax = 1.2;
 
     public BotHardware(HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;

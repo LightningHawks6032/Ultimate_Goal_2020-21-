@@ -36,6 +36,8 @@ public class AutoTest extends LinearOpMode {
 
         waitForStart();
         controller.init(getRuntime());
+        controller.resetBasePos();
+        controller.setPos(new AutoController.RobotPos(0,0,0));
         while (!gamepad1.x) {
             double x = gamepad1.left_stick_x*24;
             double y = gamepad1.left_stick_y*24;
@@ -43,7 +45,8 @@ public class AutoTest extends LinearOpMode {
             controller.update(getRuntime());
             if (gamepad1.a)
                 controller.resetBasePos();
-            System.out.println(x+","+y);
+            telemetry.addLine(x+","+y);
+            telemetry.addLine(controller.getPos().toString());
             opModeIsActive();
         }
         requestOpModeStop();
