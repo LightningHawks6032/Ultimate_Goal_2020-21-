@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.drive;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.hardware.BotHardwareInfo;
 import org.firstinspires.ftc.teamcode.hardware.DriveMotors;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
@@ -8,12 +9,15 @@ public class AutoController {
     RobotPos target = null;
     RobotPos pos = null;
 
-    final DriveController driveController;
+    public final DriveController driveController;
     final BotHardware hardware;
 
-    public AutoController(BotHardware hardware) {
+    final Telemetry telemetry;
+
+    public AutoController(BotHardware hardware, Telemetry telemetry) {
         this.hardware = hardware;
         this.driveController = new DriveController(DriveMotors.MotorClipMode.SCALE,hardware);
+        this.telemetry = telemetry;
     }
 
     public void init(double t) {
@@ -35,19 +39,23 @@ public class AutoController {
         double dmFR = hardware.motors.fr.getStepDisplacement();
         double dmBL = hardware.motors.bl.getStepDisplacement();
         double dmBR = hardware.motors.br.getStepDisplacement();
+        telemetry.addLine(String.format("%.2f %.2f %.2f %.2f",dmFL,dmFR,dmBL,dmBR));
         double dY = dmFL + dmFR + dmBL + dmBR;  dY *= 1/4.0;
         double dX = dmFL + dmFR -(dmBL + dmBR); dX *= 1/4.0;
-        double dR = dmFR + dmBR -(dmFL + dmBL); dR *= BotHardwareInfo.ROTPOW_TO_RAD/2.0;
-        pos = pos.integrateRelFwd(dY, dX, dR, t);
+        double dR = dmFR + dmBR -(dmFL + dmBL); dR *= BotHardwareInfo.ROTPOW_TO_RAD/4.0;
+        pos = pos.integrateRelFwd(dX, dY, dR, t);
 
         RobotPos diff = pos.getDifferenceTo(target);
         dX = diff.x; dY = diff.y; dR = diff.r;
-        dX = Math.signum(dX)*Math.max(0,Math.min(12,Math.abs(dX)-0.5))/12;
-        dY = Math.signum(dY)*Math.max(0,Math.min(12,Math.abs(dY)-0.5))/12;
-        dR = Math.signum(dR)*Math.max(0,Math.min(1,Math.abs(dR)-0.1))/1;
-        dX = Math.cos(dR)*dX+Math.sin(dR)*dY;
-        dY = Math.cos(dR)*dY-Math.sin(dR)*dX;
-        driveController.setMotors_YXR(dY,dX,dR);
+        dX = Math.signum(dX)*Math.max(0,Math.min(6,Math.abs(dX)-0.5))/6;
+        dY = Math.signum(dY)*Math.max(0,Math.min(6,Math.abs(dY)-0.5))/6;
+        dR = Math.signum(dR)*Math.max(0,Math.min(0.5,Math.abs(dR)-0.05))/0.5;
+        dX = Math.cos(pos.r)*dX+Math.sin(pos.r)*dY;
+        dY = Math.cos(pos.r)*dY-Math.sin(pos.r)*dX;
+
+        telemetry.addLine(String.format("%.2f %.2f %.2f",dX,dY,dR));
+
+        //driveController.setMotors_YXR(dY,0*dX,dR);
     }
 
     public void resetBasePos() { setBaseDist(0); }
@@ -82,9 +90,9 @@ public class AutoController {
             double dy = dy_*Math.cos(r)-dx_*Math.sin(r);
             double s = Math.sin(dr);
             double c = Math.cos(dr);
-            double xe = dx*s-dy*c;
-            double ye = dy*s+dx*c;
-            return new RobotPos(xe,ye,dr+r,newAqTime);
+            double xe = dx*c+dy*s;
+            double ye = dy*c-dx*s;
+            return new RobotPos(xe+x,ye+y,dr+r,newAqTime);
         }
         public RobotPos integrateVelRelFwd(double vx, double vy, double vr, double dt) {
             return this.integrateRelFwd(x*dt,vy*dt,  vr*dt,aqTime+dt);

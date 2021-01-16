@@ -20,8 +20,9 @@ public class BotHardware {
     public final MRGyro gyro;
     public final IMUAccelerationIntegrator accInt;
 
-    private double motorBoost = 0.3;
+    private double motorBoost = 1;
     private double motorMax = 1.2;
+    private double motorMin = 0.05;
 
     public BotHardware(HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
@@ -54,8 +55,10 @@ public class BotHardware {
 
     public double getMotorBoost() { return motorBoost; }
     public double getMotorMax() { return motorMax; }
-    public void setMotorPowerModifiers(double boost, double max) {
+    public double getMotorMin() { return motorMin; }
+    public void setMotorPowerModifiers(double boost, double max, double min) {
         motorBoost = boost;
         motorMax = max;
+        motorMin = min;
     }
 }
