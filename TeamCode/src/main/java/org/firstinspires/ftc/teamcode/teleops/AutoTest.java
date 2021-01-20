@@ -47,7 +47,7 @@ public class AutoTest extends LinearOpMode {
                 controller.resetBasePos();
                 controller.setPos(new AutoController.RobotPos(0,0,0));
             }
-            controller.driveController.setMotors_YXR(gamepad1.left_stick_y,gamepad1.left_stick_x,gamepad1.right_stick_x);
+            //controller.driveController.setMotors_YXR(gamepad1.left_stick_y,gamepad1.left_stick_x,gamepad1.right_stick_x);
             telemetry.addLine(x+","+y);
             telemetry.addLine(controller.getPos().toString());
             telemetry.update();
