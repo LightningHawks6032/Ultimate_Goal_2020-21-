@@ -1,12 +1,11 @@
 package org.firstinspires.ftc.teamcode.teleops;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.drive.DriveController;
+import org.firstinspires.ftc.teamcode.hardware.drive.DriveController;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
-import org.firstinspires.ftc.teamcode.hardware.DriveMotors;
+import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
 
 
 @TeleOp(name = "Drivtrain TeleOp", group = "Iterative Opmode")

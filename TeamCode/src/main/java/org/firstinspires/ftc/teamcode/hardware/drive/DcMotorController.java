@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.drive;
+package org.firstinspires.ftc.teamcode.hardware.drive;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
-import org.firstinspires.ftc.teamcode.hardware.BotHardwareInfo;
+import org.firstinspires.ftc.teamcode.Constants;
 
 public class DcMotorController {
     private double lastT = 0;
@@ -37,5 +37,5 @@ public class DcMotorController {
     public double getStepDisplacement() { return stepDisplacement; }
     public double getDist() { return currentDist; }
     public void adjustBaseDist(double amtInches) { distStart += amtInches; currentDist -= amtInches; }
-    public double calculateDist() { return motor.getCurrentPosition()/BotHardwareInfo.TICKS_PER_IN*(motor.getDirection()==DcMotorSimple.Direction.FORWARD?1:1) - distStart; }
+    public double calculateDist() { return motor.getCurrentPosition()/ Constants.TICKS_PER_IN*(motor.getDirection()==DcMotorSimple.Direction.FORWARD?1:1) - distStart; }
 }

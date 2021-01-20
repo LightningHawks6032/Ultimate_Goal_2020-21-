@@ -1,17 +1,19 @@
-package org.firstinspires.ftc.teamcode.hardware;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-public class BotHardwareInfo {
+public class Constants {
     //public static final double MOTORRAMP_TICKSPEEDFAC = 500;
     //public static final int MOTORRAMP_MINTHRESH = 200;
     //public static final double MOTORRAMP_MAXACC = 4;
+
+    public static final double MM_PER_IN = 25.4;
 
     public static final double WHEEL_DIA_MM = 96;
 
     public static final double TICKS_PER_REV = 145.6 * 6;
     public static final double TICKS_PER_MM = TICKS_PER_REV / (WHEEL_DIA_MM * Math.PI);
-    public static final double TICKS_PER_IN = TICKS_PER_MM*25.4;
+    public static final double TICKS_PER_IN = TICKS_PER_MM*MM_PER_IN;
 
     public static final double ROTPOW_TO_RAD = 1/5.5;
 

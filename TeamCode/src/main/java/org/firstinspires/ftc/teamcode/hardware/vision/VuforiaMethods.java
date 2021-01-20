@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.vision;
+package org.firstinspires.ftc.teamcode.hardware.vision;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
@@ -9,6 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.teamcode.R;
+import org.firstinspires.ftc.teamcode.Constants;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -32,12 +33,11 @@ public class VuforiaMethods {
             "AdwaKe7/////AAAAmVQWX/gUQE/gnK+olEmSWA5FCaxNrdY/EyKFLO2afR1IQD4gbnThc6LcCHIJ64hyC2i3n5VRiIRAMGxtKqjI7meHCphQAPrXpH9GomENr/fSXjVUhQao+Zw0/MLQEuTaqNYnp5EI/4oo6LTm/YPgYKOSPaP+tijaydiwNQn4A8zXPfDhkD/q6RTYMzS3UtpOR7WBZJPUBxW9XKim5ekHbYd1Hk2cFTTFAsL0XwycIWhuvHYpVlnZMqWwEnkTqp0o+5TE1FLkAfJ4OOUEfB8sP9kMEcged2/tczAh3GOcjOudp1S9F5xjPFZQX00OLV+QUCPzmT5kkqFBwiS30YR6L8urW2mJG4quq6NnrNYwzn47";
 
 
-    private static final float mmPerInch        = 25.4f;
-    private static final float mmTargetHeight   = (6) * mmPerInch;          // the height of the center of the target image above the floor
+    private static final float mmTargetHeight   = (float) ((6) * Constants.MM_PER_IN);          // the height of the center of the target image above the floor
 
     // Constants for perimeter targets
-    private static final float halfField = 72 * mmPerInch;
-    private static final float quadField  = 36 * mmPerInch;
+    private static final float halfField = (float) (72 * Constants.MM_PER_IN);
+    private static final float quadField  = (float) (36 * Constants.MM_PER_IN);
 
     // Class Members
     private OpenGLMatrix lastLocation = null;
@@ -151,8 +151,8 @@ public class VuforiaMethods {
 
         // Next, translate the camera lens to where it is on the robot.
         // In this example, it is centered (left to right), but forward of the middle of the robot, and above ground level.
-        final float CAMERA_FORWARD_DISPLACEMENT  = 4.0f * mmPerInch;   // eg: Camera is 4 Inches in front of robot center
-        final float CAMERA_VERTICAL_DISPLACEMENT = 8.0f * mmPerInch;   // eg: Camera is 8 Inches above ground
+        final float CAMERA_FORWARD_DISPLACEMENT  = (float) (4.0f * Constants.MM_PER_IN);   // eg: Camera is 4 Inches in front of robot center
+        final float CAMERA_VERTICAL_DISPLACEMENT = (float) (8.0f * Constants.MM_PER_IN);   // eg: Camera is 8 Inches above ground
         final float CAMERA_LEFT_DISPLACEMENT     = 0;     // eg: Camera is ON the robot's center line
 
         OpenGLMatrix robotFromCamera = OpenGLMatrix
@@ -179,7 +179,7 @@ public class VuforiaMethods {
         targetsUltimateGoal.activate();
     }
 
-    public Coordinate getPosition(Coordinate currentPosition){
+    public VisionPos getPosition(VisionPos currentPosition){
         String targetName = "";
         double coordX = currentPosition.getX(), coordY = currentPosition.getY();
 
@@ -206,8 +206,8 @@ public class VuforiaMethods {
             // express position (translation) of robot in inches.
             VectorF translation = lastLocation.getTranslation();
 
-            coordX = translation.get(0)/mmPerInch;
-            coordY = translation.get(1)/mmPerInch;
+            coordX = translation.get(0)/Constants.MM_PER_IN;
+            coordY = translation.get(1)/Constants.MM_PER_IN;
 
             // express the rotation of the robot in degrees. May need this later.
 
@@ -216,7 +216,7 @@ public class VuforiaMethods {
         }
 
 
-        return new Coordinate(coordX,coordY,targetName);
+        return new VisionPos(coordX,coordY,targetName);
     }
 
 

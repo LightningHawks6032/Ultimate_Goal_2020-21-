@@ -1,19 +1,19 @@
-package org.firstinspires.ftc.teamcode.vision;
+package org.firstinspires.ftc.teamcode.hardware.vision;
 
-public class Coordinate {
+public class VisionPos {
     protected double x,y;
     protected String name = "";
     protected static final float mmPerInch = 25.4f;
 
 
     //Note: x and y are measured in inches
-    public Coordinate(double x, double y, String name){
+    public VisionPos(double x, double y, String name){
         this.x=x;
         this.y=y;
         this.name=name;
     }
 
-    public Coordinate(){
+    public VisionPos(){
         this.x=0;
         this.y=0;
         this.name="";

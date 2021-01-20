@@ -1,8 +1,9 @@
-package org.firstinspires.ftc.teamcode.hardware;
+package org.firstinspires.ftc.teamcode.hardware.groups;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.drive.DcMotorController;
+import org.firstinspires.ftc.teamcode.hardware.BotHardware;
+import org.firstinspires.ftc.teamcode.hardware.drive.DcMotorController;
 
 public class DriveMotors {
     public final DcMotorController fl;

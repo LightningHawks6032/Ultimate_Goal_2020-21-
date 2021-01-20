@@ -1,7 +1,7 @@
-package org.firstinspires.ftc.teamcode.drive;
+package org.firstinspires.ftc.teamcode.hardware.drive;
 
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
-import org.firstinspires.ftc.teamcode.hardware.DriveMotors;
+import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
 
 public class DriveController {
     private final DriveMotors.MotorClipMode clipMode;

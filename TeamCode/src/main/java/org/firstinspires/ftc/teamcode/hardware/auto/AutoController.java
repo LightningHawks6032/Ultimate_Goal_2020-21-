@@ -1,9 +1,10 @@
-package org.firstinspires.ftc.teamcode.drive;
+package org.firstinspires.ftc.teamcode.hardware.auto;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.hardware.BotHardwareInfo;
-import org.firstinspires.ftc.teamcode.hardware.DriveMotors;
+import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
+import org.firstinspires.ftc.teamcode.hardware.drive.DriveController;
 
 public class AutoController {
     RobotPos target = null;
@@ -56,7 +57,7 @@ public class AutoController {
         double dmBR = hardware.motors.br.getStepDisplacement();
         double dY = dmFL + dmFR + dmBL + dmBR;  dY *= 1/4.0;
         double dX = dmBL + dmFR -(dmFL + dmBR); dX *= 1/4.0;
-        double dR = dmFR + dmBR -(dmFL + dmBL); dR *= BotHardwareInfo.ROTPOW_TO_RAD/4.0;
+        double dR = dmFR + dmBR -(dmFL + dmBL); dR *= Constants.ROTPOW_TO_RAD/4.0;
         pos = pos.integrateRelFwd(dX, dY, dR, t);
     }
 

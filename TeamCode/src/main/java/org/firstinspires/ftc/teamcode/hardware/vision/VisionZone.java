@@ -1,11 +1,11 @@
-package org.firstinspires.ftc.teamcode.vision;
+package org.firstinspires.ftc.teamcode.hardware.vision;
 
-public class CoordinateZone extends Coordinate{
+public class VisionZone extends VisionPos {
     protected double x1,y1,x2,y2;
 
     //In this case, a coordinate zone's coordinate values will be equal to the center of the coordinate zone
 
-    public CoordinateZone(double x1, double x2, double y1, double y2, String name){
+    public VisionZone(double x1, double x2, double y1, double y2, String name){
         this.x1=x1;
         this.x2=x2;
         this.y1=y1;
@@ -14,7 +14,7 @@ public class CoordinateZone extends Coordinate{
         this.y = (y1+y2)/2;
     }
 
-    public CoordinateZone(Coordinate bl, Coordinate tr){
+    public VisionZone(VisionPos bl, VisionPos tr){
         this.x1=bl.getX();
         this.y1=bl.getY();
         this.x2=tr.getX();
