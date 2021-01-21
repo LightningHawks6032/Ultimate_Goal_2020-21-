@@ -21,9 +21,9 @@ public class DriveController {
         checkMotorsPresent();
 
         double powerFL = moveY - moveX - rotate;
-        double powerFR = moveY + moveX + rotate;
+        double powerFR = moveY - moveX + rotate;
         double powerBL = moveY + moveX - rotate;
-        double powerBR = moveY - moveX + rotate;
+        double powerBR = moveY + moveX + rotate;
 
         hardware.motors.setPowerClamped(powerFL,powerFR,powerBL,powerBR,clipMode);
     }

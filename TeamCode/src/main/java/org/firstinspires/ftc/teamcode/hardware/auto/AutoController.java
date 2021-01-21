@@ -46,7 +46,7 @@ public class AutoController {
 
         telemetry.addLine(String.format("%.2f %.2f %.2f",vX,vY,vR));
 
-        driveController.setMotors_YXR(dY,0*dX,dR);
+        driveController.setMotors_YXR(dY,dX,dR);
     }
 
     private void updatePosition(double t) {
