@@ -19,7 +19,7 @@ public class DriveMotors {
     }
 
     public boolean checkMotorsPresent() {
-        return bl != null && br != null && fl != null && fr != null;
+        return bl.motor != null && br.motor != null && fl.motor != null && fr.motor != null;
     }
 
     public void setPowerClamped(double fl, double fr, double bl, double br, MotorClipMode clipMode) {

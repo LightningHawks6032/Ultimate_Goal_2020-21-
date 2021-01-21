@@ -5,6 +5,9 @@ import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
 import org.firstinspires.ftc.teamcode.hardware.drive.DriveController;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Locale;
 
 public class AutoController {
     RobotPos target = null;
@@ -40,13 +43,13 @@ public class AutoController {
         double dX = diff.x, dY = diff.y, dR = diff.r;
         double vX = Math.signum(dX)*Math.max(0,Math.min(6,Math.abs(dX)))/6;
         double vY = Math.signum(dY)*Math.max(0,Math.min(6,Math.abs(dY)))/6;
-        vX = Math.cos(pos.r)*vX+Math.sin(pos.r)*vY;
-        vY = Math.cos(pos.r)*vY-Math.sin(pos.r)*vX;
+        vX = Math.cos(-pos.r)*vX+Math.sin(-pos.r)*vY;
+        vY = Math.cos(-pos.r)*vY-Math.sin(-pos.r)*vX;
         double vR = Math.signum(dR)*Math.max(0,Math.min(0.5,Math.abs(dR)))/0.5;
 
-        telemetry.addLine(String.format("%.2f %.2f %.2f",vX,vY,vR));
+        telemetry.addLine(String.format(Locale.ENGLISH,"%.2f %.2f %.2f",vX,vY,vR));
 
-        driveController.setMotors_YXR(dY,dX,dR);
+        driveController.setMotors_YXR(vY,vX,vR);
     }
 
     private void updatePosition(double t) {
@@ -91,8 +94,8 @@ public class AutoController {
         public RobotPos integrateRelFwd(double dx_, double dy_, double dr, double newAqTime) {
             double s = Math.sin(r+dr);
             double c = Math.cos(r+dr);
-            double dx = dx_*c+dy_*s;
-            double dy = dy_*c-dx_*s;
+            double dx = dx_*c-dy_*s;
+            double dy = dy_*c+dx_*s;
             return new RobotPos(dx+x,dy+y,dr+r,newAqTime);
         }
         public RobotPos integrateVelRelFwd(double vx, double vy, double vr, double dt) {
@@ -102,6 +105,7 @@ public class AutoController {
             return new RobotPos(other.x-x,other.y-y,other.r-r);
         }
 
+        @NotNull
         @Override
         public String toString() {
             return "[RobotPos{x:"+x+",y:"+y+",r:"+r+"}]";
