@@ -15,6 +15,7 @@ public class JoeysDriveTeleOp extends OpMode {
 
     public void init(){
         driveController = new DriveController(DriveMotors.MotorClipMode.CLAMP, new BotHardware(hardwareMap));
+        driveController.updateMotors(getRuntime());
     }
 
 
@@ -24,6 +25,7 @@ public class JoeysDriveTeleOp extends OpMode {
         double rotate = gamepad1.left_bumper?0:gamepad1.left_stick_x; // +: CW; -: CCW
 
         driveController.setMotors_YXR(moveY,moveX,rotate);
+        driveController.updateMotors(getRuntime());
 
         telemetry.update();
     }

@@ -11,6 +11,7 @@ public class DcMotorController {
     private double distStart = 0;
     private double stepDisplacement = 0;
     private double currentDist = 0;
+    private double vTarget = 0;
     public final DcMotor motor;
     public final BotHardware hardware;
 
@@ -23,16 +24,20 @@ public class DcMotorController {
         lastT = time;
     }
     public void update(double time) {
-        lastT = time;
+        double dt = time - lastT; lastT = time;
 
         double lastDist = currentDist;
         currentDist = calculateDist();
         stepDisplacement = currentDist - lastDist;
+
+        double pow = motor.getPower();
+        motor.setPower(pow+(vTarget-pow)*dt*Constants.MAX_MOTORACC);
+        vTarget = motor.getPower();
     }
 
     public void setPower(double value) {
         double pow = Math.max(Math.min(value*hardware.getMotorBoost(),hardware.getMotorMax()),-hardware.getMotorMax());
-        this.motor.setPower(Math.abs(pow)<hardware.getMotorMin()?0:pow);
+        vTarget = (Math.abs(pow)<hardware.getMotorMin()?0:pow);
     }
     public double getStepDisplacement() { return stepDisplacement; }
     public double getDist() { return currentDist; }

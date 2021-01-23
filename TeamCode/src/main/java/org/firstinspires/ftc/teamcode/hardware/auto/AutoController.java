@@ -42,10 +42,11 @@ public class AutoController {
         RobotPos diff = pos.getDifferenceTo(target);
         double dX = diff.x, dY = diff.y, dR = diff.r;
         double vX = Math.signum(dX)*Math.max(0,Math.min(6,Math.abs(dX)))/6;
-        double vY = Math.signum(dY)*Math.max(0,Math.min(6,Math.abs(dY)))/6;
-        vX = Math.cos(-pos.r)*vX+Math.sin(-pos.r)*vY;
-        vY = Math.cos(-pos.r)*vY-Math.sin(-pos.r)*vX;
-        double vR = Math.signum(dR)*Math.max(0,Math.min(0.5,Math.abs(dR)))/0.5;
+        double vY = -Math.signum(dY)*Math.max(0,Math.min(6,Math.abs(dY)))/6;
+        vX = Math.cos(pos.r)*vX-Math.sin(pos.r)*vY;
+        vY = Math.cos(pos.r)*vY+Math.sin(pos.r)*vX;
+        final double rotInvPow = 2;
+        double vR = Math.signum(dR)*Math.max(0,Math.min(rotInvPow,Math.abs(dR)))/rotInvPow;
 
         telemetry.addLine(String.format(Locale.ENGLISH,"%.2f %.2f %.2f",vX,vY,vR));
 
@@ -58,9 +59,10 @@ public class AutoController {
         double dmFR = hardware.motors.fr.getStepDisplacement();
         double dmBL = hardware.motors.bl.getStepDisplacement();
         double dmBR = hardware.motors.br.getStepDisplacement();
-        double dY = dmFL + dmFR + dmBL + dmBR;  dY *= 1/4.0;
+        double dY = dmFL + dmFR + dmBL + dmBR;  dY *= -1/4.0;
         double dX = dmBL + dmFR -(dmFL + dmBR); dX *= 1/4.0;
         double dR = dmFR + dmBR -(dmFL + dmBL); dR *= Constants.ROTPOW_TO_RAD/4.0;
+        telemetry.addLine(String.format(Locale.ENGLISH,"DY: %.3f; DX: %.3f; DR: %.3f;",dY,dX,dR));
         pos = pos.integrateRelFwd(dX, dY, dR, t);
     }
 

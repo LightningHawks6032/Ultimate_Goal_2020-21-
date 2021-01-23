@@ -17,7 +17,7 @@ public class Constants {
 
     public static final double ROTPOW_TO_RAD = 1/5.5;
 
-    public static final double MAX_MOTORACC = 2;
+    public static final double MAX_MOTORACC = 8;
 
     public static class MapKeys {
         public static final String MOTOR_FL = "fl";

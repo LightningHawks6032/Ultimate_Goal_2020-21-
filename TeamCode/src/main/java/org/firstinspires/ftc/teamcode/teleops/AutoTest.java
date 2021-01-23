@@ -45,14 +45,15 @@ public class AutoTest extends OpMode {
         x *= 24;
         double y = (gamepad1.dpad_down ? -1 : 0) + (gamepad1.dpad_up ? 1 : 0);
         y *= 24;
-        controller.setTarget(new AutoController.RobotPos(x, y, 0));
+        double r = gamepad1.left_trigger * Math.PI;
+        controller.setTarget(new AutoController.RobotPos(x, y, r));
         controller.update(getRuntime());
         if (gamepad1.a) {
             controller.resetBasePos();
             controller.setPos(new AutoController.RobotPos(0, 0, 0));
         }
-        if (gamepad1.right_trigger < 0.5)
-            controller.driveController.setMotors_YXR(gamepad1.left_stick_y,gamepad1.left_stick_x,gamepad1.right_stick_x);
+
+        //controller.driveController.setMotors_YXR(gamepad1.left_stick_y,gamepad1.left_stick_x,gamepad1.right_stick_x);
         telemetry.addLine(x + "," + y);
         telemetry.addLine(controller.getPos().toString());
         telemetry.update();
