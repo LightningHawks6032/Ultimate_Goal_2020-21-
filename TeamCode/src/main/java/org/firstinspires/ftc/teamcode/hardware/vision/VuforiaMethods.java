@@ -11,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.teamcode.R;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.RobotPos;
+import org.firstinspires.ftc.teamcode.hardware.BotHardware;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -28,7 +29,10 @@ public class VuforiaMethods {
     // Variable Declarations/ /
     private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = BACK;
     private static final boolean PHONE_IS_PORTRAIT = false  ;
-    private HardwareMap hardwareMap = null;
+
+    private static final String TFOD_MODEL_ASSET = "UltimateGoal.tflite";
+    private static final String LABEL_FIRST_ELEMENT = "Quad";
+    private static final String LABEL_SECOND_ELEMENT = "Single";
 
     private static final String VUFORIA_KEY =
             "AdwaKe7/////AAAAmVQWX/gUQE/gnK+olEmSWA5FCaxNrdY/EyKFLO2afR1IQD4gbnThc6LcCHIJ64hyC2i3n5VRiIRAMGxtKqjI7meHCphQAPrXpH9GomENr/fSXjVUhQao+Zw0/MLQEuTaqNYnp5EI/4oo6LTm/YPgYKOSPaP+tijaydiwNQn4A8zXPfDhkD/q6RTYMzS3UtpOR7WBZJPUBxW9XKim5ekHbYd1Hk2cFTTFAsL0XwycIWhuvHYpVlnZMqWwEnkTqp0o+5TE1FLkAfJ4OOUEfB8sP9kMEcged2/tczAh3GOcjOudp1S9F5xjPFZQX00OLV+QUCPzmT5kkqFBwiS30YR6L8urW2mJG4quq6NnrNYwzn47";
@@ -52,8 +56,8 @@ public class VuforiaMethods {
     List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>();
 
     //Basic constructor
-    public VuforiaMethods(HardwareMap hm){
-        hardwareMap = hm;
+    public VuforiaMethods(){
+        
     }
 
     // Copy-pasted from example
