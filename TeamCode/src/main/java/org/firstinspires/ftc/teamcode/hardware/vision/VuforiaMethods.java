@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefau
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.teamcode.R;
 import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.RobotPos;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -179,9 +180,9 @@ public class VuforiaMethods {
         targetsUltimateGoal.activate();
     }
 
-    public VisionPos getPosition(VisionPos currentPosition){
+    public RobotPos getPosition(RobotPos currentPosition){
         String targetName = "";
-        double coordX = currentPosition.getX(), coordY = currentPosition.getY();
+        double coordX = currentPosition.x, coordY = currentPosition.y;
 
         // check all the trackable targets to see which one (if any) is visible.
         targetVisible = false;
@@ -215,8 +216,12 @@ public class VuforiaMethods {
             //telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
         }
 
+        // express the rotation of the robot in degrees.
+        Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
 
-        return new VisionPos(coordX,coordY,targetName);
+
+
+        return new RobotPos(coordX,coordY,rotation.thirdAngle);
     }
 
 
