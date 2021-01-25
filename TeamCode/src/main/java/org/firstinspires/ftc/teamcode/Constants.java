@@ -19,6 +19,8 @@ public class Constants {
 
     public static final double MAX_MOTORACC = 8;
 
+    public static final double ROBOTPOS_BLEND_FAC = 0.01;
+
     public static class MapKeys {
         public static final String MOTOR_FL = "fl";
         public static final String MOTOR_FR = "fr";

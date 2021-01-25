@@ -31,7 +31,7 @@ public class AutoController {
 
     public void setTarget(RobotPos target) { this.target = target; }
 
-    public void update(double t) {
+    public void update(double t, RobotPos visionPos) {
         if (target == null) {
             driveController.setMotors_YXR(0,0,0);
             driveController.updateMotors(t);
