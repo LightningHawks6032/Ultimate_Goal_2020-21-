@@ -49,7 +49,8 @@ public class AutoTest extends OpMode {
     public void loop() {
         setTarget();
         visionPos = voofinshmertsEvilIncorperated.getPosition(visionPos);
-        controller.update(getRuntime(),visionPos);
+        if (voofinshmertsEvilIncorperated.targetVisible())
+            controller.update(getRuntime(),visionPos);
 
         telemetry.addLine(controller.getPos().toString());
         telemetry.update();

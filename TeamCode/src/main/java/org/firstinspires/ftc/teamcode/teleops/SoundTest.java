@@ -15,7 +15,7 @@ public class SoundTest extends OpMode {
 
     public void loop(){
         if (gamepad1.a){
-            sounds.playMegalovenia();
+            sounds.playSong();
         }
     }
 }
