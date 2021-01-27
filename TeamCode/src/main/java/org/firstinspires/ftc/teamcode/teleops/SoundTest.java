@@ -1,24 +1,21 @@
 package org.firstinspires.ftc.teamcode.teleops;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.hardware.sound.PlaySound;
+import org.firstinspires.ftc.teamcode.hardware.sound.Sounds;
 
+@TeleOp(name = "BEEP")
 public class SoundTest extends OpMode {
-    double t = 0;
-    public PlaySound sound;
+    private Sounds sounds;
 
-    @Override
-    public void init() {
-        sound = new PlaySound();
+    public void init(){
+        sounds = new Sounds(hardwareMap);
     }
 
-    @Override
-    public void loop() {
-
-        if (getRuntime() > t) {
-            t += 1000;
-            sound.playSound();
+    public void loop(){
+        if (gamepad1.a){
+            sounds.playMegalovenia();
         }
     }
 }
