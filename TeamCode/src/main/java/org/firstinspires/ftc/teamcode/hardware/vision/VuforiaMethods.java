@@ -40,6 +40,7 @@ public class VuforiaMethods {
     private static final String VUFORIA_KEY =
             "AdwaKe7/////AAAAmVQWX/gUQE/gnK+olEmSWA5FCaxNrdY/EyKFLO2afR1IQD4gbnThc6LcCHIJ64hyC2i3n5VRiIRAMGxtKqjI7meHCphQAPrXpH9GomENr/fSXjVUhQao+Zw0/MLQEuTaqNYnp5EI/4oo6LTm/YPgYKOSPaP+tijaydiwNQn4A8zXPfDhkD/q6RTYMzS3UtpOR7WBZJPUBxW9XKim5ekHbYd1Hk2cFTTFAsL0XwycIWhuvHYpVlnZMqWwEnkTqp0o+5TE1FLkAfJ4OOUEfB8sP9kMEcged2/tczAh3GOcjOudp1S9F5xjPFZQX00OLV+QUCPzmT5kkqFBwiS30YR6L8urW2mJG4quq6NnrNYwzn47";
 
+    private final int THREE_RING_TOP = 90;
 
     public HardwareMap hardwareMap;
     private static final float mmTargetHeight   = (float) ((6) * Constants.MM_PER_IN);          // the height of the center of the target image above the floor
@@ -250,12 +251,33 @@ public class VuforiaMethods {
     }
 
     public int getRings(){
+        int rings = 0;
         if (tfod != null) {
             // getUpdatedRecognitions() will return null if no new information is available since
             // the last time that call was made.
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
 
-            return updatedRecognitions.size();
+            //left top is less than or great than 90
+
+            if(updatedRecognitions.size() == 0){
+                rings = 0;
+            }else {
+
+                if (updatedRecognitions != null) {
+
+                    // step through the list of recognitions and display boundary info.
+                    int i = 0;
+                    for (Recognition recognition : updatedRecognitions) {
+                        if (recognition.getTop() <= THREE_RING_TOP) {
+                            rings = 1;
+                        } else {
+                            rings = 3;
+                        }
+                    }
+                }
+            }
+
+            return rings;
 
         }
         return 0;
