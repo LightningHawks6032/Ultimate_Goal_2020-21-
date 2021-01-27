@@ -122,6 +122,8 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
                     if (updatedRecognitions != null) {
                       telemetry.addData("# Object Detected", updatedRecognitions.size());
 
+                      if (updatedRecognitions.size() == 0) telemetry.addLine("No Rings");
+
                       // step through the list of recognitions and display boundary info.
                       int i = 0;
                       for (Recognition recognition : updatedRecognitions) {
@@ -130,6 +132,9 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
                                           recognition.getLeft(), recognition.getTop());
                         telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
                                 recognition.getRight(), recognition.getBottom());
+
+                        if (recognition.getTop() >= 90) telemetry.addLine("Three Rings");
+                        else telemetry.addLine("One Rings");
                       }
                       telemetry.update();
                     }
