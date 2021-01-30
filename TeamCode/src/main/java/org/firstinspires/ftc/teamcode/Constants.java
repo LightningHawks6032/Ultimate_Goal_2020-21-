@@ -11,7 +11,7 @@ public class Constants {
 
     public static final double WHEEL_DIA_MM = 96;
 
-    public static final double TICKS_PER_REV = 145.6 * 6;
+    public static final double TICKS_PER_REV = 145.6 * 6 / 1.75;
     public static final double TICKS_PER_MM = TICKS_PER_REV / (WHEEL_DIA_MM * Math.PI);
     public static final double TICKS_PER_IN = TICKS_PER_MM*MM_PER_IN;
 

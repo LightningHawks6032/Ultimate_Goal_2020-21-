@@ -41,6 +41,7 @@ public class AutoTest extends OpMode {
         voofinshmertsEvilIncorperated = new VuforiaMethods(hardwareMap);
 
         controller.init(getRuntime());
+        controller.update(getRuntime());
         controller.resetBasePos();
         controller.setPos(new RobotPos(0,0,0));
         voofinshmertsEvilIncorperated.initVuforia();
@@ -50,7 +51,8 @@ public class AutoTest extends OpMode {
         setTarget();
         visionPos = voofinshmertsEvilIncorperated.getPosition(visionPos);
         if (voofinshmertsEvilIncorperated.targetVisible())
-            controller.update(getRuntime(),visionPos);
+            controller.correctForVisionPos(visionPos);
+        controller.update(getRuntime());
 
         telemetry.addLine(controller.getPos().toString());
         telemetry.update();

@@ -12,6 +12,7 @@ import java.util.Locale;
 public class AutoController {
     RobotPos target = null;
     RobotPos pos = null;
+    RobotPos vel = null;
 
     public final DriveController driveController;
     final BotHardware hardware;
@@ -31,7 +32,7 @@ public class AutoController {
 
     public void setTarget(RobotPos target) { this.target = target; }
 
-    public void update(double t, RobotPos visionPos) {
+    public void update(double t) {
         if (target == null) {
             driveController.setMotors_YXR(0,0,0);
             driveController.updateMotors(t);
@@ -50,7 +51,12 @@ public class AutoController {
 
         telemetry.addLine(String.format(Locale.ENGLISH,"%.2f %.2f %.2f",vX,vY,vR));
 
+        vel = new RobotPos(vX,vY,vR);
         driveController.setMotors_YXR(vY,vX,vR);
+    }
+
+    public void correctForVisionPos(RobotPos visionPos){
+        pos = pos.correctPos(visionPos);
     }
 
     private void updatePosition(double t) {
@@ -60,7 +66,7 @@ public class AutoController {
         double dmBL = hardware.motors.bl.getStepDisplacement();
         double dmBR = hardware.motors.br.getStepDisplacement();
         double dY = dmFL + dmFR + dmBL + dmBR;  dY *= -1/4.0;
-        double dX = dmBL + dmFR -(dmFL + dmBR); dX *= 1/4.0;
+        double dX = dmBL + dmBR -(dmFL + dmFR); dX *= 1/4.0;
         double dR = dmFR + dmBR -(dmFL + dmBL); dR *= Constants.ROTPOW_TO_RAD/4.0;
         telemetry.addLine(String.format(Locale.ENGLISH,"DY: %.3f; DX: %.3f; DR: %.3f;",dY,dX,dR));
         pos = pos.integrateRelFwd(dX, dY, dR, t);
@@ -76,11 +82,13 @@ public class AutoController {
     public void setPos(RobotPos pos) { this.pos = new RobotPos(pos); }
     public RobotPos getPos() { return pos; }
 
-    public boolean withinThreshold(double distInches, double rotThresh) {
-        if (target == null || pos == null) return false;
+    public boolean withinThreshold(double distInches, double rotThresh, double speedThresh) {
+        if (target == null || pos == null || vel == null) return false;
         RobotPos diff = target.getDifferenceTo(pos);
         boolean close = diff.x*diff.x+diff.y*diff.y < distInches*distInches;
         close &= Math.abs(diff.r) < rotThresh;
+        close &= vel.x*vel.x+vel.y*vel.y < speedThresh*speedThresh;
+        close &= Math.abs(vel.r) < speedThresh;
         return close;
     }
 }

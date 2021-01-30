@@ -208,7 +208,6 @@ public class VuforiaMethods {
 
     public RobotPos getPosition(RobotPos currentPosition){
         String targetName = "";
-        double coordX = currentPosition.x, coordY = currentPosition.y;
 
         // check all the trackable targets to see which one (if any) is visible.
         targetVisible = false;
@@ -232,22 +231,18 @@ public class VuforiaMethods {
         if (targetVisible) {
             // express position (translation) of robot in inches.
             VectorF translation = lastLocation.getTranslation();
+            Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, RADIANS);
 
-            coordX = translation.get(0)/Constants.MM_PER_IN;
-            coordY = translation.get(1)/Constants.MM_PER_IN;
+            return new RobotPos(translation.get(0)/Constants.MM_PER_IN, translation.get(1)/Constants.MM_PER_IN,rotation.thirdAngle);
 
             // express the rotation of the robot in degrees. May need this later.
 
             //Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
             //telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
+        } else {
+            return null;
         }
 
-        // express the rotation of the robot in degrees.
-        Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, RADIANS);
-
-
-
-        return new RobotPos(coordX,coordY,rotation.thirdAngle);
     }
 
     public int getRings(){

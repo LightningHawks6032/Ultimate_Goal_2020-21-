@@ -1,54 +1,52 @@
 package org.firstinspires.ftc.teamcode.teleops.autos;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.RobotPos;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
 import org.firstinspires.ftc.teamcode.hardware.auto.AutoController;
 import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
 
-@TeleOp(group = "autos", name = "move to line")
+@Autonomous(group = "autos", name = "move to line")
 public class MoveForwards extends LinearOpMode{
 
     AutoController controller;
-    VuforiaMethods voofinshmertsEvilIncorperated;
+    VuforiaMethods vuforia;
     RobotPos visionPos;
 
     @Override
     public void runOpMode() throws InterruptedException {
+        telemetry.addLine("STARTING");
+        telemetry.update();
+
         BotHardware bh = new BotHardware(hardwareMap);
         controller = new AutoController(bh, telemetry);
-        voofinshmertsEvilIncorperated = new VuforiaMethods(hardwareMap);
+        vuforia = new VuforiaMethods(hardwareMap);
+        vuforia.initVuforia();
 
-        controller.init(getRuntime());
-        controller.resetBasePos();
-        controller.setPos(new RobotPos(0,0,0));
-        voofinshmertsEvilIncorperated.initVuforia();
+        telemetry.addLine("READY");
+        telemetry.update();
 
         waitForStart();
 
-        while (!controller.withinThreshold(5,180)) {
-            Thread.sleep(10);
-            setTarget();
-            visionPos = voofinshmertsEvilIncorperated.getPosition(visionPos);
-            if (voofinshmertsEvilIncorperated.targetVisible())
-                controller.update(getRuntime(), visionPos);
+        controller.init(getRuntime());
+        controller.update(getRuntime());
+        controller.resetBasePos();
+        controller.setPos(new RobotPos(0,0,0));
+        controller.setTarget(new RobotPos(0,72,0));
 
-            telemetry.addLine(controller.getPos().toString());
+        while (!controller.withinThreshold(5,0.3,0.5)) {
+            Thread.sleep(10);
+            visionPos = vuforia.getPosition(visionPos);
+            if (visionPos != null) controller.correctForVisionPos(visionPos);
+            controller.update(getRuntime());
+
+            telemetry.addLine("POS: "+controller.getPos().toString());
             telemetry.update();
         }
-    }
-
-    private void setTarget() {
-        double r = visionPos.r;
-        double y = visionPos.y + 72* Constants.MM_PER_IN;
-        double x = visionPos.x;
-        //double x = (gamepad1.dpad_left ? -1 : 0) + (gamepad1.dpad_right ? 1 : 0); x *= 24;
-        //double y = (gamepad1.dpad_down ? -1 : 0) + (gamepad1.dpad_up ? 1 : 0); y *= 24;
-        //double r = gamepad1.left_trigger * Math.PI;
-        controller.setTarget(new RobotPos(x, y, r));
+        controller.driveController.setMotors_YXR(0,0,0);
+        requestOpModeStop();
     }
 
 }
