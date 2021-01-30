@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.hardware.sound;
 
 import android.content.Context;
-import android.view.SoundEffectConstants;
 
 import com.qualcomm.ftccommon.SoundPlayer;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -11,16 +10,17 @@ import org.firstinspires.ftc.robotcore.external.function.Consumer;
 public class Sounds {
     HardwareMap hardwareMap;
     Context context;
-    private int soundId;
+    private int songId;
+    private int skreemId;
     boolean soundPlaying = false;
 
 
     public Sounds (HardwareMap hardwareMa){
         hardwareMap = hardwareMa;
         context = hardwareMap.appContext;
-        soundId = hardwareMap.appContext.getResources().getIdentifier("song", "raw", hardwareMap.appContext.getPackageName());
 
-        SoundPlayer player = SoundPlayer.getInstance();
+        songId = hardwareMap.appContext.getResources().getIdentifier("song", "raw", hardwareMap.appContext.getPackageName());
+        skreemId = hardwareMap.appContext.getResources().getIdentifier("skreem", "raw", hardwareMap.appContext.getPackageName());
     }
 
     public void stop() {
@@ -30,15 +30,10 @@ public class Sounds {
     }
     public void playSong(){
         SoundPlayer player = SoundPlayer.getInstance();
-
-        soundId = hardwareMap.appContext.getResources().getIdentifier("song", "raw", hardwareMap.appContext.getPackageName());
-        System.out.println(player.preload(context,soundId));
-
-        SoundPlayer.PlaySoundParams params = new SoundPlayer.PlaySoundParams();
-        System.out.println(params.loopControl+"YEET"+params.isLooping());
-        params.loopControl = 0;
-        player.startPlaying(context, soundId, params,
-            new Consumer<Integer>() { @Override public void accept(Integer integer){System.out.println("START");}},
-            new Runnable(){@Override public void run(){System.out.println("END");}});
+        player.startPlaying(context, songId);
+    }
+    public void playSkreem(){
+        SoundPlayer player = SoundPlayer.getInstance();
+        player.startPlaying(context, skreemId);
     }
 }
