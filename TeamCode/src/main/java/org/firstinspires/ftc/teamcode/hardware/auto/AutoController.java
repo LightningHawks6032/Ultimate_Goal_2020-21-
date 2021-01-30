@@ -76,4 +76,10 @@ public class AutoController {
     public void setPos(RobotPos pos) { this.pos = new RobotPos(pos); }
     public RobotPos getPos() { return pos; }
 
+    public boolean withinThreshold(double distInches, double rotThresh) {
+        RobotPos diff = target.getDifferenceTo(pos);
+        boolean close = diff.x*diff.x+diff.y*diff.y < distInches*distInches;
+        close &= Math.abs(diff.r) < rotThresh;
+        return close;
+    }
 }
