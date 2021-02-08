@@ -12,11 +12,14 @@ import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.hardware.drive.IMUAccelerationIntegrator;
 import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
 import org.firstinspires.ftc.teamcode.hardware.groups.MRGyro;
+import org.firstinspires.ftc.teamcode.hardware.groups.TandemMotors;
 
 public class BotHardware {
     private final HardwareMap hardwareMap;
 
     public final DriveMotors motors;
+    public final DcMotor intakeMotor;
+    public final TandemMotors outtakeMotor;
 
     public final BNO055IMU imu;
     public final MRGyro gyro;
@@ -34,6 +37,10 @@ public class BotHardware {
         DcMotor MOTOR_FR = getMotor(Constants.MapKeys.MOTOR_FR, Constants.MotorDirections.DRIVE_FR);
         DcMotor MOTOR_BR = getMotor(Constants.MapKeys.MOTOR_BR, Constants.MotorDirections.DRIVE_BR);
         motors = new DriveMotors(MOTOR_FL,MOTOR_FR,MOTOR_BL,MOTOR_BR,this);
+        intakeMotor = getMotor(Constants.MapKeys.MOTOR_INTAKE,Constants.MotorDirections.INTAKE);
+        DcMotor MOTOR_OUTTAKE_0 = getMotor(Constants.MapKeys.MOTOR_OUTTAKE_FWD,Constants.MotorDirections.OUTTAKE_FWD);
+        DcMotor MOTOR_OUTTAKE_1 = getMotor(Constants.MapKeys.MOTOR_OUTTAKE_BAK,Constants.MotorDirections.OUTTAKE_BAK);
+        outtakeMotor = new TandemMotors(MOTOR_OUTTAKE_1,MOTOR_OUTTAKE_0);
 
         imu = hardwareMap.get(BNO055IMU.class, Constants.MapKeys.IMU);
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();

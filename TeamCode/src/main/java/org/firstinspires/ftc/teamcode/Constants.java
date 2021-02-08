@@ -26,6 +26,9 @@ public class Constants {
         public static final String MOTOR_FR = "fr";
         public static final String MOTOR_BL = "bl";
         public static final String MOTOR_BR = "br";
+        public static final String MOTOR_INTAKE = "intake";
+        public static final String MOTOR_OUTTAKE_FWD = "outtake-fwd";
+        public static final String MOTOR_OUTTAKE_BAK = "outtake-bak";
         public static final String IMU = "imu";
         public static final String GYRO = "gyro";
     }
@@ -34,5 +37,9 @@ public class Constants {
         public static final DcMotorSimple.Direction DRIVE_BL = DcMotorSimple.Direction.FORWARD;
         public static final DcMotorSimple.Direction DRIVE_FR = DcMotorSimple.Direction.REVERSE;
         public static final DcMotorSimple.Direction DRIVE_BR = DcMotorSimple.Direction.REVERSE;
+
+        public static final DcMotorSimple.Direction INTAKE = DcMotorSimple.Direction.FORWARD;
+        public static final DcMotorSimple.Direction OUTTAKE_FWD = DcMotorSimple.Direction.FORWARD;
+        public static final DcMotorSimple.Direction OUTTAKE_BAK = DcMotorSimple.Direction.REVERSE;
     }
 }
