@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.RobotPos;
 import org.firstinspires.ftc.teamcode.hardware.auto.AutoController;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
+import org.firstinspires.ftc.teamcode.hardware.sound.Sounds;
 import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
 
 /*
