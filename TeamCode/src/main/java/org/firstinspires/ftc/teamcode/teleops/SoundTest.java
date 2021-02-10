@@ -22,8 +22,7 @@ public class SoundTest extends OpMode {
         SoundPlayer player = SoundPlayer.getInstance();
 
         if (gamepad1.a && !a) {
-            if (rand.nextBoolean()) sounds.playSong();
-            else sounds.playSkreem();
+            sounds.play((new String[]{"Megalovania", "skreem", "IAmRecordingSound"})[rand.nextInt(3)]);
         }
         if (gamepad1.x) sounds.stop();
         a = gamepad1.a;

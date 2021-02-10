@@ -5,35 +5,37 @@ import android.content.Context;
 import com.qualcomm.ftccommon.SoundPlayer;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.robotcore.external.function.Consumer;
+import java.util.HashMap;
 
 public class Sounds {
     HardwareMap hardwareMap;
     Context context;
-    private int songId;
-    private int skreemId;
-    boolean soundPlaying = false;
+    private HashMap<String,Integer> soundMap = new HashMap<>();
 
 
     public Sounds (HardwareMap hardwareMa){
         hardwareMap = hardwareMa;
         context = hardwareMap.appContext;
 
-        songId = hardwareMap.appContext.getResources().getIdentifier("song", "raw", hardwareMap.appContext.getPackageName());
-        skreemId = hardwareMap.appContext.getResources().getIdentifier("skreem", "raw", hardwareMap.appContext.getPackageName());
+        addSound("skreem","skreem");
+        addSound("Megalovania","mega");
+        addSound("IAmRecordingSound","im_recording_sound");
     }
 
     public void stop() {
         SoundPlayer player = SoundPlayer.getInstance();
         player.stopPlayingAll();
-
     }
-    public void playSong(){
-        SoundPlayer player = SoundPlayer.getInstance();
-        player.startPlaying(context, songId);
+    private void addSound(String publicId, String resId) {
+        int id = hardwareMap.appContext.getResources().getIdentifier(resId, "raw", hardwareMap.appContext.getPackageName());
+        soundMap.put(publicId,id);
     }
-    public void playSkreem(){
+    @SuppressWarnings(value = "NullPointerException")
+    public boolean play(String id){
+        if (!soundMap.containsKey(id)) return false;
+        int numericId = soundMap.get(id);
         SoundPlayer player = SoundPlayer.getInstance();
-        player.startPlaying(context, skreemId);
+        player.startPlaying(context, numericId);
+        return true;
     }
 }
