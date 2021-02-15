@@ -38,7 +38,7 @@ public class MoveForwards extends LinearOpMode{
         controller.update(getRuntime());
         controller.resetBasePos();
         controller.setPos(new RobotPos(0,0,0));
-        controller.setTarget(new RobotPos(0,72,0));
+        controller.setTarget(new RobotPos(0,12,0));
 
         while (!controller.withinThreshold(5,0.3,0.5)) {
             Thread.sleep(10);
