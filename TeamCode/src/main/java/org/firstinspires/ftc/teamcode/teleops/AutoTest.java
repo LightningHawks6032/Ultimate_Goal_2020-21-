@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleops;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -29,6 +30,7 @@ import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
 _/  _/   _/_/_/   _/  _/   _/_/_/
  */
 @TeleOp(group = "drive", name = "Auto Test")
+@Disabled
 public class AutoTest extends OpMode {
 
     AutoController controller;

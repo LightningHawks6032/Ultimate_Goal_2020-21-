@@ -19,7 +19,6 @@ public class MoveForwards extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException {
         Sounds sounds = new Sounds(hardwareMap);
-        sounds.play("Megalovania");
 
         telemetry.addLine("STARTING");
         telemetry.update();
@@ -33,6 +32,7 @@ public class MoveForwards extends LinearOpMode{
         telemetry.update();
 
         waitForStart();
+        sounds.play("Megalovania");
 
         controller.init(getRuntime());
         controller.update(getRuntime());
@@ -41,6 +41,7 @@ public class MoveForwards extends LinearOpMode{
         controller.setTarget(new RobotPos(0,12,0));
 
         while (!controller.withinThreshold(5,0.3,0.5)) {
+            //noinspection BusyWait
             Thread.sleep(10);
             visionPos = vuforia.getPosition(visionPos);
             if (visionPos != null) controller.correctForVisionPos(visionPos);
