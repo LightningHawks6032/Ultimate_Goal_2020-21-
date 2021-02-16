@@ -183,6 +183,8 @@ public class VuforiaMethods {
         final float CAMERA_VERTICAL_DISPLACEMENT = 7.5f * (float) Constants.MM_PER_IN;   //Camera is 7.5 Inches above ground
         final float CAMERA_LEFT_DISPLACEMENT     = 4.0f * (float) Constants.MM_PER_IN;   //Camera is 8 inches left of the robot's center line
 
+        //FOV: robot needs to be ~18in away from something on the ground in order to see it
+
         OpenGLMatrix robotFromCamera = OpenGLMatrix
                 .translation(CAMERA_FORWARD_DISPLACEMENT, CAMERA_LEFT_DISPLACEMENT, CAMERA_VERTICAL_DISPLACEMENT)
                 .multiplied(Orientation.getRotationMatrix(EXTRINSIC, YZX, DEGREES, phoneYRotate, phoneZRotate, phoneXRotate));
