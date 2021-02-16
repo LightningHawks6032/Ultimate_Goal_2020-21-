@@ -232,7 +232,6 @@ public class VuforiaMethods {
             // express position (translation) of robot in inches.
             VectorF translation = lastLocation.getTranslation();
             Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, RADIANS);
-
             return new RobotPos(translation.get(0)/Constants.MM_PER_IN, translation.get(1)/Constants.MM_PER_IN,rotation.thirdAngle);
 
             // express the rotation of the robot in degrees. May need this later.
