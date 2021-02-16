@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.hardware.vision;
 
+import android.provider.SyncStateContract;
+
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
@@ -130,24 +132,23 @@ public class VuforiaMethods {
 
         //Set the position of the perimeter targets with relation to origin (center of field)
 
-        //MAY BE SUBJECT TO EXPERIMENTAL ALTERATION
         redAllianceTarget.setLocation(OpenGLMatrix
-                .translation(halfField, 0, mmTargetHeight)
+                .translation(0, -halfField, mmTargetHeight)
                 .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0, 180)));
 
         blueAllianceTarget.setLocation(OpenGLMatrix
-                .translation(-halfField, 0, mmTargetHeight)
+                .translation(0, halfField, mmTargetHeight)
                 .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0, 0)));
         frontWallTarget.setLocation(OpenGLMatrix
-                .translation(0, -halfField, mmTargetHeight)
+                .translation(-halfField, 0, mmTargetHeight)
                 .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0 , 90)));
 
         // The tower goal targets are located a quarter field length from the ends of the back perimeter wall.
         blueTowerGoalTarget.setLocation(OpenGLMatrix
-                .translation(-quadField, halfField, mmTargetHeight)
+                .translation(halfField, quadField, mmTargetHeight)
                 .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0 , -90)));
         redTowerGoalTarget.setLocation(OpenGLMatrix
-                .translation(quadField, halfField, mmTargetHeight)
+                .translation(halfField, -quadField, mmTargetHeight)
                 .multiplied(Orientation.getRotationMatrix(EXTRINSIC, XYZ, DEGREES, 90, 0, -90)));
 
         //
@@ -178,9 +179,9 @@ public class VuforiaMethods {
 
         // Next, translate the camera lens to where it is on the robot.
         // In this example, it is centered (left to right), but forward of the middle of the robot, and above ground level.
-        final float CAMERA_FORWARD_DISPLACEMENT  = (float) (4.0f * Constants.MM_PER_IN);   // eg: Camera is 4 Inches in front of robot center
-        final float CAMERA_VERTICAL_DISPLACEMENT = (float) (8.0f * Constants.MM_PER_IN);   // eg: Camera is 8 Inches above ground
-        final float CAMERA_LEFT_DISPLACEMENT     = (float) (0.0f * Constants.MM_PER_IN);   // eg: Camera is ON the robot's center line
+        final float CAMERA_FORWARD_DISPLACEMENT  = 8.0f * (float) Constants.MM_PER_IN;   //Camera is 8 Inches in front of robot center
+        final float CAMERA_VERTICAL_DISPLACEMENT = 7.5f * (float) Constants.MM_PER_IN;   //Camera is 7.5 Inches above ground
+        final float CAMERA_LEFT_DISPLACEMENT     = 4.0f * (float) Constants.MM_PER_IN;   //Camera is 8 inches left of the robot's center line
 
         OpenGLMatrix robotFromCamera = OpenGLMatrix
                 .translation(CAMERA_FORWARD_DISPLACEMENT, CAMERA_LEFT_DISPLACEMENT, CAMERA_VERTICAL_DISPLACEMENT)
@@ -232,6 +233,8 @@ public class VuforiaMethods {
             // express position (translation) of robot in inches.
             VectorF translation = lastLocation.getTranslation();
             Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, RADIANS);
+            RobotPos newPos = new RobotPos(-translation.get(1)/Constants.MM_PER_IN,translation.get(0)/Constants.MM_PER_IN, rotation.thirdAngle);
+
             return new RobotPos(translation.get(0)/Constants.MM_PER_IN, translation.get(1)/Constants.MM_PER_IN,rotation.thirdAngle);
 
             // express the rotation of the robot in degrees. May need this later.
