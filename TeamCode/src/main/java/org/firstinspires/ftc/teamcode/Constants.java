@@ -21,6 +21,9 @@ public class Constants {
 
     public static final double ROBOTPOS_BLEND_FAC = 0.01;
 
+    public static final double OUTTAKE_POWER_FAC = 0.3;
+    public static final double INTAKE_POWER_FAC = 1;
+
     public static class MapKeys {
         public static final String MOTOR_FL = "fl";
         public static final String MOTOR_FR = "fr";
@@ -39,7 +42,7 @@ public class Constants {
         public static final DcMotorSimple.Direction DRIVE_BR = DcMotorSimple.Direction.REVERSE;
 
         public static final DcMotorSimple.Direction INTAKE = DcMotorSimple.Direction.FORWARD;
-        public static final DcMotorSimple.Direction OUTTAKE_FWD = DcMotorSimple.Direction.FORWARD;
+        public static final DcMotorSimple.Direction OUTTAKE_FWD = DcMotorSimple.Direction.REVERSE;
         public static final DcMotorSimple.Direction OUTTAKE_BAK = DcMotorSimple.Direction.REVERSE;
     }
 }

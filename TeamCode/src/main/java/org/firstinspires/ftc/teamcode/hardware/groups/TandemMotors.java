@@ -8,7 +8,7 @@ public class TandemMotors {
         this.motors = motors;
     }
 
-    public void setPower(float power) {
+    public void setPower(double power) {
         for (DcMotor m : motors) m.setPower(power);
     }
 }
