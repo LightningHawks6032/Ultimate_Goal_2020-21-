@@ -21,7 +21,7 @@ public class Constants {
 
     public static final double ROBOTPOS_BLEND_FAC = 0.01;
 
-    public static final double OUTTAKE_POWER_FAC = 0.3;
+    public static final double OUTTAKE_POWER_FAC = 0.5;
     public static final double INTAKE_POWER_FAC = 1;
 
     public static class MapKeys {
