@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.hardware.auto;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.RobotPos;
+import org.firstinspires.ftc.teamcode.hardware.drive.PositionTracker;
 import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
 import org.firstinspires.ftc.teamcode.hardware.drive.DriveController;
@@ -10,12 +10,15 @@ import org.firstinspires.ftc.teamcode.hardware.drive.DriveController;
 import java.util.Locale;
 
 public class AutoController {
+
+
     RobotPos target = null;
     RobotPos pos = null;
     RobotPos vel = null;
 
     public final DriveController driveController;
     final BotHardware hardware;
+    final PositionTracker posTracker;
 
     final Telemetry telemetry;
 
@@ -23,11 +26,18 @@ public class AutoController {
         this.hardware = hardware;
         this.driveController = new DriveController(DriveMotors.MotorClipMode.SCALE,hardware);
         this.telemetry = telemetry;
+        this.posTracker = new PositionTracker(hardware,telemetry);
     }
 
     public void init(double t) {
         driveController.initMotors(t);
-        pos = new RobotPos(t);
+        posTracker.init(t);
+        pos = posTracker.getPos();
+    }
+    public void init(double t, RobotPos initialPos) {
+        driveController.initMotors(t);
+        posTracker.init(t,initialPos);
+        pos = posTracker.getPos();
     }
 
     public void setTarget(RobotPos target) { this.target = target; }
@@ -35,7 +45,7 @@ public class AutoController {
     public void update(double t) {
         if (target == null) {
             driveController.setMotors_YXR(0,0,0);
-            driveController.updateMotors(t);
+            updatePosition(t);
             return;
         }
         updatePosition(t);
@@ -56,20 +66,14 @@ public class AutoController {
     }
 
     public void correctForVisionPos(RobotPos visionPos){
-        pos = pos.correctPos(visionPos);
+        posTracker.correctForVisionPos(visionPos);
+        pos = posTracker.getPos();
     }
 
     private void updatePosition(double t) {
         driveController.updateMotors(t);
-        double dmFL = hardware.motors.fl.getStepDisplacement();
-        double dmFR = hardware.motors.fr.getStepDisplacement();
-        double dmBL = hardware.motors.bl.getStepDisplacement();
-        double dmBR = hardware.motors.br.getStepDisplacement();
-        double dY = dmFL + dmFR + dmBL + dmBR;  dY *= -1/4.0;
-        double dX = dmBL + dmBR -(dmFL + dmFR); dX *= 1/4.0;
-        double dR = dmFR + dmBR -(dmFL + dmBL); dR *= Constants.ROTPOW_TO_RAD/4.0;
-        telemetry.addLine(String.format(Locale.ENGLISH,"DY: %.3f; DX: %.3f; DR: %.3f;",dY,dX,dR));
-        pos = pos.integrateRelFwd(dX, dY, dR, t);
+        posTracker.updatePosition(t);
+        pos = posTracker.getPos();
     }
 
     public void resetBasePos() { setBaseDist(0); }
@@ -79,10 +83,11 @@ public class AutoController {
         hardware.motors.fr.adjustBaseDist(hardware.motors.fr.calculateDist()+dist);
         hardware.motors.br.adjustBaseDist(hardware.motors.br.calculateDist()+dist);
     }
-    public void setPos(RobotPos pos) { this.pos = new RobotPos(pos); }
-    public RobotPos getPos() { return pos; }
+    public void setPos(RobotPos pos) { posTracker.setPos(pos); this.pos = this.posTracker.getPos(); }
+    public RobotPos getPos() { return posTracker.getPos(); }
 
     public boolean withinThreshold(double distInches, double rotThresh, double speedThresh) {
+        pos = posTracker.getPos();
         if (target == null || pos == null || vel == null) return false;
         RobotPos diff = target.getDifferenceTo(pos);
         boolean close = diff.x*diff.x+diff.y*diff.y < distInches*distInches;
