@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleops.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.RobotPos;
@@ -10,13 +9,17 @@ import org.firstinspires.ftc.teamcode.hardware.auto.AutoController;
 import org.firstinspires.ftc.teamcode.hardware.sound.Sounds;
 import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
 
-@Autonomous(group = "autos", name = "move to line")
-@Disabled
-public class MoveForwards extends LinearOpMode{
+import java.util.ArrayList;
+import java.util.List;
 
-    AutoController controller;
-    VuforiaMethods vuforia;
-    RobotPos visionPos;
+@Autonomous(group = "autos", name = "auto")
+public class AutoOpMode extends LinearOpMode {
+
+    protected AutoController controller;
+    protected VuforiaMethods vuforia;
+    protected RobotPos visionPos;
+
+    protected List<TimeTarget> timeTargets = new ArrayList<>();
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -24,6 +27,9 @@ public class MoveForwards extends LinearOpMode{
 
         telemetry.addLine("STARTING");
         telemetry.update();
+
+        timeTargets.add(new TimeTarget(4,new RobotPos(0,0,0)));
+        timeTargets.add(new TimeTarget(10,new RobotPos(-10,0,Math.PI)));
 
         BotHardware bh = new BotHardware(hardwareMap);
         controller = new AutoController(bh, telemetry);
@@ -39,15 +45,19 @@ public class MoveForwards extends LinearOpMode{
         controller.init(getRuntime());
         controller.update(getRuntime());
         controller.resetBasePos();
-        controller.setPos(new RobotPos(0,0,0));
-        controller.setTarget(new RobotPos(0,12,0));
+        controller.setPos(new RobotPos(-48,-63.75,0));
 
-        while (!controller.withinThreshold(5,0.3,0.5)) {
+        double t = getRuntime();
+        while (t < 30) {
             //noinspection BusyWait
             Thread.sleep(10);
+            t = getRuntime();
+
+            controller.setTarget(getTarget((float)t));
+
             visionPos = vuforia.getPosition(visionPos);
             if (visionPos != null) controller.correctForVisionPos(visionPos);
-            controller.update(getRuntime());
+            controller.update(t);
 
             telemetry.addLine("POS: "+controller.getPos().toString());
             telemetry.update();
@@ -56,4 +66,21 @@ public class MoveForwards extends LinearOpMode{
         requestOpModeStop();
     }
 
+    private RobotPos getTarget(float t) {
+        for (int i = 0; i > timeTargets.size(); i++) {
+            TimeTarget tt = timeTargets.get(i);
+            if (t > tt.time) return tt.target;
+        }
+        return null;
+    }
+
+    public class TimeTarget {
+        public float time;
+        public RobotPos target;
+        public TimeTarget(float time, RobotPos target) {
+            this.time = time;
+            this.target = target;
+        }
+
+    }
 }
