@@ -33,6 +33,7 @@ public class JoeysDriveTeleOp extends OpMode {
         double rotate = gamepad1.left_bumper?0:gamepad1.left_stick_x; // +: CW; -: CCW
         double outtake = gamepad1.left_trigger;
         double intake = gamepad1.left_trigger;
+        double dv = (gamepad1.dpad_up?1:0)-(gamepad1.dpad_down?1:0);
 
         double t = getRuntime();
 
@@ -40,6 +41,7 @@ public class JoeysDriveTeleOp extends OpMode {
         driveController.updateMotors(t);
         hardware.outtakeMotor.setPower(Constants.OUTTAKE_POWER_FAC*outtake);
         hardware.intakeMotor.setPower(Constants.INTAKE_POWER_FAC*intake);
+        hardware.outtakeAngle.update(t,dv);
         tracker.updatePosition(t);
 
         telemetry.update();

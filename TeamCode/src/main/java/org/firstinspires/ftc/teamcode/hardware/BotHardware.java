@@ -5,11 +5,13 @@ import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.hardware.drive.IMUAccelerationIntegrator;
+import org.firstinspires.ftc.teamcode.hardware.groups.AngleServo;
 import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
 import org.firstinspires.ftc.teamcode.hardware.groups.MRGyro;
 import org.firstinspires.ftc.teamcode.hardware.groups.TandemMotors;
@@ -20,6 +22,8 @@ public class BotHardware {
     public final DriveMotors motors;
     public final DcMotor intakeMotor;
     public final TandemMotors outtakeMotor;
+    public final DcMotor wobbleLifter;
+    public final AngleServo outtakeAngle;
 
     public final BNO055IMU imu;
     public final MRGyro gyro;
@@ -42,6 +46,9 @@ public class BotHardware {
         DcMotor MOTOR_OUTTAKE_1 = getMotor(Constants.MapKeys.MOTOR_OUTTAKE_BAK,Constants.MotorDirections.OUTTAKE_BAK);
         outtakeMotor = new TandemMotors(MOTOR_OUTTAKE_1,MOTOR_OUTTAKE_0);
 
+        wobbleLifter = getMotor(Constants.MapKeys.MOTOR_WOBBLE_LIFTER, Constants.MotorDirections.WOBBLE_LIFTER);
+        outtakeAngle = new AngleServo(getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE, Constants.MotorDirections.OUTTAKE_ANGLE));
+
         imu = hardwareMap.get(BNO055IMU.class, Constants.MapKeys.IMU);
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();
         params.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
@@ -58,6 +65,11 @@ public class BotHardware {
 
     public DcMotor getMotor(String id, DcMotorSimple.Direction direction) {
         DcMotor motor = hardwareMap.get(DcMotor.class, id);
+        motor.setDirection(direction);
+        return motor;
+    }
+    public Servo getServo(String id, Servo.Direction direction) {
+        Servo motor = hardwareMap.get(Servo.class, id);
         motor.setDirection(direction);
         return motor;
     }

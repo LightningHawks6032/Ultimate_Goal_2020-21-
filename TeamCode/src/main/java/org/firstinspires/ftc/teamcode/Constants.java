@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class Constants {
     //public static final double MOTORRAMP_TICKSPEEDFAC = 500;
@@ -21,8 +22,12 @@ public class Constants {
 
     public static final double ROBOTPOS_BLEND_FAC = 0.01;
 
-    public static final double OUTTAKE_POWER_FAC = 0.5;
+    public static final double OUTTAKE_POWER_FAC = 1;
     public static final double INTAKE_POWER_FAC = 1;
+
+    public static final double OUTTAKE_ANGLE_MAX = 0.9;
+    public static final double OUTTAKE_ANGLE_MIN = 0.47;
+    public static final double OUTTAKE_ANGLE_SPEED = 0.85;
 
     public static class MapKeys {
         public static final String MOTOR_FL = "fl";
@@ -34,6 +39,8 @@ public class Constants {
         public static final String MOTOR_OUTTAKE_BAK = "outtake-bak";
         public static final String IMU = "imu";
         public static final String GYRO = "gyro";
+        public static final String MOTOR_WOBBLE_LIFTER = "wobble-lifter";
+        public static final String SERVO_OUTTAKE_ANGLE = "outtake-angle";
     }
     public static class MotorDirections {
         public static final DcMotorSimple.Direction DRIVE_FL = DcMotorSimple.Direction.FORWARD;
@@ -44,5 +51,8 @@ public class Constants {
         public static final DcMotorSimple.Direction INTAKE = DcMotorSimple.Direction.FORWARD;
         public static final DcMotorSimple.Direction OUTTAKE_FWD = DcMotorSimple.Direction.REVERSE;
         public static final DcMotorSimple.Direction OUTTAKE_BAK = DcMotorSimple.Direction.REVERSE;
+
+        public static final DcMotorSimple.Direction WOBBLE_LIFTER = DcMotorSimple.Direction.FORWARD;
+        public static final Servo.Direction OUTTAKE_ANGLE = Servo.Direction.FORWARD;
     }
 }

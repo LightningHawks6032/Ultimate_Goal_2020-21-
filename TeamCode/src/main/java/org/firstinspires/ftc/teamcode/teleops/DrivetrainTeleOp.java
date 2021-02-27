@@ -37,6 +37,7 @@ public class DrivetrainTeleOp extends OpMode {
         double triggerR = gamepad1.right_trigger;
         double outtake = gamepad1.y?1:0;
         double intake = gamepad1.x?1:0;
+        double dv = (gamepad1.dpad_up?1:0)-(gamepad1.dpad_down?1:0);
 
         double t = getRuntime();
 
@@ -44,6 +45,7 @@ public class DrivetrainTeleOp extends OpMode {
         driveController.updateMotors(t);
         hardware.outtakeMotor.setPower(Constants.OUTTAKE_POWER_FAC*outtake);
         hardware.intakeMotor.setPower(Constants.INTAKE_POWER_FAC*intake);
+        hardware.outtakeAngle.update(t,dv);
         tracker.updatePosition(t);
 
         telemetry.update();
