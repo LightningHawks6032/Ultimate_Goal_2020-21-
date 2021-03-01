@@ -11,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.hardware.drive.IMUAccelerationIntegrator;
+import org.firstinspires.ftc.teamcode.hardware.groups.AngleDcMotor;
 import org.firstinspires.ftc.teamcode.hardware.groups.AngleServo;
 import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
 import org.firstinspires.ftc.teamcode.hardware.groups.MRGyro;
@@ -22,7 +23,7 @@ public class BotHardware {
     public final DriveMotors motors;
     public final DcMotor intakeMotor;
     public final TandemMotors outtakeMotor;
-    public final DcMotor wobbleLifter;
+    public final AngleDcMotor wobbleLifter;
     public final AngleServo outtakeAngle;
 
     public final BNO055IMU imu;
@@ -46,7 +47,8 @@ public class BotHardware {
         DcMotor MOTOR_OUTTAKE_1 = getMotor(Constants.MapKeys.MOTOR_OUTTAKE_BAK,Constants.MotorDirections.OUTTAKE_BAK);
         outtakeMotor = new TandemMotors(MOTOR_OUTTAKE_1,MOTOR_OUTTAKE_0);
 
-        wobbleLifter = getMotor(Constants.MapKeys.MOTOR_WOBBLE_LIFTER, Constants.MotorDirections.WOBBLE_LIFTER);
+        wobbleLifter = new AngleDcMotor(getMotor(Constants.MapKeys.MOTOR_WOBBLE_LIFTER, Constants.MotorDirections.WOBBLE_LIFTER),0);
+
         outtakeAngle = new AngleServo(getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE, Constants.MotorDirections.OUTTAKE_ANGLE));
 
         imu = hardwareMap.get(BNO055IMU.class, Constants.MapKeys.IMU);

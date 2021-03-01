@@ -20,21 +20,28 @@ public class AutoOpMode extends LinearOpMode {
     protected RobotPos visionPos;
 
     protected List<TimeTarget> timeTargets = new ArrayList<>();
+    protected List<TimeAction> timeActions = new ArrayList<>();
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Sounds sounds = new Sounds(hardwareMap);
+        final Sounds sounds = new Sounds(hardwareMap);
 
         telemetry.addLine("STARTING");
         telemetry.update();
 
-        timeTargets.add(new TimeTarget(4,new RobotPos(0,0,0)));
-        timeTargets.add(new TimeTarget(10,new RobotPos(-10,0,Math.PI)));
-
-        BotHardware bh = new BotHardware(hardwareMap);
+        final BotHardware bh = new BotHardware(hardwareMap);
         controller = new AutoController(bh, telemetry);
         vuforia = new VuforiaMethods(hardwareMap);
         vuforia.initVuforia();
+
+        timeTargets.add(new TimeTarget(4,new RobotPos(0,0,0)));
+        timeTargets.add(new TimeTarget(10,new RobotPos(-10,0,Math.PI)));
+
+        timeActions.add(new TimeAction(10, new Runnable(){public void run(){
+            sounds.play("skreem");
+            bh.outtakeAngle.servo.setPosition(0.8);
+            bh.wobbleLifter.setPos(10000);
+        }}));
 
         telemetry.addLine("READY");
         telemetry.update();
@@ -49,11 +56,11 @@ public class AutoOpMode extends LinearOpMode {
 
         double t = getRuntime();
         while (t < 30) {
-            //noinspection BusyWait
             Thread.sleep(10);
             t = getRuntime();
 
             controller.setTarget(getTarget((float)t));
+            tryTimeRunnable((float)t);
 
             visionPos = vuforia.getPosition(visionPos);
             if (visionPos != null) controller.correctForVisionPos(visionPos);
@@ -67,20 +74,40 @@ public class AutoOpMode extends LinearOpMode {
     }
 
     private RobotPos getTarget(float t) {
-        for (int i = 0; i > timeTargets.size(); i++) {
+        for (int i = 0; i < timeTargets.size(); i++) {
             TimeTarget tt = timeTargets.get(i);
             if (t > tt.time) return tt.target;
         }
         return null;
     }
+    private void tryTimeRunnable(float t) {
+        for (TimeAction ta : timeActions)
+            ta.tryRun(t);
+    }
 
     public class TimeTarget {
-        public float time;
-        public RobotPos target;
+        public final float time;
+        public final RobotPos target;
         public TimeTarget(float time, RobotPos target) {
             this.time = time;
             this.target = target;
         }
-
+    }
+    public class TimeAction {
+        public final float time;
+        public final Runnable callback;
+        public boolean ran = false;
+        public TimeAction(float time, Runnable callback) {
+            this.time = time;
+            this.callback = callback;
+        }
+        public void tryRun(float t) {
+            if (!ran && t > time)
+                run();
+        }
+        private void run() {
+            ran = true;
+            callback.run();
+        }
     }
 }
