@@ -32,7 +32,7 @@ public class JoeysDriveTeleOp extends OpMode {
         double moveY = gamepad1.left_stick_y; // +: Right; -: Left;
         double rotate = gamepad1.left_bumper?0:gamepad1.left_stick_x; // +: CW; -: CCW
         double outtake = gamepad1.left_trigger;
-        double intake = gamepad1.left_trigger;
+        double intake = gamepad1.right_trigger;
         double dv = (gamepad1.dpad_up?1:0)-(gamepad1.dpad_down?1:0);
 
         double t = getRuntime();

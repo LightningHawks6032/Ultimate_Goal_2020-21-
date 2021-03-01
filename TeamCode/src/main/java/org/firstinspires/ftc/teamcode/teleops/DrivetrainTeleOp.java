@@ -35,9 +35,9 @@ public class DrivetrainTeleOp extends OpMode {
         double powerR = gamepad1.right_stick_y;
         double triggerL = gamepad1.left_trigger;
         double triggerR = gamepad1.right_trigger;
-        double outtake = gamepad1.y?1:0;
-        double intake = gamepad1.x?1:0;
-        double dv = (gamepad1.dpad_up?1:0)-(gamepad1.dpad_down?1:0);
+        double outtake = gamepad2.y?1:0;
+        double intake = gamepad2.x?1:0;
+        double dv = (gamepad2.dpad_up?1:0)-(gamepad2.dpad_down?1:0);
 
         double t = getRuntime();
 
