@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleops;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -9,6 +10,10 @@ import org.firstinspires.ftc.teamcode.hardware.auto.AutoController;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
 import org.firstinspires.ftc.teamcode.hardware.sound.Sounds;
 import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
+import org.firstinspires.ftc.teamcode.teleops.autos.AutoOpMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /*
                 _/_/_/   _/_/_/   _/_/_/   _/  _/
@@ -30,35 +35,54 @@ import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
 _/  _/   _/_/_/   _/  _/   _/_/_/
  */
 @TeleOp(group = "drive", name = "Auto Test")
-@Disabled
-public class AutoTest extends OpMode {
+//@Disabled
+public class AutoTest extends LinearOpMode {
 
-    AutoController controller;
-    VuforiaMethods voofinshmertsEvilIncorperated;
-    RobotPos visionPos;
+    protected AutoController controller;
+    protected VuforiaMethods vuforia;
+    protected RobotPos visionPos;
+
 
     @Override
-    public void init() {
-        BotHardware bh = new BotHardware(hardwareMap);
+    public void runOpMode() throws InterruptedException {
+        final Sounds sounds = new Sounds(hardwareMap);
+
+        telemetry.addLine("STARTING");
+        telemetry.update();
+
+        final BotHardware bh = new BotHardware(hardwareMap);
         controller = new AutoController(bh, telemetry);
-        voofinshmertsEvilIncorperated = new VuforiaMethods(hardwareMap);
+        vuforia = new VuforiaMethods(hardwareMap);
+        vuforia.initVuforia();
+
+
+        telemetry.addLine("READY");
+        telemetry.update();
+
+        waitForStart();
+        sounds.play("Megalovania");
 
         controller.init(getRuntime());
         controller.update(getRuntime());
         controller.resetBasePos();
-        controller.setPos(new RobotPos(0,0,0));
-        voofinshmertsEvilIncorperated.initVuforia();
-    }
-    @Override
-    public void loop() {
-        setTarget();
-        visionPos = voofinshmertsEvilIncorperated.getPosition(visionPos);
-        if (voofinshmertsEvilIncorperated.targetVisible())
-            controller.correctForVisionPos(visionPos);
-        controller.update(getRuntime());
+        controller.setPos(new RobotPos(-48,-63.75,0));
 
-        telemetry.addLine(controller.getPos().toString());
-        telemetry.update();
+        double t = getRuntime();
+        while (!gamepad1.x) {
+            Thread.sleep(10);
+            t = getRuntime();
+
+            setTarget();
+
+            visionPos = vuforia.getPosition(visionPos);
+            if (visionPos != null) controller.correctForVisionPos(visionPos);
+            controller.update(t);
+
+            telemetry.addLine("POS: "+controller.getPos().toString());
+            telemetry.update();
+        }
+        controller.driveController.setMotors_YXR(0,0,0);
+        requestOpModeStop();
     }
 
     private void setTarget() {

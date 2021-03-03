@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.hardware.auto;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.RobotPos;
 import org.firstinspires.ftc.teamcode.hardware.drive.PositionTracker;
 import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
@@ -52,12 +53,11 @@ public class AutoController {
 
         RobotPos diff = pos.getDifferenceTo(target);
         double dX = diff.x, dY = diff.y, dR = diff.r;
-        double vX = Math.signum(dX)*Math.max(0,Math.min(6,Math.abs(dX)))/6;
-        double vY = -Math.signum(dY)*Math.max(0,Math.min(6,Math.abs(dY)))/6;
+        double vX = Math.signum(dX)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST,Math.abs(dX)))/Constants.MOTOR_DECELL_DIST;
+        double vY = -Math.signum(dY)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST,Math.abs(dY)))/Constants.MOTOR_DECELL_DIST;
         vX = Math.cos(pos.r)*vX-Math.sin(pos.r)*vY;
         vY = Math.cos(pos.r)*vY+Math.sin(pos.r)*vX;
-        final double rotInvPow = 2;
-        double vR = Math.signum(dR)*Math.max(0,Math.min(rotInvPow,Math.abs(dR)))/rotInvPow;
+        double vR = Math.signum(dR)*Math.max(0,Math.min(Constants.MOTOR_DECELL_ROTDIST,Math.abs(dR)))/Constants.MOTOR_DECELL_ROTDIST;
 
         telemetry.addLine(String.format(Locale.ENGLISH,"%.2f %.2f %.2f",vX,vY,vR));
 
