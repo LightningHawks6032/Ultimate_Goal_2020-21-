@@ -65,7 +65,8 @@ public class AutoTest extends LinearOpMode {
         controller.init(getRuntime());
         controller.update(getRuntime());
         controller.resetBasePos();
-        controller.setPos(new RobotPos(-48,-63.75,0));
+        //controller.setPos(new RobotPos(-48,-63.75,0));
+        controller.setPos(new RobotPos(0,0,0));
 
         double t = getRuntime();
         while (!gamepad1.x) {
@@ -75,7 +76,7 @@ public class AutoTest extends LinearOpMode {
             setTarget();
 
             visionPos = vuforia.getPosition(visionPos);
-            if (visionPos != null) controller.correctForVisionPos(visionPos);
+            //if (visionPos != null) controller.correctForVisionPos(visionPos);
             controller.update(t);
 
             telemetry.addLine("POS: "+controller.getPos().toString());

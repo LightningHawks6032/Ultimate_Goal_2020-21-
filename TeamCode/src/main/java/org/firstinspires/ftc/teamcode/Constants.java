@@ -19,8 +19,9 @@ public class Constants {
     public static final double ROTPOW_TO_RAD = 1/5.5;
 
     public static final double MAX_MOTORACC = 4;
-    public static final double MOTOR_DECELL_DIST = 10;
-    public static final double MOTOR_DECELL_ROTDIST = 2;
+
+    public static final double MOTOR_DECELL_DIST = 20;
+    public static final double MOTOR_DECELL_ROTDIST = 4;
 
     public static final double ROBOTPOS_BLEND_FAC = 0.01;
 
