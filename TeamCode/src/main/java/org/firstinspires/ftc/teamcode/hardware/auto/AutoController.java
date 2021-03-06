@@ -12,6 +12,7 @@ import java.util.Locale;
 
 public class AutoController {
 
+    //Mich will add comments of his understanding of the code
 
     RobotPos target = null;
     RobotPos pos = null;
@@ -23,6 +24,8 @@ public class AutoController {
 
     final Telemetry telemetry;
 
+
+    //Construct the auto controller
     public AutoController(BotHardware hardware, Telemetry telemetry) {
         this.hardware = hardware;
         this.driveController = new DriveController(DriveMotors.MotorClipMode.SCALE,hardware);
@@ -30,6 +33,7 @@ public class AutoController {
         this.posTracker = new PositionTracker(hardware,telemetry);
     }
 
+    //overloaded inits
     public void init(double t) {
         driveController.initMotors(t);
         posTracker.init(t);
@@ -41,15 +45,17 @@ public class AutoController {
         pos = posTracker.getPos();
     }
 
+    //Sets and stores the target position
     public void setTarget(RobotPos target) { this.target = target; }
 
+    //Brings the robot to target position
     public void update(double t) {
         if (target == null) {
             driveController.setMotors_YXR(0,0,0);
             updatePosition(t);
             return;
         }
-        updatePosition(t);
+        updatePosition(t); //make motors know what the pos is
 
         RobotPos diff = pos.getDifferenceTo(target);
         double dX = diff.x, dY = diff.y, dR = diff.r;
@@ -65,11 +71,13 @@ public class AutoController {
         driveController.setMotors_YXR(vY,vX,vR);
     }
 
+    //Factors a small amount of the vision position values into
     public void correctForVisionPos(RobotPos visionPos){
         posTracker.correctForVisionPos(visionPos);
         pos = posTracker.getPos();
     }
 
+    //Update the position's data to the motors and stuff
     private void updatePosition(double t) {
         driveController.updateMotors(t);
         posTracker.updatePosition(t);

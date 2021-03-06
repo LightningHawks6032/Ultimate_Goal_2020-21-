@@ -55,7 +55,7 @@ public class AutoOpMode extends LinearOpMode {
         controller.setPos(new RobotPos(-48,-63.75,0));
 
         double t = getRuntime();
-        while (t < 30) {
+        while (t < 30) { //30 seconds
             Thread.sleep(10);
             t = getRuntime();
 
