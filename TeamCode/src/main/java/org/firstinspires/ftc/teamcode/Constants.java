@@ -11,17 +11,19 @@ public class Constants {
     public static final double MM_PER_IN = 25.4;
 
     public static final double WHEEL_DIA_MM = 96;
-
-    public static final double TICKS_PER_REV = 145.6 * 6 / 1.75;
+    public static final double TICKS_PER_REV = 145.6 * 6;
     public static final double TICKS_PER_MM = TICKS_PER_REV / (WHEEL_DIA_MM * Math.PI);
     public static final double TICKS_PER_IN = TICKS_PER_MM*MM_PER_IN;
 
+    public static final double MOVE_SCALE_FWD = 1.5;//24in : 9in irl  9/24*4
+    public static final double MOVE_SCALE_SRF = 1.16666667;//24in : 7in irl  7/24*4
+
     public static final double ROTPOW_TO_RAD = 1/5.5;
 
-    public static final double MAX_MOTORACC = 8;
+    public static final double MAX_MOTORACC = 4;
 
-    public static final double MOTOR_DECELL_DIST = 20;
-    public static final double MOTOR_DECELL_ROTDIST = 4;
+    public static final double MOTOR_DECELL_DIST = 15;
+    public static final double MOTOR_DECELL_ROTDIST = 1;
 
     public static final double ROBOTPOS_BLEND_FAC = 0.01;
 
@@ -44,8 +46,8 @@ public class Constants {
         public static final String GYRO = "gyro";
         public static final String MOTOR_WOBBLE_LIFTER = "wobble-lifter";
 
-        public static final String SERVO_OUTTAKE_ANGLE_FWD = "outtake-angle-fwd";
-        public static final String SERVO_OUTTAKE_ANGLE_BAK = "outtake-angle-bak";
+        public static final String SERVO_OUTTAKE_ANGLE = "outtake-angle";
+        //public static final String SERVO_OUTTAKE_ANGLE_BAK = "outtake-angle-bak";
     }
     public static class MotorDirections {
         public static final DcMotorSimple.Direction DRIVE_FL = DcMotorSimple.Direction.FORWARD;
@@ -59,7 +61,7 @@ public class Constants {
 
         public static final DcMotorSimple.Direction WOBBLE_LIFTER = DcMotorSimple.Direction.FORWARD;
 
-        public static final Servo.Direction OUTTAKE_ANGLE_FWD = Servo.Direction.FORWARD;
-        public static final Servo.Direction OUTTAKE_ANGLE_BAK = Servo.Direction.REVERSE;
+        public static final Servo.Direction OUTTAKE_ANGLE = Servo.Direction.FORWARD;
+        //public static final Servo.Direction OUTTAKE_ANGLE_BAK = Servo.Direction.REVERSE;
     }
 }

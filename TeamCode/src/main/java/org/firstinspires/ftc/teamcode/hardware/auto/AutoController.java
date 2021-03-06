@@ -59,8 +59,8 @@ public class AutoController {
 
         RobotPos diff = pos.getDifferenceTo(target);
         double dX = diff.x, dY = diff.y, dR = diff.r;
-        double vX = Math.signum(dX)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST,Math.abs(dX)))/Constants.MOTOR_DECELL_DIST;
-        double vY = -Math.signum(dY)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST,Math.abs(dY)))/Constants.MOTOR_DECELL_DIST;
+        double vX = Math.signum(dX)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF,Math.abs(dX)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF);
+        double vY = -Math.signum(dY)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD,Math.abs(dY)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD) ;
         vX = Math.cos(pos.r)*vX-Math.sin(pos.r)*vY;
         vY = Math.cos(pos.r)*vY+Math.sin(pos.r)*vX;
         double vR = Math.signum(dR)*Math.max(0,Math.min(Constants.MOTOR_DECELL_ROTDIST,Math.abs(dR)))/Constants.MOTOR_DECELL_ROTDIST;

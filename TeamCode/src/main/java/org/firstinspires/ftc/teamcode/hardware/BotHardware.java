@@ -50,10 +50,10 @@ public class BotHardware {
 
         wobbleLifter = new AngleDcMotor(getMotor(Constants.MapKeys.MOTOR_WOBBLE_LIFTER, Constants.MotorDirections.WOBBLE_LIFTER),0);
 
-        outtakeAngle = new AngleServo(new TandemServos(
-                getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE_FWD, Constants.MotorDirections.OUTTAKE_ANGLE_FWD),
-                getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE_BAK, Constants.MotorDirections.OUTTAKE_ANGLE_BAK)
-        ));
+        outtakeAngle = new AngleServo(//new TandemServos(
+                getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE, Constants.MotorDirections.OUTTAKE_ANGLE)
+                //getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE_BAK, Constants.MotorDirections.OUTTAKE_ANGLE_BAK)
+        );//);
 
         imu = hardwareMap.get(BNO055IMU.class, Constants.MapKeys.IMU);
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();

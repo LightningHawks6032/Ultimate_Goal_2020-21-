@@ -35,8 +35,13 @@ public class AutoOpMode extends LinearOpMode {
         vuforia.initVuforia();
 
         timeTargets.add(new TimeTarget(4,new RobotPos(0,0,0)));
-        timeTargets.add(new TimeTarget(20,new RobotPos(-10,0,Math.PI)));
+        //timeTargets.add(new TimeTarget(20,new RobotPos(-10,0,Math.PI)));
 
+        timeActions.add(new TimeAction(5, new Runnable(){public void run(){
+            sounds.play("skreem");
+            bh.outtakeAngle.servo.setPosition(0.6);
+            bh.wobbleLifter.setPos(0);
+        }}));
         timeActions.add(new TimeAction(20, new Runnable(){public void run(){
             sounds.play("skreem");
             bh.outtakeAngle.servo.setPosition(0.8);
@@ -63,6 +68,7 @@ public class AutoOpMode extends LinearOpMode {
             tryTimeRunnable((float)t);
 
             visionPos = vuforia.getPosition(visionPos);
+            if (visionPos != null)telemetry.addLine("VIZPOZ: "+visionPos.toString());
             if (visionPos != null) controller.correctForVisionPos(visionPos);
             controller.update(t);
 

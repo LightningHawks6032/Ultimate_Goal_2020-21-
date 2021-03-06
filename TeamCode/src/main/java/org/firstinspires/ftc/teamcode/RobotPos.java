@@ -35,7 +35,7 @@ public class RobotPos {
         double k = Constants.ROBOTPOS_BLEND_FAC;
         double i = 1-k;
         double dr = (target.r-this.r)/(Math.PI*2);
-        dr -= Math.floor(dr); dr -= 0.5; dr *= Math.PI*2;
+        dr -= Math.floor(dr+0.5)*Math.PI*2;
         return new RobotPos(i*this.x+k*target.x,i*this.y+k*target.y,this.r+k*dr,this.aqTime);
     }
 
