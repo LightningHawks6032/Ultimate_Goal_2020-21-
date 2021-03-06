@@ -237,8 +237,8 @@ public class VuforiaMethods {
             Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, RADIANS);
             RobotPos newPos = new RobotPos(-translation.get(1)/Constants.MM_PER_IN,translation.get(0)/Constants.MM_PER_IN, rotation.thirdAngle);
 
-            //return newPos;
-            return new RobotPos(translation.get(0)/Constants.MM_PER_IN, translation.get(1)/Constants.MM_PER_IN,rotation.thirdAngle);
+            return newPos;
+            //return new RobotPos(translation.get(0)/Constants.MM_PER_IN, translation.get(1)/Constants.MM_PER_IN,rotation.thirdAngle);
 
             // express the rotation of the robot in degrees. May need this later.
 
