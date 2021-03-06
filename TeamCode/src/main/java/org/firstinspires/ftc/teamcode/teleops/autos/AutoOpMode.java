@@ -35,9 +35,9 @@ public class AutoOpMode extends LinearOpMode {
         vuforia.initVuforia();
 
         timeTargets.add(new TimeTarget(4,new RobotPos(0,0,0)));
-        timeTargets.add(new TimeTarget(10,new RobotPos(-10,0,Math.PI)));
+        timeTargets.add(new TimeTarget(20,new RobotPos(-10,0,Math.PI)));
 
-        timeActions.add(new TimeAction(10, new Runnable(){public void run(){
+        timeActions.add(new TimeAction(20, new Runnable(){public void run(){
             sounds.play("skreem");
             bh.outtakeAngle.servo.setPosition(0.8);
             bh.wobbleLifter.setPos(10000);

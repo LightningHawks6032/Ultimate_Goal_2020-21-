@@ -53,7 +53,7 @@ public class PositionTracker {
         double dmBR = hardware.motors.br.getStepDisplacement();
         double dY = dmFL + dmFR + dmBL + dmBR;  dY *= -1/4.0;
         double dX = dmBL + dmBR -(dmFL + dmFR); dX *= 1/4.0;
-        double dR = dmFR + dmBR -(dmFL + dmBL); dR *= Constants.ROTPOW_TO_RAD/4.0;
+        double dR = dmFR + dmBR -(dmFL + dmBL); dR *= Constants.ROTPOW_TO_RAD/8.0;
         telemetry.addLine(String.format(Locale.ENGLISH,"DY: %.3f; DX: %.3f; DR: %.3f;",dY,dX,dR));
         pos = pos.integrateRelFwd(dX, dY, dR, t);
     }
