@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.hardware.groups.AngleServo;
 import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
 import org.firstinspires.ftc.teamcode.hardware.groups.MRGyro;
 import org.firstinspires.ftc.teamcode.hardware.groups.TandemMotors;
+import org.firstinspires.ftc.teamcode.hardware.groups.TandemServos;
 
 public class BotHardware {
     private final HardwareMap hardwareMap;
@@ -49,7 +50,10 @@ public class BotHardware {
 
         wobbleLifter = new AngleDcMotor(getMotor(Constants.MapKeys.MOTOR_WOBBLE_LIFTER, Constants.MotorDirections.WOBBLE_LIFTER),0);
 
-        outtakeAngle = new AngleServo(getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE, Constants.MotorDirections.OUTTAKE_ANGLE));
+        outtakeAngle = new AngleServo(new TandemServos(
+                getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE_FWD, Constants.MotorDirections.OUTTAKE_ANGLE_FWD),
+                getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE_BAK, Constants.MotorDirections.OUTTAKE_ANGLE_BAK)
+        ));
 
         imu = hardwareMap.get(BNO055IMU.class, Constants.MapKeys.IMU);
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();
