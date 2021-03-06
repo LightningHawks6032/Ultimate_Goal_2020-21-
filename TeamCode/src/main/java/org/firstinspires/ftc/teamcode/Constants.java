@@ -43,7 +43,9 @@ public class Constants {
         public static final String IMU = "imu";
         public static final String GYRO = "gyro";
         public static final String MOTOR_WOBBLE_LIFTER = "wobble-lifter";
-        public static final String SERVO_OUTTAKE_ANGLE = "outtake-angle";
+
+        public static final String SERVO_OUTTAKE_ANGLE_FWD = "outtake-angle-fwd";
+        public static final String SERVO_OUTTAKE_ANGLE_BAK = "outtake-angle-bak";
     }
     public static class MotorDirections {
         public static final DcMotorSimple.Direction DRIVE_FL = DcMotorSimple.Direction.FORWARD;
@@ -56,6 +58,8 @@ public class Constants {
         public static final DcMotorSimple.Direction OUTTAKE_BAK = DcMotorSimple.Direction.REVERSE;
 
         public static final DcMotorSimple.Direction WOBBLE_LIFTER = DcMotorSimple.Direction.FORWARD;
-        public static final Servo.Direction OUTTAKE_ANGLE = Servo.Direction.FORWARD;
+
+        public static final Servo.Direction OUTTAKE_ANGLE_FWD = Servo.Direction.FORWARD;
+        public static final Servo.Direction OUTTAKE_ANGLE_BAK = Servo.Direction.REVERSE;
     }
 }
