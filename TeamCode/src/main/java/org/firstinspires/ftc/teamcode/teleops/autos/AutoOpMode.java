@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.RobotPos;
+import org.firstinspires.ftc.teamcode.debug.JavaHTTPServer;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
 import org.firstinspires.ftc.teamcode.hardware.auto.AutoController;
 import org.firstinspires.ftc.teamcode.hardware.sound.Sounds;
@@ -24,6 +25,8 @@ public class AutoOpMode extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        JavaHTTPServer.init();
+        JavaHTTPServer.pathData.clear();
         final Sounds sounds = new Sounds(hardwareMap);
 
         telemetry.addLine("STARTING");
@@ -61,7 +64,7 @@ public class AutoOpMode extends LinearOpMode {
 
         double t = getRuntime();
         while (t < 30) { //30 seconds
-            Thread.sleep(10);
+            JavaHTTPServer.update();
             t = getRuntime();
 
             controller.setTarget(getTarget((float)t));
@@ -74,8 +77,12 @@ public class AutoOpMode extends LinearOpMode {
 
             telemetry.addLine("POS: "+controller.getPos().toString());
             telemetry.update();
+
+            JavaHTTPServer.pathData.add(new RobotPos[]{controller.getPos(),visionPos});
         }
         controller.driveController.setMotors_YXR(0,0,0);
+
+        JavaHTTPServer.close();
         requestOpModeStop();
     }
 

@@ -24,7 +24,7 @@ public class JavaHTTPServer {
     static final int PORT = 8080;
     static ServerSocket serverConnect;
 
-    static final byte[] indexHTMLData = ("<canvas id=\"cnv\" width=\"500\" height=\"300\"></canvas><script defer>(async()=>{ var ctx = cnv.getContext(\"2d\"); var fetchPaths = async () => { var body = await fetch(\"http://127.0.0.1:8080/path\",{mode:\"no-cors\"}).then(res=>res.body); var reader = body.getReader(), chunks = []; while (chunks.length == 0 || !chunks[chunks.length-1].done) chunks.push(await reader.read()); var l = 0; for (var c of chunks) if (c.value) l += c.value.length; var buf=new ArrayBuffer(l), dv = new DataView(buf), i = 0; for (var c of chunks) if (c.value) for (var ui8 of c.value) dv.setUint8(i++,ui8); var n = dv.getInt32(0),unpacked = []; for (var i = 4; i < l; i+=4*n*3) { unpacked.push([]); for (var j = 0; j < n; j++) unpacked[unpacked.length-1].push({x:dv.getFloat32(i+j*4*3+0),y:dv.getFloat32(i+j*4*3+4),r:dv.getFloat32(i+j*4*3+8)});} var reshaped = new Array(n).fill().map(_=>[]); for (var i = 0; i < unpacked.length; i++) for (var j = 0; j < n; j++) reshaped[j][i] = unpacked[i][j]; return reshaped;}; var drawFrame = async () => {var paths = await fetchPaths(), i = 0, cols = [\"#ff0000\",\"#00ff00\",\"#0000ff\"]; ctx.clearRect(0,0,500,300); for (var path of paths) { ctx.beginPath(); ctx.strokeStyle = cols[i++]; for (var pt of path) ctx.lineTo(pt.x*100,pt.y*100); ctx.stroke(); ctx.closePath(); }}; setInterval(drawFrame,500); })();</script>").getBytes();
+    static final byte[] indexHTMLData = ("<div style=\"font-family: monospace;width: 360;color: #888888;text-align: center;transform: scaleX(1.5);\">-- FRONT -- FRONT -- FRONT --</div><canvas id=\"cnv\" width=\"360\" height=\"720\"></canvas><script defer>(async()=>{ var ctx = cnv.getContext(\"2d\"); var fetchPaths = async () => { var body = await fetch(window.location.href+\"path\",{mode:\"no-cors\"}).then(res=>res.body); var reader = body.getReader(), chunks = []; while (chunks.length == 0 || !chunks[chunks.length-1].done) chunks.push(await reader.read()); var l = 0; for (var c of chunks) if (c.value) l += c.value.length; var buf=new ArrayBuffer(l), dv = new DataView(buf), i = 0; for (var c of chunks) if (c.value) for (var ui8 of c.value) dv.setUint8(i++,ui8); var n = dv.getInt32(0),unpacked = []; for (var i = 4; i < l; i+=4*n*3) { unpacked.push([]); for (var j = 0; j < n; j++) unpacked[unpacked.length-1].push({x:dv.getFloat32(i+j*4*3+0),y:dv.getFloat32(i+j*4*3+4),r:dv.getFloat32(i+j*4*3+8)});} var reshaped = new Array(n).fill().map(_=>[]); for (var i = 0; i < unpacked.length; i++) for (var j = 0; j < n; j++) reshaped[j][i] = unpacked[i][j]; return reshaped;}; var drawFrame = async () => {var paths = await fetchPaths(), i = 0, cols = [\"#fc8f41\",\"#4ec3e6\",\"#4ee699\"]; ctx.resetTransform(); ctx.clearRect(0,0,720,1440);var s=5; ctx.setTransform(s,0,0,s,48*s,72*s); ctx.strokeStyle=\"#dddddd\";for (var j = -3; j <= 3; j++) {ctx.lineWidth=j==0?1:0.3;ctx.beginPath();ctx.moveTo(-72,j*24);ctx.lineTo(72,j*24);ctx.moveTo(j*24,-72);ctx.lineTo(j*24,72);ctx.stroke();ctx.closePath();};ctx.lineWidth=1; for (var path of paths) { ctx.beginPath(); ctx.strokeStyle = cols[i++]; var lpt = NaN;console.log(\"S\"); for (var pt of path) {console.log(pt.x,isFinite(pt.x));if (isFinite(pt.x)) {if (isFinite(lpt)) ctx.lineTo(pt.x,pt.y); else ctx.moveTo(pt.x,pt.y);}; lpt=pt.x;}; ctx.stroke(); ctx.closePath(); }}; setInterval(drawFrame,500); })();</script>").getBytes();
 
     public static void init() {
         try {
@@ -36,7 +36,7 @@ public class JavaHTTPServer {
     }
     public static void update() {
         try {
-            serverConnect.setSoTimeout(1);
+            serverConnect.setSoTimeout(10);
             Socket s = serverConnect.accept();
             dealWithClient(s);
         } catch (SocketTimeoutException ignored) {
@@ -134,14 +134,18 @@ public class JavaHTTPServer {
     public static List<RobotPos[]> pathData = new ArrayList<>();
     public static final int pathDataNElements = 2;
     private static byte[] getData() {
-        byte[] bytes = new byte[Integer.SIZE/8+pathData.size()*Double.SIZE/8*pathDataNElements*3];
+        byte[] bytes = new byte[Integer.SIZE/8+pathData.size()*Float.SIZE/8*pathDataNElements*3];
         ByteBuffer bb = ByteBuffer.wrap(bytes);
         bb.putInt(pathDataNElements);
         for (RobotPos[] pathElt : pathData)
             for (RobotPos pos : pathElt) {
-                bb.putDouble(pos.x);
-                bb.putDouble(pos.y);
-                bb.putDouble(pos.r);
+                if (pos == null) {
+                    for(int j=0;j<3;j++)bb.putFloat(Float.NaN);
+                } else {
+                    bb.putFloat((float) pos.x);
+                    bb.putFloat((float) pos.y);
+                    bb.putFloat((float) pos.r);
+                }
             }
         return bytes;
     }
