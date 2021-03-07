@@ -24,7 +24,7 @@ public class AutoOpMode extends LinearOpMode {
     protected List<TimeAction> timeActions = new ArrayList<>();
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         JavaHTTPServer.init();
         JavaHTTPServer.pathData.clear();
         final Sounds sounds = new Sounds(hardwareMap);
@@ -98,7 +98,7 @@ public class AutoOpMode extends LinearOpMode {
             ta.tryRun(t);
     }
 
-    public class TimeTarget {
+    public static class TimeTarget {
         public final float time;
         public final RobotPos target;
         public TimeTarget(float time, RobotPos target) {
@@ -106,7 +106,7 @@ public class AutoOpMode extends LinearOpMode {
             this.target = target;
         }
     }
-    public class TimeAction {
+    public static class TimeAction {
         public final float time;
         public final Runnable callback;
         public boolean ran = false;
