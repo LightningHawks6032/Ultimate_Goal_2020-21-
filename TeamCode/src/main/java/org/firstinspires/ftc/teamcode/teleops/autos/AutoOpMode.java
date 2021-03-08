@@ -30,7 +30,6 @@ public class AutoOpMode extends LinearOpMode {
         final Sounds sounds = new Sounds(hardwareMap);
 
         telemetry.addLine("STARTING");
-        telemetry.update();
 
         final BotHardware bh = new BotHardware(hardwareMap);
         controller = new AutoController(bh, telemetry);
@@ -64,14 +63,16 @@ public class AutoOpMode extends LinearOpMode {
 
         double t = getRuntime();
         while (t < 30) { //30 seconds
-            JavaHTTPServer.update();
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ignored) {}
             t = getRuntime();
 
             controller.setTarget(getTarget((float)t));
             tryTimeRunnable((float)t);
 
             visionPos = vuforia.getPosition(visionPos);
-            if (visionPos != null)telemetry.addLine("VIZPOZ: "+visionPos.toString());
+            if (visionPos != null) telemetry.addLine("VIZPOZ: "+visionPos.toString());
             if (visionPos != null) controller.correctForVisionPos(visionPos);
             controller.update(t);
 
@@ -82,7 +83,6 @@ public class AutoOpMode extends LinearOpMode {
         }
         controller.driveController.setMotors_YXR(0,0,0);
 
-        JavaHTTPServer.close();
         requestOpModeStop();
     }
 

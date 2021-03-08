@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.RobotPos;
+import org.firstinspires.ftc.teamcode.debug.JavaHTTPServer;
 import org.firstinspires.ftc.teamcode.hardware.drive.DriveController;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
 import org.firstinspires.ftc.teamcode.hardware.drive.PositionTracker;
@@ -25,6 +27,9 @@ public class DrivetrainTeleOp extends OpMode {
         driveController.updateMotors(t);
         tracker = new PositionTracker(hardware,telemetry,driveController);
         tracker.init(t);
+
+        JavaHTTPServer.init();
+        JavaHTTPServer.pathData.clear();
     }
 
     //The grounds for testing other things with this program
@@ -47,6 +52,9 @@ public class DrivetrainTeleOp extends OpMode {
         hardware.intakeMotor.setPower(Constants.INTAKE_POWER_FAC*intake);
         hardware.outtakeAngle.update(t,dv);
         tracker.updatePosition(t);
+
+        JavaHTTPServer.pathData.add(new RobotPos[]{tracker.getPos(),null});
+        telemetry.addLine(tracker.getPos().toString());
 
         telemetry.update();
     }
