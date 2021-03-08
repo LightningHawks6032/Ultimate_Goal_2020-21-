@@ -15,7 +15,7 @@ public class Constants {
     public static final double TICKS_PER_MM = TICKS_PER_REV / (WHEEL_DIA_MM * Math.PI);
     public static final double TICKS_PER_IN = TICKS_PER_MM*MM_PER_IN;
 
-    public static final double MOVE_SCALE_FWD = 1.5;//24in : 9in irl  9/24*4
+    public static final double MOVE_SCALE_FWD = 1.5*72.0/63.75;//24in : 9in irl  9/24*4
     public static final double MOVE_SCALE_SRF = 1.16666667;//24in : 7in irl  7/24*4
 
     public static final double ROTPOW_TO_RAD = 1/5.5;
