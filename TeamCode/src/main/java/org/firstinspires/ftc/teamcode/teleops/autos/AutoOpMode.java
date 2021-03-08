@@ -23,6 +23,8 @@ public class AutoOpMode extends LinearOpMode {
     protected List<TimeTarget> timeTargets = new ArrayList<>();
     protected List<TimeAction> timeActions = new ArrayList<>();
 
+    private int k;
+
     @Override
     public void runOpMode() {
         JavaHTTPServer.init();
@@ -36,7 +38,15 @@ public class AutoOpMode extends LinearOpMode {
         vuforia = new VuforiaMethods(hardwareMap);
         vuforia.initVuforia();
 
-        timeTargets.add(new TimeTarget(4,new RobotPos(0,0,0)));
+        timeTargets.add(new TimeTarget(0,new RobotPos(-48,-48,0)));
+        timeTargets.add(new TimeTarget(3,new RobotPos(-48,-48,-0.34)));
+        timeTargets.add(new TimeTarget(6,new RobotPos(-48,-48,0)));
+        timeTargets.add(new TimeTarget(9,new RobotPos(-48,-12,0)));
+        timeTargets.add(new TimeTarget(12,new RobotPos(-48,60,0)));
+        timeTargets.add(new TimeTarget(15,new RobotPos(-48,-48,0)));
+        timeTargets.add(new TimeTarget(18,new RobotPos(-48,-48,-Math.PI)));
+        timeTargets.add(new TimeTarget(21,new RobotPos(-48,-48,0)));
+        timeTargets.add(new TimeTarget(24,new RobotPos(-48,60,0)));
         //timeTargets.add(new TimeTarget(20,new RobotPos(-10,0,Math.PI)));
 
         timeActions.add(new TimeAction(5, new Runnable(){public void run(){
@@ -77,6 +87,7 @@ public class AutoOpMode extends LinearOpMode {
             controller.update(t);
 
             telemetry.addLine("POS: "+controller.getPos().toString());
+            telemetry.addLine("I: "+k);
             telemetry.update();
 
             JavaHTTPServer.pathData.add(new RobotPos[]{controller.getPos(),visionPos});
@@ -89,6 +100,7 @@ public class AutoOpMode extends LinearOpMode {
     private RobotPos getTarget(float t) {
         for (int i = 0; i < timeTargets.size(); i++) {
             TimeTarget tt = timeTargets.get(i);
+            k=i;
             if (t > tt.time) return tt.target;
         }
         return null;
