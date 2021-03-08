@@ -237,6 +237,8 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
         final float CAMERA_VERTICAL_DISPLACEMENT = 7.5f * mmPerInch;   // eg: Camera is 8 Inches above ground
         final float CAMERA_LEFT_DISPLACEMENT     = 4.0f * mmPerInch;     // eg: Camera is ON the robot's center line
 
+
+
         OpenGLMatrix robotFromCamera = OpenGLMatrix
                     .translation(CAMERA_FORWARD_DISPLACEMENT, CAMERA_LEFT_DISPLACEMENT, CAMERA_VERTICAL_DISPLACEMENT)
                     .multiplied(Orientation.getRotationMatrix(EXTRINSIC, YZX, DEGREES, phoneYRotate, phoneZRotate, phoneXRotate));
