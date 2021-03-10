@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.teleops.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotPos;
 import org.firstinspires.ftc.teamcode.debug.JavaHTTPServer;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
@@ -23,7 +25,7 @@ public class AutoOpMode extends LinearOpMode {
     protected List<TimeTarget> timeTargets = new ArrayList<>();
     protected List<TimeAction> timeActions = new ArrayList<>();
 
-    private int k;
+    private int k = 0;
 
     @Override
     public void runOpMode() {
@@ -32,6 +34,7 @@ public class AutoOpMode extends LinearOpMode {
         final Sounds sounds = new Sounds(hardwareMap);
 
         telemetry.addLine("STARTING");
+        telemetry.update();
 
         final BotHardware bh = new BotHardware(hardwareMap);
         controller = new AutoController(bh, telemetry);
@@ -43,10 +46,6 @@ public class AutoOpMode extends LinearOpMode {
         timeTargets.add(new TimeTarget(6,new RobotPos(-48,-48,0)));
         timeTargets.add(new TimeTarget(9,new RobotPos(-48,-12,0)));
         timeTargets.add(new TimeTarget(12,new RobotPos(-48,60,0)));
-        timeTargets.add(new TimeTarget(15,new RobotPos(-48,-48,0)));
-        timeTargets.add(new TimeTarget(18,new RobotPos(-48,-48,-Math.PI)));
-        timeTargets.add(new TimeTarget(21,new RobotPos(-48,-48,0)));
-        timeTargets.add(new TimeTarget(24,new RobotPos(-48,60,0)));
         //timeTargets.add(new TimeTarget(20,new RobotPos(-10,0,Math.PI)));
 
         timeActions.add(new TimeAction(5, new Runnable(){public void run(){
@@ -71,12 +70,12 @@ public class AutoOpMode extends LinearOpMode {
         controller.resetBasePos();
         controller.setPos(new RobotPos(-48,-63.75,0));
 
-        double t = getRuntime();
+        double ts = getRuntime(), t = 0;
         while (t < 30) { //30 seconds
             try {
                 Thread.sleep(10);
             } catch (InterruptedException ignored) {}
-            t = getRuntime();
+            t = getRuntime()-ts;
 
             controller.setTarget(getTarget((float)t));
             tryTimeRunnable((float)t);
@@ -98,10 +97,12 @@ public class AutoOpMode extends LinearOpMode {
     }
 
     private RobotPos getTarget(float t) {
+        telemetry.addLine(t+"s");
         for (int i = 0; i < timeTargets.size(); i++) {
-            TimeTarget tt = timeTargets.get(i);
+            if (i == timeTargets.size()-1) return timeTargets.get(i).target;
+            TimeTarget tt = timeTargets.get(i+1);
             k=i;
-            if (t > tt.time) return tt.target;
+            if (t < tt.time) return timeTargets.get(i).target;
         }
         return null;
     }
