@@ -68,7 +68,7 @@ public class AutoController {
         telemetry.addLine(String.format(Locale.ENGLISH,"%.2f %.2f %.2f",vX,vY,vR));
 
         vel = new RobotPos(vX,vY,vR);
-        driveController.setMotors_YXR(vY,vX,vR);
+        driveController.setMotors_YXR(vY,vX,-vR);
     }
 
     //Factors a small amount of the vision position values into

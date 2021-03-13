@@ -2,9 +2,7 @@ package org.firstinspires.ftc.teamcode.teleops.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotPos;
 import org.firstinspires.ftc.teamcode.debug.JavaHTTPServer;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
@@ -42,21 +40,26 @@ public class AutoOpMode extends LinearOpMode {
         vuforia.initVuforia();
 
         timeTargets.add(new TimeTarget(0,new RobotPos(-48,-48,0)));
-        timeTargets.add(new TimeTarget(3,new RobotPos(-48,-48,-0.34)));
-        timeTargets.add(new TimeTarget(6,new RobotPos(-48,-48,0)));
-        timeTargets.add(new TimeTarget(9,new RobotPos(-48,-12,0)));
-        timeTargets.add(new TimeTarget(12,new RobotPos(-48,60,0)));
-        //timeTargets.add(new TimeTarget(20,new RobotPos(-10,0,Math.PI)));
+        timeTargets.add(new TimeTarget(2,new RobotPos(-48,-48,-0.34)));
+        timeTargets.add(new TimeTarget(4,new RobotPos(-48,-48,0)));
+        // n=2 INSERT HERE //
+        timeTargets.add(new TimeTarget(20,new RobotPos(-48,-63.75,0)));
 
-        timeActions.add(new TimeAction(5, new Runnable(){public void run(){
+
+        timeActions.add(new TimeAction(5.7f, new Runnable(){public void run(){
             sounds.play("skreem");
-            bh.outtakeAngle.servo.setPosition(0.6);
-            bh.wobbleLifter.setPos(0);
-        }}));
-        timeActions.add(new TimeAction(20, new Runnable(){public void run(){
-            sounds.play("skreem");
-            bh.outtakeAngle.servo.setPosition(0.8);
-            bh.wobbleLifter.setPos(10000);
+            switch (vuforia.getRings()) {
+                case 0:
+                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,0,0)));
+                    break;
+                case 1:
+                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,24,0)));
+                    timeTargets.add(3,new TimeTarget(10,new RobotPos(-48,24,-Math.PI/2)));
+                    break;
+                case 3:
+                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,48,0)));
+                    break;
+            }
         }}));
 
         telemetry.addLine("READY");
