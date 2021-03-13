@@ -277,10 +277,10 @@ public class VuforiaMethods {
                 }
             }
 
-            return rings;
+            //return rings;
 
         }
-        return 0;
+        return rings;
     }
 
     private void initTfod() {
