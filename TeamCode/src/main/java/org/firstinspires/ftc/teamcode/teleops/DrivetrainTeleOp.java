@@ -46,12 +46,18 @@ public class DrivetrainTeleOp extends OpMode {
 
         double t = getRuntime();
 
-        driveController.setMotors_LRX(powerL,powerR,triggerR-triggerL);
+        driveController.setMotors_LRX(powerL,powerR,triggerL-triggerR);
         driveController.updateMotors(t);
         hardware.outtakeMotor.setPower(Constants.OUTTAKE_POWER_FAC*outtake);
         hardware.intakeMotor.setPower(Constants.INTAKE_POWER_FAC*intake);
         hardware.outtakeAngle.update(t,dv);
         tracker.updatePosition(t);
+
+        if (gamepad2.a) hardware.wobbleGrabber.setPosition(-0.7);
+        if (gamepad2.b) hardware.wobbleGrabber.setPosition(-0.3);
+
+        if (gamepad2.dpad_left) hardware.wobbleLifter.setPos(150);
+        if (gamepad2.dpad_right) hardware.wobbleLifter.setPos(300);
 
         JavaHTTPServer.pathData.add(new RobotPos[]{tracker.getPos(),null});
         telemetry.addLine(tracker.getPos().toString());

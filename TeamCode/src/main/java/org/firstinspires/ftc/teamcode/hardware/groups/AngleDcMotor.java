@@ -12,10 +12,7 @@ public class AngleDcMotor {
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-    public void setPos(int pos) {
-        motor.setTargetPosition(pos-zeroPos);
-    }
-    public int getPos() {
-        return motor.getCurrentPosition()+zeroPos;
-    }
+    public void setPos(int pos) { motor.setTargetPosition(pos-zeroPos); }
+    public int getPos() { return motor.getCurrentPosition()+zeroPos; }
+    public void setPower(double power) { motor.setPower(power); }
 }

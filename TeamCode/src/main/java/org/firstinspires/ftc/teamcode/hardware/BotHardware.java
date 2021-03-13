@@ -26,7 +26,7 @@ public class BotHardware {
     public final TandemMotors outtakeMotor;
     public final AngleDcMotor wobbleLifter;
     public final AngleServo outtakeAngle;
-    public final AngleServo wobbleGrabber;
+    public final Servo wobbleGrabber;
 
     public final BNO055IMU imu;
     public final MRGyro gyro;
@@ -50,7 +50,7 @@ public class BotHardware {
         outtakeMotor = new TandemMotors(MOTOR_OUTTAKE_1,MOTOR_OUTTAKE_0);
 
         wobbleLifter = new AngleDcMotor(getMotor(Constants.MapKeys.MOTOR_WOBBLE_LIFTER, Constants.MotorDirections.WOBBLE_LIFTER),0);
-        wobbleGrabber = new AngleServo(getServo(Constants.MapKeys.SERVO_WOBBLE_GRABBER, Constants.MotorDirections.WOBBLE_GRABBER_ANGLE));
+        wobbleGrabber = getServo(Constants.MapKeys.SERVO_WOBBLE_GRABBER, Constants.MotorDirections.WOBBLE_GRABBER_ANGLE);
 
         outtakeAngle = new AngleServo(//new TandemServos(
                 getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE, Constants.MotorDirections.OUTTAKE_ANGLE)
