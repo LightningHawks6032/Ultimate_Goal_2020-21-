@@ -20,6 +20,8 @@ public class Sounds {
         addSound("skreem","skreem");
         addSound("Megalovania","mega");
         addSound("IAmRecordingSound","im_recording_sound");
+        addSound("b1","beep");
+        addSound("b2","beep2");
     }
 
     public void stop() {

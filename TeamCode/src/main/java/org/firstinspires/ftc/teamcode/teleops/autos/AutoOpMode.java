@@ -40,24 +40,25 @@ public class AutoOpMode extends LinearOpMode {
         vuforia.initVuforia();
 
         timeTargets.add(new TimeTarget(0,new RobotPos(-48,-48,0)));
-        timeTargets.add(new TimeTarget(2,new RobotPos(-48,-48,-0.34)));
-        timeTargets.add(new TimeTarget(4,new RobotPos(-48,-48,0)));
+        timeTargets.add(new TimeTarget(2,new RobotPos(-48,-48,-0.7)));
+        timeTargets.add(new TimeTarget(5,new RobotPos(-48,-48,0)));
         // n=2 INSERT HERE //
-        timeTargets.add(new TimeTarget(20,new RobotPos(-48,-63.75,0)));
+        timeTargets.add(new TimeTarget(15,new RobotPos(-24,16,0)));
 
 
-        timeActions.add(new TimeAction(5.7f, new Runnable(){public void run(){
-            sounds.play("skreem");
+        timeActions.add(new TimeAction(5f, new Runnable(){public void run(){
+            sounds.play("b1");
+            sounds.play("b2");
             switch (vuforia.getRings()) {
                 case 0:
-                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,0,0)));
+                    timeTargets.add(3,new TimeTarget(7,new RobotPos(-48,0,0)));
                     break;
                 case 1:
-                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,24,0)));
-                    timeTargets.add(3,new TimeTarget(10,new RobotPos(-48,24,-Math.PI/2)));
+                    timeTargets.add(3,new TimeTarget(7,new RobotPos(-48,24,0)));
+                    timeTargets.add(4,new TimeTarget(10,new RobotPos(-48,24,-Math.PI/2)));
                     break;
                 case 3:
-                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,48,0)));
+                    timeTargets.add(3,new TimeTarget(7,new RobotPos(-48,48,0)));
                     break;
             }
         }}));
@@ -74,7 +75,7 @@ public class AutoOpMode extends LinearOpMode {
         controller.setPos(new RobotPos(-48,-63.75,0));
 
         double ts = getRuntime(), t = 0;
-        while (t < 30) { //30 seconds
+        while (t < 28) { //30 seconds
             try {
                 Thread.sleep(10);
             } catch (InterruptedException ignored) {}
@@ -88,6 +89,7 @@ public class AutoOpMode extends LinearOpMode {
             if (visionPos != null) controller.correctForVisionPos(visionPos);
             controller.update(t);
 
+            telemetry.addLine("DIFF: "+(visionPos.x-controller.getPos().x)+","+(visionPos.y-controller.getPos().y));
             telemetry.addLine("POS: "+controller.getPos().toString());
             telemetry.addLine("I: "+k);
             telemetry.update();
