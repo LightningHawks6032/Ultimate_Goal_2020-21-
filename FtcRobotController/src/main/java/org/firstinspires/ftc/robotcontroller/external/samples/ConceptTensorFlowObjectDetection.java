@@ -129,8 +129,8 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
                         telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
                                 recognition.getRight(), recognition.getBottom());
                         telemetry.addData("Vertical difference", recognition.getTop()-recognition.getBottom());
-                        telemetry.addData("Horizontal difference", recognition.getLeft()-recognition.getRight());
-                        telemetry.addData("Height to width", recognition.getTop()-recognition.getBottom()/(recognition.getLeft()-recognition.getRight()));
+                        //telemetry.addData("Horizontal difference", recognition.getLeft()-recognition.getRight());
+                        //telemetry.addData("Height to width", recognition.getTop()-recognition.getBottom()/(recognition.getLeft()-recognition.getRight()));
                       }
                       telemetry.update();
                     }
