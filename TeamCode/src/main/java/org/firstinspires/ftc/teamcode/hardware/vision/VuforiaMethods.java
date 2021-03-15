@@ -179,9 +179,9 @@ public class VuforiaMethods {
 
         // Next, translate the camera lens to where it is on the robot.
         // In this example, it is centered (left to right), but forward of the middle of the robot, and above ground level.
-        final float CAMERA_FORWARD_DISPLACEMENT  = 8.0f * (float) Constants.MM_PER_IN;   //Camera is 8 Inches in front of robot center
-        final float CAMERA_VERTICAL_DISPLACEMENT = 7.5f * (float) Constants.MM_PER_IN;   //Camera is 7.5 Inches above ground
-        final float CAMERA_LEFT_DISPLACEMENT     = 4.0f * (float) Constants.MM_PER_IN;   //Camera is 4 inches left of the robot's center line
+        final float CAMERA_FORWARD_DISPLACEMENT  = 9.0f * (float) Constants.MM_PER_IN;   //Camera is 8 Inches in front of robot center
+        final float CAMERA_VERTICAL_DISPLACEMENT = 4f * (float) Constants.MM_PER_IN;   //Camera is 7.5 Inches above ground
+        final float CAMERA_LEFT_DISPLACEMENT     = 5.0f * (float) Constants.MM_PER_IN;   //Camera is 4 inches left of the robot's center line
 
         //FOV: robot needs to be ~18in away from something on the ground in order to see it
 
