@@ -104,4 +104,19 @@ public class AutoController {
         close &= Math.abs(vel.r) < speedThresh*rotThresh/distInches;
         return close;
     }
+
+
+    public void putDownWobbleGoal() throws InterruptedException {
+        hardware.wobbleLifter.setPos(300);
+        Thread.sleep(1000);
+        hardware.wobbleGrabber.setPosition(-0.3);
+        Thread.sleep(300);
+        hardware.wobbleLifter.setPos(150);
+        Thread.sleep(200);
+        hardware.wobbleGrabber.setPosition(-0.7);
+    }
+    public void goToPos(double x, double y, double r) throws InterruptedException {
+        setTarget(new RobotPos(x,y,r));
+        CompletionWait.autoControllerReachTarget(this);
+    }
 }
