@@ -101,7 +101,7 @@ public class AutoController {
         boolean close = diff.x*diff.x+diff.y*diff.y < distInches*distInches;
         close &= Math.abs(diff.r) < rotThresh;
         close &= vel.x*vel.x+vel.y*vel.y < speedThresh*speedThresh;
-        close &= Math.abs(vel.r) < speedThresh;
+        close &= Math.abs(vel.r) < speedThresh*rotThresh/distInches;
         return close;
     }
 }

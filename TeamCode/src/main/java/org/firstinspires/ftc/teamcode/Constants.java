@@ -35,6 +35,10 @@ public class Constants {
     public static final double OUTTAKE_ANGLE_MIN = 0.47;
     public static final double OUTTAKE_ANGLE_SPEED = 0.85;
 
+    public static final double TARGET_THRESH_LIN = 2;
+    public static final double TARGET_THRESH_ROT = 0.2;
+    public static final double TARGET_THRESH_VEL = 0.2;
+
     public static class MapKeys {
         public static final String MOTOR_FL = "fl";
         public static final String MOTOR_FR = "fr";
