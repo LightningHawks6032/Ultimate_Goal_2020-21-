@@ -282,6 +282,15 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
                 }
             }
 
+            /*
+             * Enginering
+             * Enjineering
+             * Engineneering
+             * Engineiring
+             * Engeneering
+             * 
+             */
+
             // Provide feedback as to where the robot is located (if we know).
             if (targetVisible) {
                 // express position (translation) of robot in inches.
