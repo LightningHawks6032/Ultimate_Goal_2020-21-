@@ -29,7 +29,7 @@ public class Constants {
     public static final double ROBOTPOS_BLEND_FAC = 0;
 
     public static final double OUTTAKE_POWER_FAC = 1;
-    public static final double INTAKE_POWER_FAC = 1;
+    public static final double INTAKE_POWER_FAC = 0.5;
 
     public static final double OUTTAKE_ANGLE_MAX = 0.9;
     public static final double OUTTAKE_ANGLE_MIN = 0.47;
@@ -51,6 +51,7 @@ public class Constants {
         public static final String GYRO = "gyro";
         public static final String MOTOR_WOBBLE_LIFTER = "wobble-lifter";
         public static final String SERVO_WOBBLE_GRABBER = "wobble-grabber";
+        public static final String SERVO_LAUNCH = "launch-servo";
 
         public static final String SERVO_OUTTAKE_ANGLE = "outtake-angle";
         //public static final String SERVO_OUTTAKE_ANGLE_BAK = "outtake-angle-bak";
@@ -61,11 +62,13 @@ public class Constants {
         public static final DcMotorSimple.Direction DRIVE_FR = DcMotorSimple.Direction.REVERSE;
         public static final DcMotorSimple.Direction DRIVE_BR = DcMotorSimple.Direction.REVERSE;
 
-        public static final DcMotorSimple.Direction INTAKE = DcMotorSimple.Direction.FORWARD;
+        public static final DcMotorSimple.Direction INTAKE = DcMotorSimple.Direction.REVERSE;
         public static final DcMotorSimple.Direction OUTTAKE_FWD = DcMotorSimple.Direction.REVERSE;
         public static final DcMotorSimple.Direction OUTTAKE_BAK = DcMotorSimple.Direction.REVERSE;
 
         public static final DcMotorSimple.Direction WOBBLE_LIFTER = DcMotorSimple.Direction.FORWARD;
+
+        public static final Servo.Direction LAUNCH_SERVO = Servo.Direction.FORWARD;
 
         public static final Servo.Direction OUTTAKE_ANGLE = Servo.Direction.FORWARD;
         public static final Servo.Direction WOBBLE_GRABBER_ANGLE = Servo.Direction.FORWARD;

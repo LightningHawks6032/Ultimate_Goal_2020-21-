@@ -1,0 +1,256 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_3_8_21__4_31_PM__Default_Changelist_.xml
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_3_8_21__4_31_PM__Default_Changelist_.xml	(revision 29ff4ced1e57a07d5a0d34cbef7e1f317ef1ff4f)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_3_8_21__4_31_PM__Default_Changelist_.xml	(revision 29ff4ced1e57a07d5a0d34cbef7e1f317ef1ff4f)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_3_8_21,_4_31_PM_[Default_Changelist]" date="1615239108904" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_8_21,_4_31_PM_[Default_Changelist]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 3/8/21, 4:31 PM [Default Changelist]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_3_8_21,_4_31_PM_[Default_Changelist]/shelved.patch
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_3_8_21,_4_31_PM_[Default_Changelist]/shelved.patch	(revision 29ff4ced1e57a07d5a0d34cbef7e1f317ef1ff4f)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_3_8_21,_4_31_PM_[Default_Changelist]/shelved.patch	(revision 29ff4ced1e57a07d5a0d34cbef7e1f317ef1ff4f)
+@@ -1,35 +0,0 @@
+-Index: TeamCode/src/main/java/org/firstinspires/ftc/teamcode/teleops/VuforiaMethodsTesting.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- TeamCode/src/main/java/org/firstinspires/ftc/teamcode/teleops/VuforiaMethodsTesting.java	(date 1615238705000)
+-+++ TeamCode/src/main/java/org/firstinspires/ftc/teamcode/teleops/VuforiaMethodsTesting.java	(date 1615238705000)
+-@@ -0,0 +1,27 @@
+-+package org.firstinspires.ftc.teamcode.teleops;
+-+
+-+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+-+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+-+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+-+
+-+import org.firstinspires.ftc.teamcode.RobotPos;
+-+import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
+-+
+-+@TeleOp(name = "VisionPos Test", group = "testing")
+-+//@Disabled
+-+public class VuforiaMethodsTesting extends OpMode {
+-+    VuforiaMethods isabled = new VuforiaMethods(hardwareMap);
+-+    RobotPos pos;
+-+
+-+    public void init(){
+-+        telemetry.addLine("Reafy");
+-+        telemetry.update();
+-+        pos = new RobotPos(0,0,0);
+-+    }
+-+
+-+    public void loop(){
+-+        telemetry.addData("Target visible", isabled.targetVisible());
+-+        if(isabled.getPosition(pos)!=null)telemetry.addLine(""+isabled.getPosition(pos));
+-+        telemetry.update();
+-+    }
+-+}
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_3_13_2021_12_41_PM__Default_Changelist_.xml
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_3_13_2021_12_41_PM__Default_Changelist_.xml	(revision 29ff4ced1e57a07d5a0d34cbef7e1f317ef1ff4f)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_3_13_2021_12_41_PM__Default_Changelist_.xml	(revision 29ff4ced1e57a07d5a0d34cbef7e1f317ef1ff4f)
+@@ -1,14 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_3_13_2021_12_41_PM_[Default_Changelist]" date="1615657275304" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_13_2021_12_41_PM_[Default_Changelist]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 3/13/2021 12:41 PM [Default Changelist]" />
+-  <binary>
+-    <option name="BEFORE_PATH" />
+-    <option name="AFTER_PATH" value="TeamCode/src/main/res/raw/beep.wav" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_13_2021_12_41_PM_[Default_Changelist]/beep.wav" />
+-  </binary>
+-  <binary>
+-    <option name="BEFORE_PATH" />
+-    <option name="AFTER_PATH" value="TeamCode/src/main/res/raw/beep2.wav" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_13_2021_12_41_PM_[Default_Changelist]/beep2.wav" />
+-  </binary>
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_3_13_2021_12_41_PM_[Default_Changelist]/shelved.patch
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_3_13_2021_12_41_PM_[Default_Changelist]/shelved.patch	(revision 29ff4ced1e57a07d5a0d34cbef7e1f317ef1ff4f)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_3_13_2021_12_41_PM_[Default_Changelist]/shelved.patch	(revision 29ff4ced1e57a07d5a0d34cbef7e1f317ef1ff4f)
+@@ -1,181 +0,0 @@
+-Index: TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/auto/AutoController.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package org.firstinspires.ftc.teamcode.hardware.auto;\r\n\r\nimport org.firstinspires.ftc.robotcore.external.Telemetry;\r\nimport org.firstinspires.ftc.teamcode.Constants;\r\nimport org.firstinspires.ftc.teamcode.RobotPos;\r\nimport org.firstinspires.ftc.teamcode.hardware.drive.PositionTracker;\r\nimport org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;\r\nimport org.firstinspires.ftc.teamcode.hardware.BotHardware;\r\nimport org.firstinspires.ftc.teamcode.hardware.drive.DriveController;\r\n\r\nimport java.util.Locale;\r\n\r\npublic class AutoController {\r\n\r\n    //Mich will add comments of his understanding of the code\r\n\r\n    RobotPos target = null;\r\n    RobotPos pos = null;\r\n    RobotPos vel = null;\r\n\r\n    public final DriveController driveController;\r\n    final BotHardware hardware;\r\n    final PositionTracker posTracker;\r\n\r\n    final Telemetry telemetry;\r\n\r\n\r\n    //Construct the auto controller\r\n    public AutoController(BotHardware hardware, Telemetry telemetry) {\r\n        this.hardware = hardware;\r\n        this.driveController = new DriveController(DriveMotors.MotorClipMode.SCALE,hardware);\r\n        this.telemetry = telemetry;\r\n        this.posTracker = new PositionTracker(hardware,telemetry);\r\n    }\r\n\r\n    //overloaded inits\r\n    public void init(double t) {\r\n        driveController.initMotors(t);\r\n        posTracker.init(t);\r\n        pos = posTracker.getPos();\r\n    }\r\n    public void init(double t, RobotPos initialPos) {\r\n        driveController.initMotors(t);\r\n        posTracker.init(t,initialPos);\r\n        pos = posTracker.getPos();\r\n    }\r\n\r\n    //Sets and stores the target position\r\n    public void setTarget(RobotPos target) { this.target = target; }\r\n\r\n    //Brings the robot to target position\r\n    public void update(double t) {\r\n        if (target == null) {\r\n            driveController.setMotors_YXR(0,0,0);\r\n            updatePosition(t);\r\n            return;\r\n        }\r\n        updatePosition(t); //make motors know what the pos is\r\n\r\n        RobotPos diff = pos.getDifferenceTo(target);\r\n        double dX = diff.x, dY = diff.y, dR = diff.r;\r\n        double vX = Math.signum(dX)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF,Math.abs(dX)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF);\r\n        double vY = -Math.signum(dY)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD,Math.abs(dY)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD) ;\r\n        vX = Math.cos(pos.r)*vX-Math.sin(pos.r)*vY;\r\n        vY = Math.cos(pos.r)*vY+Math.sin(pos.r)*vX;\r\n        double vR = Math.signum(dR)*Math.max(0,Math.min(Constants.MOTOR_DECELL_ROTDIST,Math.abs(dR)))/Constants.MOTOR_DECELL_ROTDIST;\r\n\r\n        telemetry.addLine(String.format(Locale.ENGLISH,\"%.2f %.2f %.2f\",vX,vY,vR));\r\n\r\n        vel = new RobotPos(vX,vY,vR);\r\n        driveController.setMotors_YXR(vY,vX,-vR);\r\n    }\r\n\r\n    //Factors a small amount of the vision position values into\r\n    public void correctForVisionPos(RobotPos visionPos){\r\n        posTracker.correctForVisionPos(visionPos);\r\n        pos = posTracker.getPos();\r\n    }\r\n\r\n    //Update the position's data to the motors and stuff\r\n    private void updatePosition(double t) {\r\n        driveController.updateMotors(t);\r\n        posTracker.updatePosition(t);\r\n        pos = posTracker.getPos();\r\n    }\r\n\r\n    public void resetBasePos() { setBaseDist(0); }\r\n    public void setBaseDist(double dist) {\r\n        hardware.motors.fl.adjustBaseDist(hardware.motors.fl.calculateDist()+dist);\r\n        hardware.motors.bl.adjustBaseDist(hardware.motors.bl.calculateDist()+dist);\r\n        hardware.motors.fr.adjustBaseDist(hardware.motors.fr.calculateDist()+dist);\r\n        hardware.motors.br.adjustBaseDist(hardware.motors.br.calculateDist()+dist);\r\n    }\r\n    public void setPos(RobotPos pos) { posTracker.setPos(pos); this.pos = this.posTracker.getPos(); }\r\n    public RobotPos getPos() { return posTracker.getPos(); }\r\n\r\n    public boolean withinThreshold(double distInches, double rotThresh, double speedThresh) {\r\n        pos = posTracker.getPos();\r\n        if (target == null || pos == null || vel == null) return false;\r\n        RobotPos diff = target.getDifferenceTo(pos);\r\n        boolean close = diff.x*diff.x+diff.y*diff.y < distInches*distInches;\r\n        close &= Math.abs(diff.r) < rotThresh;\r\n        close &= vel.x*vel.x+vel.y*vel.y < speedThresh*speedThresh;\r\n        close &= Math.abs(vel.r) < speedThresh;\r\n        return close;\r\n    }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/auto/AutoController.java	(revision acda570695d3162cd8ba1cce0c03a32572468c97)
+-+++ TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/auto/AutoController.java	(date 1615652835557)
+-@@ -68,7 +68,7 @@
+-         telemetry.addLine(String.format(Locale.ENGLISH,"%.2f %.2f %.2f",vX,vY,vR));
+- 
+-         vel = new RobotPos(vX,vY,vR);
+--        driveController.setMotors_YXR(vY,vX,-vR);
+-+        driveController.setMotors_YXR(vY,vX,vR);
+-     }
+- 
+-     //Factors a small amount of the vision position values into
+-Index: TeamCode/src/main/java/org/firstinspires/ftc/teamcode/teleops/autos/AutoOpMode.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package org.firstinspires.ftc.teamcode.teleops.autos;\r\n\r\nimport com.qualcomm.robotcore.eventloop.opmode.Autonomous;\r\nimport com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;\r\n\r\nimport org.firstinspires.ftc.teamcode.RobotPos;\r\nimport org.firstinspires.ftc.teamcode.debug.JavaHTTPServer;\r\nimport org.firstinspires.ftc.teamcode.hardware.BotHardware;\r\nimport org.firstinspires.ftc.teamcode.hardware.auto.AutoController;\r\nimport org.firstinspires.ftc.teamcode.hardware.sound.Sounds;\r\nimport org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n@Autonomous(group = \"autos\", name = \"auto\")\r\npublic class AutoOpMode extends LinearOpMode {\r\n\r\n    protected AutoController controller;\r\n    protected VuforiaMethods vuforia;\r\n    protected RobotPos visionPos;\r\n\r\n    protected List<TimeTarget> timeTargets = new ArrayList<>();\r\n    protected List<TimeAction> timeActions = new ArrayList<>();\r\n\r\n    private int k = 0;\r\n\r\n    @Override\r\n    public void runOpMode() {\r\n        JavaHTTPServer.init();\r\n        JavaHTTPServer.pathData.clear();\r\n        final Sounds sounds = new Sounds(hardwareMap);\r\n\r\n        telemetry.addLine(\"STARTING\");\r\n        telemetry.update();\r\n\r\n        final BotHardware bh = new BotHardware(hardwareMap);\r\n        controller = new AutoController(bh, telemetry);\r\n        vuforia = new VuforiaMethods(hardwareMap);\r\n        vuforia.initVuforia();\r\n\r\n        timeTargets.add(new TimeTarget(0,new RobotPos(-48,-48,0)));\r\n        timeTargets.add(new TimeTarget(2,new RobotPos(-48,-48,-0.34)));\r\n        timeTargets.add(new TimeTarget(4,new RobotPos(-48,-48,0)));\r\n        // n=2 INSERT HERE //\r\n        timeTargets.add(new TimeTarget(20,new RobotPos(-48,-63.75,0)));\r\n\r\n\r\n        timeActions.add(new TimeAction(5.7f, new Runnable(){public void run(){\r\n            sounds.play(\"skreem\");\r\n            switch (vuforia.getRings()) {\r\n                case 0:\r\n                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,0,0)));\r\n                    break;\r\n                case 1:\r\n                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,24,0)));\r\n                    timeTargets.add(3,new TimeTarget(10,new RobotPos(-48,24,-Math.PI/2)));\r\n                    break;\r\n                case 3:\r\n                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,48,0)));\r\n                    break;\r\n            }\r\n        }}));\r\n\r\n        telemetry.addLine(\"READY\");\r\n        telemetry.update();\r\n\r\n        waitForStart();\r\n        sounds.play(\"Megalovania\");\r\n\r\n        controller.init(getRuntime());\r\n        controller.update(getRuntime());\r\n        controller.resetBasePos();\r\n        controller.setPos(new RobotPos(-48,-63.75,0));\r\n\r\n        double ts = getRuntime(), t = 0;\r\n        while (t < 30) { //30 seconds\r\n            try {\r\n                Thread.sleep(10);\r\n            } catch (InterruptedException ignored) {}\r\n            t = getRuntime()-ts;\r\n\r\n            controller.setTarget(getTarget((float)t));\r\n            tryTimeRunnable((float)t);\r\n\r\n            visionPos = vuforia.getPosition(visionPos);\r\n            if (visionPos != null) telemetry.addLine(\"VIZPOZ: \"+visionPos.toString());\r\n            if (visionPos != null) controller.correctForVisionPos(visionPos);\r\n            controller.update(t);\r\n\r\n            telemetry.addLine(\"POS: \"+controller.getPos().toString());\r\n            telemetry.addLine(\"I: \"+k);\r\n            telemetry.update();\r\n\r\n            JavaHTTPServer.pathData.add(new RobotPos[]{controller.getPos(),visionPos});\r\n        }\r\n        controller.driveController.setMotors_YXR(0,0,0);\r\n\r\n        requestOpModeStop();\r\n    }\r\n\r\n    private RobotPos getTarget(float t) {\r\n        telemetry.addLine(t+\"s\");\r\n        for (int i = 0; i < timeTargets.size(); i++) {\r\n            if (i == timeTargets.size()-1) return timeTargets.get(i).target;\r\n            TimeTarget tt = timeTargets.get(i+1);\r\n            k=i;\r\n            if (t < tt.time) return timeTargets.get(i).target;\r\n        }\r\n        return null;\r\n    }\r\n    private void tryTimeRunnable(float t) {\r\n        for (TimeAction ta : timeActions)\r\n            ta.tryRun(t);\r\n    }\r\n\r\n    public static class TimeTarget {\r\n        public final float time;\r\n        public final RobotPos target;\r\n        public TimeTarget(float time, RobotPos target) {\r\n            this.time = time;\r\n            this.target = target;\r\n        }\r\n    }\r\n    public static class TimeAction {\r\n        public final float time;\r\n        public final Runnable callback;\r\n        public boolean ran = false;\r\n        public TimeAction(float time, Runnable callback) {\r\n            this.time = time;\r\n            this.callback = callback;\r\n        }\r\n        public void tryRun(float t) {\r\n            if (!ran && t > time)\r\n                run();\r\n        }\r\n        private void run() {\r\n            ran = true;\r\n            callback.run();\r\n        }\r\n    }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- TeamCode/src/main/java/org/firstinspires/ftc/teamcode/teleops/autos/AutoOpMode.java	(revision acda570695d3162cd8ba1cce0c03a32572468c97)
+-+++ TeamCode/src/main/java/org/firstinspires/ftc/teamcode/teleops/autos/AutoOpMode.java	(date 1615657084587)
+-@@ -40,24 +40,25 @@
+-         vuforia.initVuforia();
+- 
+-         timeTargets.add(new TimeTarget(0,new RobotPos(-48,-48,0)));
+--        timeTargets.add(new TimeTarget(2,new RobotPos(-48,-48,-0.34)));
+--        timeTargets.add(new TimeTarget(4,new RobotPos(-48,-48,0)));
+-+        timeTargets.add(new TimeTarget(2,new RobotPos(-48,-48,-0.7)));
+-+        timeTargets.add(new TimeTarget(5,new RobotPos(-48,-48,0)));
+-         // n=2 INSERT HERE //
+--        timeTargets.add(new TimeTarget(20,new RobotPos(-48,-63.75,0)));
+-+        timeTargets.add(new TimeTarget(15,new RobotPos(-24,16,0)));
+- 
+- 
+--        timeActions.add(new TimeAction(5.7f, new Runnable(){public void run(){
+--            sounds.play("skreem");
+-+        timeActions.add(new TimeAction(5f, new Runnable(){public void run(){
+-+            sounds.play("b1");
+-+            sounds.play("b2");
+-             switch (vuforia.getRings()) {
+-                 case 0:
+--                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,0,0)));
+-+                    timeTargets.add(3,new TimeTarget(7,new RobotPos(-48,0,0)));
+-                     break;
+-                 case 1:
+--                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,24,0)));
+--                    timeTargets.add(3,new TimeTarget(10,new RobotPos(-48,24,-Math.PI/2)));
+-+                    timeTargets.add(3,new TimeTarget(7,new RobotPos(-48,24,0)));
+-+                    timeTargets.add(4,new TimeTarget(10,new RobotPos(-48,24,-Math.PI/2)));
+-                     break;
+-                 case 3:
+--                    timeTargets.add(2,new TimeTarget(6,new RobotPos(-48,48,0)));
+-+                    timeTargets.add(3,new TimeTarget(7,new RobotPos(-48,48,0)));
+-                     break;
+-             }
+-         }}));
+-@@ -74,7 +75,7 @@
+-         controller.setPos(new RobotPos(-48,-63.75,0));
+- 
+-         double ts = getRuntime(), t = 0;
+--        while (t < 30) { //30 seconds
+-+        while (t < 28) { //30 seconds
+-             try {
+-                 Thread.sleep(10);
+-             } catch (InterruptedException ignored) {}
+-@@ -88,6 +89,7 @@
+-             if (visionPos != null) controller.correctForVisionPos(visionPos);
+-             controller.update(t);
+- 
+-+            telemetry.addLine("DIFF: "+(visionPos.x-controller.getPos().x)+","+(visionPos.y-controller.getPos().y));
+-             telemetry.addLine("POS: "+controller.getPos().toString());
+-             telemetry.addLine("I: "+k);
+-             telemetry.update();
+-Index: TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/drive/PositionTracker.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package org.firstinspires.ftc.teamcode.hardware.drive;\r\n\r\nimport org.firstinspires.ftc.robotcore.external.Telemetry;\r\nimport org.firstinspires.ftc.teamcode.Constants;\r\nimport org.firstinspires.ftc.teamcode.RobotPos;\r\nimport org.firstinspires.ftc.teamcode.hardware.BotHardware;\r\nimport org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;\r\n\r\nimport java.util.Locale;\r\n\r\npublic class PositionTracker {\r\n\r\n    private static RobotPos pos = null;\r\n\r\n    public final DriveController driveController;\r\n    final BotHardware hardware;\r\n\r\n    final Telemetry telemetry;\r\n\r\n    public PositionTracker(BotHardware hardware, Telemetry telemetry) {\r\n        this.hardware = hardware;\r\n        this.driveController = new DriveController(DriveMotors.MotorClipMode.SCALE,hardware);\r\n        this.telemetry = telemetry;\r\n    }\r\n    public PositionTracker(BotHardware hardware, Telemetry telemetry, DriveController driveController) {\r\n        this.hardware = hardware;\r\n        this.driveController = driveController;\r\n        this.telemetry = telemetry;\r\n    }\r\n\r\n    public void init(double t) {\r\n        driveController.initMotors(t);\r\n        if (pos != null)\r\n            pos = new RobotPos(pos.x, pos.y, pos.r, t);\r\n        else\r\n            pos = new RobotPos(t);\r\n    }\r\n    public void init(double t, RobotPos initialPos) {\r\n        if (pos != null)\r\n            pos = new RobotPos(initialPos.x, initialPos.y, initialPos.r, t);\r\n        else\r\n            pos = new RobotPos(t);\r\n    }\r\n\r\n    public void correctForVisionPos(RobotPos visionPos){\r\n        pos = pos.correctPos(visionPos);\r\n    }\r\n\r\n    public void updatePosition(double t) {\r\n        double dmFL = hardware.motors.fl.getStepDisplacement();\r\n        double dmFR = hardware.motors.fr.getStepDisplacement();\r\n        double dmBL = hardware.motors.bl.getStepDisplacement();\r\n        double dmBR = hardware.motors.br.getStepDisplacement();\r\n        double dY = dmFL + dmFR + dmBL + dmBR;  dY *= -1/4.0; dY *= Constants.MOVE_SCALE_FWD;\r\n        double dX = dmBL + dmBR -(dmFL + dmFR); dX *= 1/4.0; dX *= Constants.MOVE_SCALE_SRF;\r\n        double dR = dmFR + dmBR -(dmFL + dmBL); dR *= Constants.ROTPOW_TO_RAD/8.0;\r\n        telemetry.addLine(String.format(Locale.ENGLISH,\"DY: %.3f; DX: %.3f; DR: %.3f;\",dY,dX,dR));\r\n        pos = pos.integrateRelFwd(dX, dY, dR, t);\r\n    }\r\n\r\n    public void resetBasePos() { setBaseDist(0); }\r\n    public void setBaseDist(double dist) {\r\n        hardware.motors.fl.adjustBaseDist(hardware.motors.fl.calculateDist()+dist);\r\n        hardware.motors.bl.adjustBaseDist(hardware.motors.bl.calculateDist()+dist);\r\n        hardware.motors.fr.adjustBaseDist(hardware.motors.fr.calculateDist()+dist);\r\n        hardware.motors.br.adjustBaseDist(hardware.motors.br.calculateDist()+dist);\r\n    }\r\n    public void setPos(RobotPos pos) { this.pos = new RobotPos(pos); }\r\n    public RobotPos getPos() { return pos; }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/drive/PositionTracker.java	(revision acda570695d3162cd8ba1cce0c03a32572468c97)
+-+++ TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/drive/PositionTracker.java	(date 1615654157822)
+-@@ -53,7 +53,7 @@
+-         double dmBR = hardware.motors.br.getStepDisplacement();
+-         double dY = dmFL + dmFR + dmBL + dmBR;  dY *= -1/4.0; dY *= Constants.MOVE_SCALE_FWD;
+-         double dX = dmBL + dmBR -(dmFL + dmFR); dX *= 1/4.0; dX *= Constants.MOVE_SCALE_SRF;
+--        double dR = dmFR + dmBR -(dmFL + dmBL); dR *= Constants.ROTPOW_TO_RAD/8.0;
+-+        double dR = dmFR + dmBR -(dmFL + dmBL); dR *= -Constants.MOVE_SCALE_ROT*Constants.ROTPOW_TO_RAD/4.0;
+-         telemetry.addLine(String.format(Locale.ENGLISH,"DY: %.3f; DX: %.3f; DR: %.3f;",dY,dX,dR));
+-         pos = pos.integrateRelFwd(dX, dY, dR, t);
+-     }
+-Index: TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/BotHardware.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package org.firstinspires.ftc.teamcode.hardware;\r\n\r\nimport com.qualcomm.hardware.bosch.BNO055IMU;\r\nimport com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;\r\nimport com.qualcomm.robotcore.hardware.DcMotor;\r\nimport com.qualcomm.robotcore.hardware.DcMotorSimple;\r\nimport com.qualcomm.robotcore.hardware.HardwareMap;\r\nimport com.qualcomm.robotcore.hardware.Servo;\r\n\r\nimport org.firstinspires.ftc.robotcore.external.navigation.Position;\r\nimport org.firstinspires.ftc.robotcore.external.navigation.Velocity;\r\nimport org.firstinspires.ftc.teamcode.Constants;\r\nimport org.firstinspires.ftc.teamcode.hardware.drive.IMUAccelerationIntegrator;\r\nimport org.firstinspires.ftc.teamcode.hardware.groups.AngleDcMotor;\r\nimport org.firstinspires.ftc.teamcode.hardware.groups.AngleServo;\r\nimport org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;\r\nimport org.firstinspires.ftc.teamcode.hardware.groups.MRGyro;\r\nimport org.firstinspires.ftc.teamcode.hardware.groups.TandemMotors;\r\nimport org.firstinspires.ftc.teamcode.hardware.groups.TandemServos;\r\n\r\npublic class BotHardware {\r\n    private final HardwareMap hardwareMap;\r\n\r\n    public final DriveMotors motors;\r\n    public final DcMotor intakeMotor;\r\n    public final TandemMotors outtakeMotor;\r\n    public final AngleDcMotor wobbleLifter;\r\n    public final AngleServo outtakeAngle;\r\n\r\n    public final BNO055IMU imu;\r\n    public final MRGyro gyro;\r\n    public final IMUAccelerationIntegrator accInt;\r\n\r\n    private double motorBoost = 1;\r\n    private double motorMax = 1.2;\r\n    private double motorMin = 0.05;\r\n\r\n    public BotHardware(HardwareMap hardwareMap) {\r\n        this.hardwareMap = hardwareMap;\r\n\r\n        DcMotor MOTOR_FL = getMotor(Constants.MapKeys.MOTOR_FL, Constants.MotorDirections.DRIVE_FL);\r\n        DcMotor MOTOR_BL = getMotor(Constants.MapKeys.MOTOR_BL, Constants.MotorDirections.DRIVE_BL);\r\n        DcMotor MOTOR_FR = getMotor(Constants.MapKeys.MOTOR_FR, Constants.MotorDirections.DRIVE_FR);\r\n        DcMotor MOTOR_BR = getMotor(Constants.MapKeys.MOTOR_BR, Constants.MotorDirections.DRIVE_BR);\r\n        motors = new DriveMotors(MOTOR_FL,MOTOR_FR,MOTOR_BL,MOTOR_BR,this);\r\n        intakeMotor = getMotor(Constants.MapKeys.MOTOR_INTAKE,Constants.MotorDirections.INTAKE);\r\n        DcMotor MOTOR_OUTTAKE_0 = getMotor(Constants.MapKeys.MOTOR_OUTTAKE_FWD,Constants.MotorDirections.OUTTAKE_FWD);\r\n        DcMotor MOTOR_OUTTAKE_1 = getMotor(Constants.MapKeys.MOTOR_OUTTAKE_BAK,Constants.MotorDirections.OUTTAKE_BAK);\r\n        outtakeMotor = new TandemMotors(MOTOR_OUTTAKE_1,MOTOR_OUTTAKE_0);\r\n\r\n        wobbleLifter = new AngleDcMotor(getMotor(Constants.MapKeys.MOTOR_WOBBLE_LIFTER, Constants.MotorDirections.WOBBLE_LIFTER),0);\r\n\r\n        outtakeAngle = new AngleServo(//new TandemServos(\r\n                getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE, Constants.MotorDirections.OUTTAKE_ANGLE)\r\n                //getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE_BAK, Constants.MotorDirections.OUTTAKE_ANGLE_BAK)\r\n        );//);\r\n\r\n        imu = hardwareMap.get(BNO055IMU.class, Constants.MapKeys.IMU);\r\n        BNO055IMU.Parameters params = new BNO055IMU.Parameters();\r\n        params.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;\r\n        params.mode = BNO055IMU.SensorMode.IMU;\r\n        params.calibrationData = new BNO055IMU.CalibrationData();\r\n        accInt = new IMUAccelerationIntegrator();\r\n        imu.initialize(params);\r\n        accInt.initialize(params,new Position(),new Velocity());\r\n\r\n\r\n        gyro = new MRGyro(hardwareMap.get(ModernRoboticsI2cGyro.class, Constants.MapKeys.GYRO),true);\r\n    }\r\n\r\n\r\n    public DcMotor getMotor(String id, DcMotorSimple.Direction direction) {\r\n        DcMotor motor = hardwareMap.get(DcMotor.class, id);\r\n        motor.setDirection(direction);\r\n        return motor;\r\n    }\r\n    public Servo getServo(String id, Servo.Direction direction) {\r\n        Servo motor = hardwareMap.get(Servo.class, id);\r\n        motor.setDirection(direction);\r\n        return motor;\r\n    }\r\n\r\n    public double getMotorBoost() { return motorBoost; }\r\n    public double getMotorMax() { return motorMax; }\r\n    public double getMotorMin() { return motorMin; }\r\n    public void setMotorPowerModifiers(double boost, double max, double min) {\r\n        motorBoost = boost;\r\n        motorMax = max;\r\n        motorMin = min;\r\n    }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/BotHardware.java	(revision acda570695d3162cd8ba1cce0c03a32572468c97)
+-+++ TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/BotHardware.java	(date 1615656248062)
+-@@ -26,6 +26,7 @@
+-     public final TandemMotors outtakeMotor;
+-     public final AngleDcMotor wobbleLifter;
+-     public final AngleServo outtakeAngle;
+-+    public final AngleServo wobbleGrabber;
+- 
+-     public final BNO055IMU imu;
+-     public final MRGyro gyro;
+-@@ -49,6 +50,7 @@
+-         outtakeMotor = new TandemMotors(MOTOR_OUTTAKE_1,MOTOR_OUTTAKE_0);
+- 
+-         wobbleLifter = new AngleDcMotor(getMotor(Constants.MapKeys.MOTOR_WOBBLE_LIFTER, Constants.MotorDirections.WOBBLE_LIFTER),0);
+-+        wobbleGrabber = new AngleServo(getServo(Constants.MapKeys.SERVO_WOBBLE_GRABBER, Constants.MotorDirections.WOBBLE_GRABBER_ANGLE));
+- 
+-         outtakeAngle = new AngleServo(//new TandemServos(
+-                 getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE, Constants.MotorDirections.OUTTAKE_ANGLE)
+-Index: TeamCode/src/main/java/org/firstinspires/ftc/teamcode/Constants.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package org.firstinspires.ftc.teamcode;\r\n\r\nimport com.qualcomm.robotcore.hardware.DcMotorSimple;\r\nimport com.qualcomm.robotcore.hardware.Servo;\r\n\r\npublic class Constants {\r\n    //public static final double MOTORRAMP_TICKSPEEDFAC = 500;\r\n    //public static final int MOTORRAMP_MINTHRESH = 200;\r\n    //public static final double MOTORRAMP_MAXACC = 4;\r\n\r\n    public static final double MM_PER_IN = 25.4;\r\n\r\n    public static final double WHEEL_DIA_MM = 96;\r\n    public static final double TICKS_PER_REV = 145.6 * 6;\r\n    public static final double TICKS_PER_MM = TICKS_PER_REV / (WHEEL_DIA_MM * Math.PI);\r\n    public static final double TICKS_PER_IN = TICKS_PER_MM*MM_PER_IN;\r\n\r\n    public static final double MOVE_SCALE_FWD = 1.5*72.0/63.75;//24in : 9in irl  9/24*4\r\n    public static final double MOVE_SCALE_SRF = 1.16666667;//24in : 7in irl  7/24*4\r\n\r\n    public static final double ROTPOW_TO_RAD = 1/5.5;\r\n\r\n    public static final double MAX_MOTORACC = 4;\r\n\r\n    public static final double MOTOR_DECELL_DIST = 15;\r\n    public static final double MOTOR_DECELL_ROTDIST = 1;\r\n\r\n    public static final double ROBOTPOS_BLEND_FAC = 0;\r\n\r\n    public static final double OUTTAKE_POWER_FAC = 1;\r\n    public static final double INTAKE_POWER_FAC = 1;\r\n\r\n    public static final double OUTTAKE_ANGLE_MAX = 0.9;\r\n    public static final double OUTTAKE_ANGLE_MIN = 0.47;\r\n    public static final double OUTTAKE_ANGLE_SPEED = 0.85;\r\n\r\n    public static class MapKeys {\r\n        public static final String MOTOR_FL = \"fl\";\r\n        public static final String MOTOR_FR = \"fr\";\r\n        public static final String MOTOR_BL = \"bl\";\r\n        public static final String MOTOR_BR = \"br\";\r\n        public static final String MOTOR_INTAKE = \"intake\";\r\n        public static final String MOTOR_OUTTAKE_FWD = \"outtake-fwd\";\r\n        public static final String MOTOR_OUTTAKE_BAK = \"outtake-bak\";\r\n        public static final String IMU = \"imu\";\r\n        public static final String GYRO = \"gyro\";\r\n        public static final String MOTOR_WOBBLE_LIFTER = \"wobble-lifter\";\r\n\r\n        public static final String SERVO_OUTTAKE_ANGLE = \"outtake-angle\";\r\n        //public static final String SERVO_OUTTAKE_ANGLE_BAK = \"outtake-angle-bak\";\r\n    }\r\n    public static class MotorDirections {\r\n        public static final DcMotorSimple.Direction DRIVE_FL = DcMotorSimple.Direction.FORWARD;\r\n        public static final DcMotorSimple.Direction DRIVE_BL = DcMotorSimple.Direction.FORWARD;\r\n        public static final DcMotorSimple.Direction DRIVE_FR = DcMotorSimple.Direction.REVERSE;\r\n        public static final DcMotorSimple.Direction DRIVE_BR = DcMotorSimple.Direction.REVERSE;\r\n\r\n        public static final DcMotorSimple.Direction INTAKE = DcMotorSimple.Direction.FORWARD;\r\n        public static final DcMotorSimple.Direction OUTTAKE_FWD = DcMotorSimple.Direction.REVERSE;\r\n        public static final DcMotorSimple.Direction OUTTAKE_BAK = DcMotorSimple.Direction.REVERSE;\r\n\r\n        public static final DcMotorSimple.Direction WOBBLE_LIFTER = DcMotorSimple.Direction.FORWARD;\r\n\r\n        public static final Servo.Direction OUTTAKE_ANGLE = Servo.Direction.FORWARD;\r\n        //public static final Servo.Direction OUTTAKE_ANGLE_BAK = Servo.Direction.REVERSE;\r\n    }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- TeamCode/src/main/java/org/firstinspires/ftc/teamcode/Constants.java	(revision acda570695d3162cd8ba1cce0c03a32572468c97)
+-+++ TeamCode/src/main/java/org/firstinspires/ftc/teamcode/Constants.java	(date 1615656248055)
+-@@ -17,13 +17,14 @@
+- 
+-     public static final double MOVE_SCALE_FWD = 1.5*72.0/63.75;//24in : 9in irl  9/24*4
+-     public static final double MOVE_SCALE_SRF = 1.16666667;//24in : 7in irl  7/24*4
+-+    public static final double MOVE_SCALE_ROT = 0.93;//idk
+- 
+-     public static final double ROTPOW_TO_RAD = 1/5.5;
+- 
+-     public static final double MAX_MOTORACC = 4;
+- 
+-     public static final double MOTOR_DECELL_DIST = 15;
+--    public static final double MOTOR_DECELL_ROTDIST = 1;
+-+    public static final double MOTOR_DECELL_ROTDIST = 1.5;
+- 
+-     public static final double ROBOTPOS_BLEND_FAC = 0;
+- 
+-@@ -45,6 +46,7 @@
+-         public static final String IMU = "imu";
+-         public static final String GYRO = "gyro";
+-         public static final String MOTOR_WOBBLE_LIFTER = "wobble-lifter";
+-+        public static final String SERVO_WOBBLE_GRABBER = "wobble-grabber";
+- 
+-         public static final String SERVO_OUTTAKE_ANGLE = "outtake-angle";
+-         //public static final String SERVO_OUTTAKE_ANGLE_BAK = "outtake-angle-bak";
+-@@ -62,6 +64,7 @@
+-         public static final DcMotorSimple.Direction WOBBLE_LIFTER = DcMotorSimple.Direction.FORWARD;
+- 
+-         public static final Servo.Direction OUTTAKE_ANGLE = Servo.Direction.FORWARD;
+-+        public static final Servo.Direction WOBBLE_GRABBER_ANGLE = Servo.Direction.FORWARD;
+-         //public static final Servo.Direction OUTTAKE_ANGLE_BAK = Servo.Direction.REVERSE;
+-     }
+- }
+-Index: TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/sound/Sounds.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package org.firstinspires.ftc.teamcode.hardware.sound;\r\n\r\nimport android.content.Context;\r\n\r\nimport com.qualcomm.ftccommon.SoundPlayer;\r\nimport com.qualcomm.robotcore.hardware.HardwareMap;\r\n\r\nimport java.util.HashMap;\r\n\r\npublic class Sounds {\r\n    HardwareMap hardwareMap;\r\n    Context context;\r\n    private HashMap<String,Integer> soundMap = new HashMap<>();\r\n\r\n\r\n    public Sounds (HardwareMap hardwareMa){\r\n        hardwareMap = hardwareMa;\r\n        context = hardwareMap.appContext;\r\n\r\n        addSound(\"skreem\",\"skreem\");\r\n        addSound(\"Megalovania\",\"mega\");\r\n        addSound(\"IAmRecordingSound\",\"im_recording_sound\");\r\n    }\r\n\r\n    public void stop() {\r\n        SoundPlayer player = SoundPlayer.getInstance();\r\n        player.stopPlayingAll();\r\n    }\r\n    private void addSound(String publicId, String resId) {\r\n        int id = hardwareMap.appContext.getResources().getIdentifier(resId, \"raw\", hardwareMap.appContext.getPackageName());\r\n        soundMap.put(publicId,id);\r\n    }\r\n    @SuppressWarnings(value = \"NullPointerException\")\r\n    public boolean play(String id){\r\n        if (!soundMap.containsKey(id)) return false;\r\n        int numericId = soundMap.get(id);\r\n        SoundPlayer player = SoundPlayer.getInstance();\r\n        player.startPlaying(context, numericId);\r\n        return true;\r\n    }\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/sound/Sounds.java	(revision acda570695d3162cd8ba1cce0c03a32572468c97)
+-+++ TeamCode/src/main/java/org/firstinspires/ftc/teamcode/hardware/sound/Sounds.java	(date 1615656593793)
+-@@ -20,6 +20,8 @@
+-         addSound("skreem","skreem");
+-         addSound("Megalovania","mega");
+-         addSound("IAmRecordingSound","im_recording_sound");
+-+        addSound("b1","beep");
+-+        addSound("b2","beep2");
+-     }
+- 
+-     public void stop() {

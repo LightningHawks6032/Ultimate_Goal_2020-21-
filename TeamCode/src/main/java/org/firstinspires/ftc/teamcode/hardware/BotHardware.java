@@ -27,6 +27,7 @@ public class BotHardware {
     public final AngleDcMotor wobbleLifter;
     public final AngleServo outtakeAngle;
     public final Servo wobbleGrabber;
+    public final Servo launchServo;
 
     public final BNO055IMU imu;
     public final MRGyro gyro;
@@ -55,7 +56,10 @@ public class BotHardware {
         outtakeAngle = new AngleServo(//new TandemServos(
                 getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE, Constants.MotorDirections.OUTTAKE_ANGLE)
                 //getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE_BAK, Constants.MotorDirections.OUTTAKE_ANGLE_BAK)
-        );//);
+        //)
+        ,Constants.OUTTAKE_ANGLE_SPEED,Constants.OUTTAKE_ANGLE_MIN,Constants.OUTTAKE_ANGLE_MAX);
+
+        launchServo = getServo(Constants.MapKeys.SERVO_LAUNCH,Constants.MotorDirections.LAUNCH_SERVO);
 
         imu = hardwareMap.get(BNO055IMU.class, Constants.MapKeys.IMU);
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();

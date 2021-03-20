@@ -42,6 +42,7 @@ public class DrivetrainTeleOp extends OpMode {
         double triggerR = gamepad1.right_trigger;
         double outtake = gamepad2.y?1:0;
         double intake = gamepad2.x?1:0;
+        double launch = gamepad2.right_bumper?0:0.35;
         double dv = (gamepad2.dpad_up?1:0)-(gamepad2.dpad_down?1:0);
 
         double t = getRuntime();
@@ -52,6 +53,8 @@ public class DrivetrainTeleOp extends OpMode {
         hardware.intakeMotor.setPower(Constants.INTAKE_POWER_FAC*intake);
         hardware.outtakeAngle.update(t,dv);
         tracker.updatePosition(t);
+
+        hardware.launchServo.setPosition(launch);
 
         if (gamepad2.a) hardware.wobbleGrabber.setPosition(-0.7);
         if (gamepad2.b) hardware.wobbleGrabber.setPosition(-0.3);

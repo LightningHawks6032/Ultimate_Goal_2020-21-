@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.RobotPos;
 import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
 
 @TeleOp(name = "If this is here its still working", group = "Almost Useless")
-//@Disabled
+@Disabled
 public class IsThisWorkingTeleOp extends OpMode{
     VuforiaMethods voof;
 
