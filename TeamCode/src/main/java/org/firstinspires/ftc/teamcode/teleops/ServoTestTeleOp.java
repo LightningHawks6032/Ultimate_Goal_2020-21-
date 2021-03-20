@@ -17,7 +17,7 @@ public class ServoTestTeleOp extends OpMode {
     @Override
     public void init() {
         h = new BotHardware(hardwareMap);
-        test = h.launchServo;
+        test = h.outtakeAngle.servo;
         as = new AngleServo(test,0.2,-1,1);
     }
 

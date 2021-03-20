@@ -42,7 +42,7 @@ public class DrivetrainTeleOp extends OpMode {
         double triggerR = gamepad1.right_trigger;
         double outtake = gamepad2.y?1:0;
         double intake = gamepad2.x?1:0;
-        double launch = gamepad2.right_bumper?0:0.35;
+        double launch = gamepad2.right_bumper?0.45:0.15;
         double dv = (gamepad2.dpad_up?1:0)-(gamepad2.dpad_down?1:0);
 
         double t = getRuntime();
@@ -59,8 +59,10 @@ public class DrivetrainTeleOp extends OpMode {
         if (gamepad2.a) hardware.wobbleGrabber.setPosition(-0.7);
         if (gamepad2.b) hardware.wobbleGrabber.setPosition(-0.3);
 
+        hardware.wobbleLifter.setPower(1);
         if (gamepad2.dpad_left) hardware.wobbleLifter.setPos(150);
         if (gamepad2.dpad_right) hardware.wobbleLifter.setPos(300);
+        telemetry.addLine(gamepad2.dpad_left+","+gamepad2.dpad_right);
 
         JavaHTTPServer.pathData.add(new RobotPos[]{tracker.getPos(),null});
         telemetry.addLine(tracker.getPos().toString());

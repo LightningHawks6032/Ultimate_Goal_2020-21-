@@ -15,14 +15,14 @@ public class AngleServo {
     private final double aM;
     public AngleServo(Servo servo, double s, double am, double aM) {
         this.servo = servo;
-        this.servo.scaleRange(Constants.OUTTAKE_ANGLE_MIN,Constants.OUTTAKE_ANGLE_MAX);
+        this.servo.scaleRange(am,aM);
         this.s = s;
         this.aM = aM;
         this.am = am;
     }
     public AngleServo(TandemServos servo, double s, double am, double aM) {
         this.tandemServos = servo;
-        this.tandemServos.scaleRange(Constants.OUTTAKE_ANGLE_MIN,Constants.OUTTAKE_ANGLE_MAX);
+        this.tandemServos.scaleRange(am,aM);
         this.s = s;
         this.aM = aM;
         this.am = am;
@@ -30,7 +30,7 @@ public class AngleServo {
     public void update(double t, double dv) {
         double dt = t-this.t; this.t = t;
         v += dv*dt*s;
-        v = Math.max(Math.min(aM,v),am);
+        v = Math.max(Math.min(1,v),0);
         if (servo != null) servo.setPosition(v);
         if (tandemServos != null) tandemServos.setTarget(v);
     }

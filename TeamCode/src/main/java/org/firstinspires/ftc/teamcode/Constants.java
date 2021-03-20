@@ -31,8 +31,8 @@ public class Constants {
     public static final double OUTTAKE_POWER_FAC = 1;
     public static final double INTAKE_POWER_FAC = 0.5;
 
-    public static final double OUTTAKE_ANGLE_MAX = 0.9;
-    public static final double OUTTAKE_ANGLE_MIN = 0.47;
+    public static final double OUTTAKE_ANGLE_MAX = 0.23;
+    public static final double OUTTAKE_ANGLE_MIN = 0.15;
     public static final double OUTTAKE_ANGLE_SPEED = 0.85;
 
     public static final double TARGET_THRESH_LIN = 4;
