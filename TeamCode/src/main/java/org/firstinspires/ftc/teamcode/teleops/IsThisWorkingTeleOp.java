@@ -5,17 +5,24 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.RobotPos;
+import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
+
 @TeleOp(name = "If this is here its still working", group = "Almost Useless")
-@Disabled
+//@Disabled
 public class IsThisWorkingTeleOp extends OpMode{
-    private DcMotor daMotor;
+    VuforiaMethods voof;
 
     public void init(){
-        daMotor = hardwareMap.get(DcMotor.class, "poop");
+        voof = new VuforiaMethods(hardwareMap);
+        voof.initVuforia();
     }
 
     public void loop(){
-        daMotor.setPower(gamepad1.left_stick_y);
-        telemetry.addLine("Telemetry.");
+        RobotPos p = voof.getPosition(null);
+        if (p == null)
+            telemetry.addLine("non");
+        else
+            telemetry.addLine("YEET: "+p.toString());
     }
 }
