@@ -20,8 +20,10 @@ public class Sounds {
         addSound("skreem","skreem");
         addSound("Megalovania","mega");
         addSound("IAmRecordingSound","im_recording_sound");
-        addSound("b1","beep");
-        addSound("b2","beep2");
+        addSound("e-s","beep_start");
+        addSound("e-r0","beep_rings_0");
+        addSound("e-r1","beep_rings_1");
+        addSound("e-s4","beep_rings_2");
     }
 
     public void stop() {
