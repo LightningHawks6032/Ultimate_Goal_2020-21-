@@ -240,7 +240,7 @@ public class VuforiaMethods {
             if(targetName.equals("Blue Tower Goal Target")){
                 if(newPos.y < 36) return null;
             }else if(targetName.equals("Blue Alliance Target")){
-                if(newPos.x < 36) return null;
+                if(newPos.x > -36) return null;
             }else if(targetName.equals("Front Wall Target")){
                 if(newPos.y > -36) return null;
             }
