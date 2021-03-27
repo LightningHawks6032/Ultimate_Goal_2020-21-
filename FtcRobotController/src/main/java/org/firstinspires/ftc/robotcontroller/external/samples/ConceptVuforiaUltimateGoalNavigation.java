@@ -259,8 +259,8 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
         // To restore the normal opmode structure, just un-comment the following line:
 
         //waitForStart();
-        CameraDevice.getInstance().setField("opti-zoom", "opti-zoom-on");
-        CameraDevice.getInstance().setField("zoom", 19);
+        //CameraDevice.getInstance().setField("opti-zoom", "opti-zoom-on");
+        //CameraDevice.getInstance().setField("zoom", 19);
 
         // Note: To use the remote camera preview:
         // AFTER you hit Init on the Driver Station, use the "options menu" to select "Camera Stream"
