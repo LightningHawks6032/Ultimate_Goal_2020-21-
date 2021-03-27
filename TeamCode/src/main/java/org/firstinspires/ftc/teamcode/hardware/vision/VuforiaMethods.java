@@ -237,6 +237,14 @@ public class VuforiaMethods {
             Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, RADIANS);
             RobotPos newPos = new RobotPos(-translation.get(1)/Constants.MM_PER_IN,translation.get(0)/Constants.MM_PER_IN, rotation.thirdAngle);
 
+            if(targetName.equals("Blue Tower Goal Target")){
+                if(newPos.y < 36) return null;
+            }else if(targetName.equals("Blue Alliance Target")){
+                if(newPos.x < 36) return null;
+            }else if(targetName.equals("Front Wall Target")){
+                if(newPos.y > -36) return null;
+            }
+
             return newPos;
             //return new RobotPos(translation.get(0)/Constants.MM_PER_IN, translation.get(1)/Constants.MM_PER_IN,rotation.thirdAngle);
 

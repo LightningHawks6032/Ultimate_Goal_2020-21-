@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.hardware.drive.DriveController;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
 import org.firstinspires.ftc.teamcode.hardware.drive.PositionTracker;
 import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
+import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
 
 
 @TeleOp(name = "Drive", group = "drive")
@@ -19,6 +20,7 @@ public class DrivetrainTeleOp extends OpMode {
     DriveController driveController;
     BotHardware hardware;
     PositionTracker tracker;
+    VuforiaMethods voof;
 
     public void init(){
         double t = getRuntime();
@@ -27,6 +29,8 @@ public class DrivetrainTeleOp extends OpMode {
         driveController.updateMotors(t);
         tracker = new PositionTracker(hardware,telemetry,driveController);
         tracker.init(t);
+        voof = new VuforiaMethods(hardwareMap);
+        voof.initVuforia();
 
         JavaHTTPServer.init();
         JavaHTTPServer.clear();
@@ -64,7 +68,9 @@ public class DrivetrainTeleOp extends OpMode {
         if (gamepad2.dpad_right) hardware.wobbleLifter.setPos(300);
         telemetry.addLine(gamepad2.dpad_left+","+gamepad2.dpad_right);
 
-        JavaHTTPServer.addPoint(tracker.getPos());
+        JavaHTTPServer.addPoint(tracker.getPos(),voof.getPosition(null));
+
+        telemetry.addData("Voof rotation", voof.getPosition())
 
         telemetry.addLine(tracker.getPos().toString());
 
