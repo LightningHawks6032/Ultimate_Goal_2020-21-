@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-
+@SuppressWarnings("StatementWithEmptyBody")
 public class JavaHTTPServer {
     static final int PORT = 6032;
     static ServerSocket serverConnect;
@@ -150,7 +150,10 @@ public class JavaHTTPServer {
 
     public static List<RobotPos[]> pathData = new ArrayList<>();
     public static final int pathDataNElements = 2;
+    public static volatile boolean lock;
     private static byte[] getData() {
+        while (lock);
+        lock = true;
         byte[] bytes = new byte[Integer.SIZE/8+pathData.size()*Float.SIZE/8*pathDataNElements*3];
         ByteBuffer bb = ByteBuffer.wrap(bytes);
         bb.putInt(pathDataNElements);
@@ -164,6 +167,21 @@ public class JavaHTTPServer {
                     bb.putFloat((float) pos.r);
                 }
             }
+        lock = false;
         return bytes;
+    }
+    public static void addPoint(RobotPos... p) {
+        RobotPos[] k = new RobotPos[pathDataNElements];
+        for (int i = 0; i < pathDataNElements; i++) k[i] = null;
+        for (int i = 0; i < p.length && i < pathDataNElements; i++) k[i] = p[i];
+        while (lock);
+        lock = true;
+        pathData.add(k);
+        lock = false;
+    }
+    public static void clear() {
+        while (lock);
+        pathData.clear();
+        lock = false;
     }
 }

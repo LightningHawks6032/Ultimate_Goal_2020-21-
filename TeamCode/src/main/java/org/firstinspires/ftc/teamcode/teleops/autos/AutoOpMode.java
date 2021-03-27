@@ -24,7 +24,7 @@ public class AutoOpMode extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         JavaHTTPServer.init();
-        JavaHTTPServer.pathData.clear();
+        JavaHTTPServer.clear();
 
         telemetry.addLine("STARTING");
         telemetry.update();
@@ -60,7 +60,7 @@ public class AutoOpMode extends LinearOpMode {
                 controller.update(t);
                 telemetry.update();
 
-                JavaHTTPServer.pathData.add(new RobotPos[]{controller.getPos(),visionPos});
+                JavaHTTPServer.addPoint(controller.getPos(),visionPos);
             }
             controller.driveController.setMotors_YXR(0,0,0);
         }}).start();
@@ -80,10 +80,10 @@ public class AutoOpMode extends LinearOpMode {
 
         controller.goToPos(-48,-48,0);
         controller.goToPos(-48,-48,-0.7);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         final int nRings = vuforia.getRings();
-        controller.goToPos(-48,48,0);
-        Thread.sleep(2000);
+        //controller.goToPos(-28,36,0);
+        Thread.sleep(1000);
 
         // Move depending on how many rings there are
         switch (nRings) {

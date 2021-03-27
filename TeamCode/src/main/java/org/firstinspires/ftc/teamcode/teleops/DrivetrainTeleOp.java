@@ -29,7 +29,7 @@ public class DrivetrainTeleOp extends OpMode {
         tracker.init(t);
 
         JavaHTTPServer.init();
-        JavaHTTPServer.pathData.clear();
+        JavaHTTPServer.clear();
     }
 
     //The grounds for testing other things with this program
@@ -64,7 +64,8 @@ public class DrivetrainTeleOp extends OpMode {
         if (gamepad2.dpad_right) hardware.wobbleLifter.setPos(300);
         telemetry.addLine(gamepad2.dpad_left+","+gamepad2.dpad_right);
 
-        JavaHTTPServer.pathData.add(new RobotPos[]{tracker.getPos(),null});
+        JavaHTTPServer.addPoint(tracker.getPos());
+
         telemetry.addLine(tracker.getPos().toString());
 
         telemetry.update();
