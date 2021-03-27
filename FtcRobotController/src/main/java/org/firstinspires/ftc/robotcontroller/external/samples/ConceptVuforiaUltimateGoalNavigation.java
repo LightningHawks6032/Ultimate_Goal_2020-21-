@@ -241,8 +241,7 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
         final float CAMERA_VERTICAL_DISPLACEMENT = 8.0f * mmPerInch;   // eg: Camera is 8 Inches above ground
         final float CAMERA_LEFT_DISPLACEMENT     = 4.0f * mmPerInch;     // eg: Camera 4 inches left of center line
 
-        CameraDevice.getInstance().setField("opti-zoom", "opti-zoom-on");
-        CameraDevice.getInstance().setField("zoom", 19);
+
 
         OpenGLMatrix robotFromCamera = OpenGLMatrix
                     .translation(CAMERA_FORWARD_DISPLACEMENT, CAMERA_LEFT_DISPLACEMENT, CAMERA_VERTICAL_DISPLACEMENT)
@@ -259,7 +258,9 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
         // CONSEQUENTLY do not put any driving commands in this loop.
         // To restore the normal opmode structure, just un-comment the following line:
 
-        // waitForStart();
+        //waitForStart();
+        CameraDevice.getInstance().setField("opti-zoom", "opti-zoom-on");
+        CameraDevice.getInstance().setField("zoom", 19);
 
         // Note: To use the remote camera preview:
         // AFTER you hit Init on the Driver Station, use the "options menu" to select "Camera Stream"
