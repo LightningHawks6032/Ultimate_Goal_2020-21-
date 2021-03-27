@@ -77,7 +77,7 @@ public class AutoOpMode extends LinearOpMode {
         hardware.wobbleLifter.setPower(0.2);
         hardware.wobbleLifter.setPos(150);
         hardware.wobbleGrabber.setPosition(-0.7);
-        hardware.setMotorPowerModifiers(0.5,1.2,0.175,0.15);
+        hardware.setMotorPowerModifiers(0.5,1.2,0.05,0.025);
 
         controller.goToPos(-48,-48,0,2f);
         Thread.sleep(200);
