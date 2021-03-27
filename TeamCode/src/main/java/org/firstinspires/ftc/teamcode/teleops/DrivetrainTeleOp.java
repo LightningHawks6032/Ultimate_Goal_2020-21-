@@ -70,7 +70,7 @@ public class DrivetrainTeleOp extends OpMode {
 
         JavaHTTPServer.addPoint(tracker.getPos(),voof.getPosition(null));
 
-        telemetry.addData("Voof rotation", voof.getPosition())
+        if(voof.getPosition(null) != null){telemetry.addData("Voof rotation", voof.getPosition(null).r);}
 
         telemetry.addLine(tracker.getPos().toString());
 
