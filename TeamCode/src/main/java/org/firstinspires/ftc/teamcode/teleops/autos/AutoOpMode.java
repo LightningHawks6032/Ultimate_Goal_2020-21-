@@ -39,7 +39,7 @@ public class AutoOpMode extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-        sounds.play("b1");
+        sounds.play("e-s");
 
         controller.init(getRuntime());
         controller.update(getRuntime());
@@ -91,24 +91,21 @@ public class AutoOpMode extends LinearOpMode {
         // Move depending on how many rings there are
         switch (nRings) {
             case 0:
-                sounds.play("b1");
-                sounds.play("b1");
+                sounds.play("e-r0");
                 controller.goToPos(-48,0,0,2f);
                 Thread.sleep(200);
                 controller.goToPos(-60,0,0,2f);
                 controller.putDownWobbleGoal();
                 break;
             case 1:
-                sounds.play("b1");
-                sounds.play("b2");
+                sounds.play("e-r1");
                 controller.goToPos(-48,28,0,2f);
                 Thread.sleep(200);
                 controller.goToPos(-36,28,0,2f);
                 controller.putDownWobbleGoal();
                 break;
             case 4:
-                sounds.play("b2");
-                sounds.play("b1");
+                sounds.play("e-r4");
                 controller.goToPos(-48,48,0,2f);
                 Thread.sleep(200);
                 controller.goToPos(-60,48,0,2f);
