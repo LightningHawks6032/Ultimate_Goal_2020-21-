@@ -115,8 +115,8 @@ public class AutoController {
         Thread.sleep(200);
         hardware.wobbleGrabber.setPosition(-0.7);
     }
-    public void goToPos(double x, double y, double r) throws InterruptedException {
+    public void goToPos(double x, double y, double r, float timeout) throws InterruptedException {
         setTarget(new RobotPos(x,y,r));
-        CompletionWait.autoControllerReachTarget(this);
+        CompletionWait.autoControllerReachTarget(this, timeout);
     }
 }

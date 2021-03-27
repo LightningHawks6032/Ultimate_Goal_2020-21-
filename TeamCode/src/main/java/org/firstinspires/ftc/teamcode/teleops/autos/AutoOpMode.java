@@ -77,38 +77,45 @@ public class AutoOpMode extends LinearOpMode {
         hardware.wobbleLifter.setPower(0.2);
         hardware.wobbleLifter.setPos(150);
         hardware.wobbleGrabber.setPosition(-0.7);
+        hardware.setMotorPowerModifiers(0.5,1.2,0.175,0.15);
 
-        controller.goToPos(-48,-48,0);
-        controller.goToPos(-48,-48,-0.7);
-        Thread.sleep(1000);
+        controller.goToPos(-48,-48,0,2f);
+        Thread.sleep(200);
+        controller.goToPos(-48,-48,-0.7,2f);
+        Thread.sleep(1800);
         final int nRings = vuforia.getRings();
-        //controller.goToPos(-28,36,0);
-        Thread.sleep(1000);
+        Thread.sleep(200);
+        controller.goToPos(-48,-48,0,2f);
+        Thread.sleep(200);
 
         // Move depending on how many rings there are
         switch (nRings) {
             case 0:
                 sounds.play("b1");
                 sounds.play("b1");
-                controller.goToPos(-48,0,0);
-                controller.goToPos(-60,0,0);
+                controller.goToPos(-48,0,0,2f);
+                Thread.sleep(200);
+                controller.goToPos(-60,0,0,2f);
                 controller.putDownWobbleGoal();
                 break;
             case 1:
                 sounds.play("b1");
                 sounds.play("b2");
-                controller.goToPos(-48,28,0);
-                controller.goToPos(-36,28,0);
+                controller.goToPos(-48,28,0,2f);
+                Thread.sleep(200);
+                controller.goToPos(-36,28,0,2f);
                 controller.putDownWobbleGoal();
                 break;
             case 4:
                 sounds.play("b2");
                 sounds.play("b1");
-                controller.goToPos(-48,48,0);
-                controller.goToPos(-60,48,0);
+                controller.goToPos(-48,48,0,2f);
+                Thread.sleep(200);
+                controller.goToPos(-60,48,0,2f);
                 controller.putDownWobbleGoal();
                 break;
         }
-        controller.goToPos(-48,6,0);
+        Thread.sleep(200);
+        controller.goToPos(-48,12,0, 2f);
     }
 }

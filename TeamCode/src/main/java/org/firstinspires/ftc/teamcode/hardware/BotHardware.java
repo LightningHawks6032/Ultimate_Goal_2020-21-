@@ -36,6 +36,7 @@ public class BotHardware {
     private double motorBoost = 1;
     private double motorMax = 1.2;
     private double motorMin = 0.05;
+    private double motorPowOffset = 0.1;
 
     public BotHardware(HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
@@ -89,9 +90,11 @@ public class BotHardware {
     public double getMotorBoost() { return motorBoost; }
     public double getMotorMax() { return motorMax; }
     public double getMotorMin() { return motorMin; }
-    public void setMotorPowerModifiers(double boost, double max, double min) {
+    public double getMotorPowOffset() { return motorPowOffset; }
+    public void setMotorPowerModifiers(double boost, double max, double min, double powOffset) {
         motorBoost = boost;
         motorMax = max;
         motorMin = min;
+        motorPowOffset = powOffset;
     }
 }

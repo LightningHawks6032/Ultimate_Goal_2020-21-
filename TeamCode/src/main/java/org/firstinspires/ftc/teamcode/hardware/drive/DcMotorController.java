@@ -36,8 +36,10 @@ public class DcMotorController {
     }
 
     public void setPower(double value) {
-        double pow = Math.max(Math.min(value*hardware.getMotorBoost(),hardware.getMotorMax()),-hardware.getMotorMax());
-        vTarget = (Math.abs(pow)<hardware.getMotorMin()?0:pow);
+        double pow = value * hardware.getMotorBoost();
+        pow = Math.signum(pow)*Math.max(Math.min(Math.abs(value),hardware.getMotorMax()),hardware.getMotorMin());
+        if (pow != 0) pow += Math.signum(pow)*hardware.getMotorPowOffset();
+        vTarget = pow;
     }
     public double getStepDisplacement() { return stepDisplacement; }
     public double getDist() { return currentDist; }
