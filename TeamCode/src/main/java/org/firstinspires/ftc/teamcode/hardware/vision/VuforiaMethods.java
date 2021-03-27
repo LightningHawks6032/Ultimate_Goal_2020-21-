@@ -209,7 +209,7 @@ public class VuforiaMethods {
         targetsUltimateGoal.activate();
     }
 
-    public RobotPos getPosition(RobotPos currentPosition){
+    public RobotPos getPosition(){
         String targetName = "";
 
         // check all the trackable targets to see which one (if any) is visible.

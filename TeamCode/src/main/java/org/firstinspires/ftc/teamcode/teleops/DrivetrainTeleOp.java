@@ -68,9 +68,9 @@ public class DrivetrainTeleOp extends OpMode {
         if (gamepad2.dpad_right) hardware.wobbleLifter.setPos(300);
         telemetry.addLine(gamepad2.dpad_left+","+gamepad2.dpad_right);
 
-        JavaHTTPServer.addPoint(tracker.getPos(),voof.getPosition(null));
+        JavaHTTPServer.addPoint(tracker.getPos(),voof.getPosition());
 
-        if(voof.getPosition(null) != null){telemetry.addData("Voof rotation", voof.getPosition(null).r);}
+        if(voof.getPosition() != null){telemetry.addData("Voof rotation", voof.getPosition().r);}
 
         telemetry.addLine(tracker.getPos().toString());
 

@@ -37,6 +37,7 @@ public class AutoOpMode extends LinearOpMode {
 
         telemetry.addLine("READY");
         telemetry.update();
+        sounds.play("e-s");
 
         waitForStart();
         sounds.play("e-s");
@@ -52,7 +53,7 @@ public class AutoOpMode extends LinearOpMode {
                 try { Thread.sleep(10); } catch (InterruptedException e) { break; }
                 t = getRuntime()-ts;
 
-                visionPos = vuforia.getPosition(visionPos);
+                visionPos = vuforia.getPosition();
                 if (visionPos != null) telemetry.addLine("VIZPOZ: "+visionPos.toString());
                 if (visionPos != null) telemetry.addLine("DIFF: "+(visionPos.x-controller.getPos().x)+","+(visionPos.y-controller.getPos().y));
                 telemetry.addLine("POS: "+controller.getPos().toString());
@@ -60,7 +61,8 @@ public class AutoOpMode extends LinearOpMode {
                 controller.update(t);
                 telemetry.update();
 
-                JavaHTTPServer.addPoint(controller.getPos(),visionPos);
+                if (k) JavaHTTPServer.addPoint(null,controller.getPos(),visionPos);
+                else JavaHTTPServer.addPoint(controller.getPos(),null,visionPos);
             }
             controller.driveController.setMotors_YXR(0,0,0);
         }}).start();
@@ -72,7 +74,7 @@ public class AutoOpMode extends LinearOpMode {
             requestOpModeStop();
         }
     }
-
+    boolean k = false;
     private void run() throws InterruptedException {
         hardware.wobbleLifter.setPower(0.2);
         hardware.wobbleLifter.setPos(150);
@@ -80,39 +82,39 @@ public class AutoOpMode extends LinearOpMode {
         hardware.setMotorPowerModifiers(0.5,1.2,0.05,0.025);
 
         controller.goToPos(-48,-48,0,2f);
-        Thread.sleep(200);
-        controller.goToPos(-48,-48,-0.7,2f);
-        Thread.sleep(1800);
+        controller.goToPos(-48,-48,-0.7,1f,1.8f);
         final int nRings = vuforia.getRings();
-        Thread.sleep(200);
-        controller.goToPos(-48,-48,0,2f);
-        Thread.sleep(200);
+        sounds.play("e-r"+nRings);
+        controller.goToPos(-48,-48,0,1f);
+
+        controller.goToPos(-48,0,0,4f,0.4f);
+        controller.goToPos(-42,0,0,2f);
+        k = true;
+        controller.goToNavTarget();
+        k = false;
+        controller.goToPos(-42,0,0,1f);
+        controller.goToPos(-48,0,0,2f);
 
         // Move depending on how many rings there are
+        /*
         switch (nRings) {
             case 0:
-                sounds.play("e-r0");
                 controller.goToPos(-48,0,0,2f);
-                Thread.sleep(200);
-                controller.goToPos(-60,0,0,2f);
+                controller.goToPos(-60,0,0,2f,0f);
                 controller.putDownWobbleGoal();
                 break;
             case 1:
-                sounds.play("e-r1");
                 controller.goToPos(-48,28,0,2f);
-                Thread.sleep(200);
-                controller.goToPos(-36,28,0,2f);
+                controller.goToPos(-36,28,0,2f,0f);
                 controller.putDownWobbleGoal();
                 break;
             case 4:
-                sounds.play("e-r4");
                 controller.goToPos(-48,48,0,2f);
-                Thread.sleep(200);
-                controller.goToPos(-60,48,0,2f);
+                controller.goToPos(-60,48,0,2f,0f);
                 controller.putDownWobbleGoal();
                 break;
         }
-        Thread.sleep(200);
-        controller.goToPos(-48,12,0, 2f);
+        */
+        controller.goToPos(-48,12,0,3f);
     }
 }

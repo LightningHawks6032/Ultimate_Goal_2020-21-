@@ -68,14 +68,15 @@ public class AutoTest extends LinearOpMode {
         //controller.setPos(new RobotPos(-48,-63.75,0));
         controller.setPos(new RobotPos(0,0,0));
 
-        double t = getRuntime();
+        double t;
         while (!gamepad1.x) {
+            //noinspection BusyWait
             Thread.sleep(10);
             t = getRuntime();
 
             setTarget();
 
-            visionPos = vuforia.getPosition(visionPos);
+            visionPos = vuforia.getPosition();
             //if (visionPos != null) controller.correctForVisionPos(visionPos);
             controller.update(t);
 

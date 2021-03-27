@@ -149,7 +149,7 @@ public class JavaHTTPServer {
 
 
     public static List<RobotPos[]> pathData = new ArrayList<>();
-    public static final int pathDataNElements = 2;
+    public static final int pathDataNElements = 3;
     public static volatile boolean lock;
     private static byte[] getData() {
         while (lock);

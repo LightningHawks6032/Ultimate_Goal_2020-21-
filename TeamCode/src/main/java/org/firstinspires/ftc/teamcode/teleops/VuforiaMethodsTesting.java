@@ -21,7 +21,7 @@ public class VuforiaMethodsTesting extends OpMode {
 
     public void loop(){
         telemetry.addData("Target visible", isabled.targetVisible());
-        if(isabled.getPosition(pos)!=null)telemetry.addLine(""+isabled.getPosition(pos));
+        if(isabled.getPosition()!=null)telemetry.addLine(""+isabled.getPosition());
         telemetry.update();
     }
 }

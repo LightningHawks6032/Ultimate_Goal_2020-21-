@@ -19,7 +19,7 @@ public class IsThisWorkingTeleOp extends OpMode{
     }
 
     public void loop(){
-        RobotPos p = voof.getPosition(null);
+        RobotPos p = voof.getPosition();
         if (p == null)
             telemetry.addLine("non");
         else

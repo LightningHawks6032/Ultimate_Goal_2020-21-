@@ -45,7 +45,7 @@ public class MoveForwards extends LinearOpMode{
         while (!controller.withinThreshold(5,0.3,0.5)) {
             //noinspection BusyWait
             Thread.sleep(10);
-            visionPos = vuforia.getPosition(visionPos);
+            visionPos = vuforia.getPosition();
             if (visionPos != null) controller.correctForVisionPos(visionPos);
             controller.update(getRuntime());
 

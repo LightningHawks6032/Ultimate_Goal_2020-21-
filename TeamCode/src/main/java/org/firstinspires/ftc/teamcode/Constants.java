@@ -24,9 +24,9 @@ public class Constants {
     public static final double MAX_MOTORACC = 4;
 
     public static final double MOTOR_DECELL_DIST = 15;
-    public static final double MOTOR_DECELL_ROTDIST = 1.5;
+    public static final double MOTOR_DECELL_ROTDIST = 1.9;
 
-    public static final double ROBOTPOS_BLEND_FAC = 0;
+    public static final double ROBOTPOS_BLEND_FAC = 0.1;
 
     public static final double OUTTAKE_POWER_FAC = 1;
     public static final double INTAKE_POWER_FAC = 0.5;
