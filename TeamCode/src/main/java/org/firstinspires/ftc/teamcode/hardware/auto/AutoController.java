@@ -18,7 +18,7 @@ public class AutoController {
     RobotPos pos = null;
     RobotPos vel = null;
 
-    private static final RobotPos[] navTargetStairingPos = new RobotPos[]{null,new RobotPos(-42,4,Math.PI/2),null};
+    private static final RobotPos[] navTargetStairingPos = new RobotPos[]{null,new RobotPos(-48,4,Math.PI/2),null};
 
     private boolean preventVisionUpdate = true;
 
@@ -129,7 +129,7 @@ public class AutoController {
         Thread.sleep((long) (leaveDelay*1000));
     }
     public void goToPos(double x, double y, double r, float timeout) throws InterruptedException {
-        goToPos(x, y, r, timeout, 0.2f);
+        goToPos(x, y, r, timeout, 1.0f);
     }
 
     public void goToNavTarget(int k) throws InterruptedException {

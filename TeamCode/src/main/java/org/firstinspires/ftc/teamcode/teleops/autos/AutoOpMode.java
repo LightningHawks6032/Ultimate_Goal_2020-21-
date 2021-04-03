@@ -127,9 +127,12 @@ public class AutoOpMode extends LinearOpMode {
                 break;
         }
         //*/
+        /*
         k = true;
         controller.goToNavTarget(1);
         k = false;
         controller.goToPos(-48,12,0,3f);
+
+         */
     }
 }
