@@ -23,18 +23,32 @@ public class DrivetrainTeleOp extends OpMode {
     VuforiaMethods voof;
 
     public void init(){
+        oirj("A");
         double t = getRuntime();
+        oirj("B");
         hardware = new BotHardware(hardwareMap);
+        oirj("pC");
+        oirj("Ca "+DriveMotors.MotorClipMode.CLAMP);
+        oirj("Cb "+hardware);
         driveController = new DriveController(DriveMotors.MotorClipMode.CLAMP, hardware);
+        oirj("D");
         driveController.updateMotors(t);
+        oirj("E");
         tracker = new PositionTracker(hardware,telemetry,driveController);
+        oirj("F");
         tracker.init(t);
+        oirj("G");
         voof = new VuforiaMethods(hardwareMap);
+        oirj("H");
         voof.initVuforia();
+        oirj("I");
 
         JavaHTTPServer.init();
+        oirj("J");
         JavaHTTPServer.clear();
+        oirj("K");
     }
+    void oirj(String z) { telemetry.addLine("D: "+z); telemetry.update(); }
 
     //The grounds for testing other things with this program
 
