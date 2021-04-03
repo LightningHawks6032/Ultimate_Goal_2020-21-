@@ -63,16 +63,16 @@ public class AutoController {
 
         RobotPos diff = pos.getDifferenceTo(target);
         double dX = diff.x, dY = diff.y, dR = diff.r, len = Math.sqrt(diff.x*diff.x+diff.y*diff.y);
-        //double vX = Math.signum(dX)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF,Math.abs(dX)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF);
-        //double vY = -Math.signum(dY)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD,Math.abs(dY)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD) ;
+        double vX = Math.signum(dX)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF,Math.abs(dX)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF);
+        double vY = -Math.signum(dY)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD,Math.abs(dY)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD) ;
 
-        double vX = Math.signum(dX)*Math.min(1,len/Constants.MOTOR_DECELL_DIST)/Constants.MOVE_SCALE_SRF;
-        double vY = -Math.signum(dY)*Math.min(1,len/Constants.MOTOR_DECELL_DIST)/Constants.MOVE_SCALE_FWD;
+        //double vX = Math.signum(dX)*Math.min(1,len/Constants.MOTOR_DECELL_DIST)/Constants.MOVE_SCALE_SRF;
+        //double vY = -Math.signum(dY)*Math.min(1,len/Constants.MOTOR_DECELL_DIST)/Constants.MOVE_SCALE_FWD;
 
         vX = Math.cos(pos.r)*vX-Math.sin(pos.r)*vY;
         vY = Math.cos(pos.r)*vY+Math.sin(pos.r)*vX;
-        //double vR = Math.signum(dR)*Math.max(0,Math.min(Constants.MOTOR_DECELL_ROTDIST,Math.abs(dR)))/Constants.MOTOR_DECELL_ROTDIST;
-        double vR = Math.signum(dR)*Math.min(1,Math.abs(dR)/Constants.MOTOR_DECELL_ROTDIST)/Constants.MOVE_SCALE_ROT;
+        double vR = Math.signum(dR)*Math.max(0,Math.min(Constants.MOTOR_DECELL_ROTDIST,Math.abs(dR)))/Constants.MOTOR_DECELL_ROTDIST;
+        //double vR = Math.signum(dR)*Math.min(1,Math.abs(dR)/Constants.MOTOR_DECELL_ROTDIST)/Constants.MOVE_SCALE_ROT;
 
         telemetry.addLine(String.format(Locale.ENGLISH,"%.2f %.2f %.2f",vX,vY,vR));
 
