@@ -10,6 +10,18 @@ import org.firstinspires.ftc.teamcode.hardware.auto.AutoController;
 import org.firstinspires.ftc.teamcode.hardware.sound.Sounds;
 import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
 
+/*
+  ___   _______ ______          __  __     __   ___ ____ ___    ___
+ |  _| |__   __|  ____|   /\   |  \/  |   / /  / _ \___ \__ \  |_  |
+ | |      | |  | |__     /  \  | \  / |  / /_ | | | |__) | ) |   | |
+ | |      | |  |  __|   / /\ \ | |\/| | | '_ \| | | |__ < / /    | |
+ | |      | |  | |____ / ____ \| |  | | | (_) | |_| |__) / /_    | |
+ | |_     |_|  |______/_/    \_\_|  |_|  \___/ \___/____/____|  _| |
+ |___|                                                         |___|
+
+*/
+
+
 @Autonomous(group = "autos", name = "auto")
 public class AutoOpMode extends LinearOpMode {
 
@@ -90,13 +102,13 @@ public class AutoOpMode extends LinearOpMode {
         controller.goToPos(-48,0,0,4f,0.4f);
         controller.goToPos(-42,0,0,2f);
         k = true;
-        controller.goToNavTarget();
+        controller.goToNavTarget(1);
         k = false;
         controller.goToPos(-42,0,0,1f);
         controller.goToPos(-48,0,0,2f);
 
         // Move depending on how many rings there are
-        /*
+        //*
         switch (nRings) {
             case 0:
                 controller.goToPos(-48,0,0,2f);
@@ -114,7 +126,10 @@ public class AutoOpMode extends LinearOpMode {
                 controller.putDownWobbleGoal();
                 break;
         }
-        */
+        //*/
+        k = true;
+        controller.goToNavTarget(1);
+        k = false;
         controller.goToPos(-48,12,0,3f);
     }
 }

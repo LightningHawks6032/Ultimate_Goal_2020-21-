@@ -18,6 +18,10 @@ public class AutoController {
     RobotPos pos = null;
     RobotPos vel = null;
 
+    private static final RobotPos[] navTargetStairingPos = new RobotPos[]{null,new RobotPos(-42,4,Math.PI/2),null};
+
+    private boolean preventVisionUpdate = true;
+
     public final DriveController driveController;
     final BotHardware hardware;
     final PositionTracker posTracker;
@@ -73,6 +77,7 @@ public class AutoController {
 
     //Factors a small amount of the vision position values into
     public void correctForVisionPos(RobotPos visionPos){
+        if (preventVisionUpdate) return;
         posTracker.correctForVisionPos(visionPos);
         pos = posTracker.getPos();
     }
@@ -116,7 +121,10 @@ public class AutoController {
         hardware.wobbleGrabber.setPosition(-0.7);
     }
     public void goToPos(double x, double y, double r, float timeout, float leaveDelay) throws InterruptedException {
-        setTarget(new RobotPos(x,y,r));
+        goToPos(new RobotPos(x,y,r),timeout,leaveDelay);
+    }
+    public void goToPos(RobotPos pos, float timeout, float leaveDelay) throws InterruptedException {
+        setTarget(pos);
         CompletionWait.autoControllerReachTarget(this, timeout);
         Thread.sleep((long) (leaveDelay*1000));
     }
@@ -124,7 +132,11 @@ public class AutoController {
         goToPos(x, y, r, timeout, 0.2f);
     }
 
-    public void goToNavTarget() throws InterruptedException {
-        goToPos(-42,0,Math.PI/2,2f,6f);
+    public void goToNavTarget(int k) throws InterruptedException {
+        goToPos(navTargetStairingPos[k],2f,1f);
+        preventVisionUpdate = false;
+        //setTarget(null);
+        Thread.sleep(4000L);
+        preventVisionUpdate = true;
     }
 }
