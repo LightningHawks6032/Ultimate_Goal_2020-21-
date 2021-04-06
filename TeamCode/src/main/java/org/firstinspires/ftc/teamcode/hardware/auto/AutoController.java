@@ -20,7 +20,7 @@ public class AutoController {
 
     private static final RobotPos[] navTargetStairingPos = new RobotPos[]{null,new RobotPos(-48,4,Math.PI/2),null};
 
-    private boolean preventVisionUpdate = true;
+    public boolean preventVisionUpdate = true;
 
     public final DriveController driveController;
     final BotHardware hardware;
@@ -63,15 +63,15 @@ public class AutoController {
 
         RobotPos diff = pos.getDifferenceTo(target);
         double dX = diff.x, dY = diff.y, dR = diff.r, len = Math.sqrt(diff.x*diff.x+diff.y*diff.y);
-        double vX = Math.signum(dX)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF,Math.abs(dX)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF);
-        double vY = -Math.signum(dY)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD,Math.abs(dY)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD) ;
+        double vX = Math.signum(dX)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF/hardware.getAccBoost(),Math.abs(dX)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_SRF/hardware.getAccBoost());
+        double vY = -Math.signum(dY)*Math.max(0,Math.min(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD/hardware.getAccBoost(),Math.abs(dY)))/(Constants.MOTOR_DECELL_DIST*Constants.MOVE_SCALE_FWD/hardware.getAccBoost()) ;
 
         //double vX = Math.signum(dX)*Math.min(1,len/Constants.MOTOR_DECELL_DIST)/Constants.MOVE_SCALE_SRF;
         //double vY = -Math.signum(dY)*Math.min(1,len/Constants.MOTOR_DECELL_DIST)/Constants.MOVE_SCALE_FWD;
 
         vX = Math.cos(pos.r)*vX-Math.sin(pos.r)*vY;
         vY = Math.cos(pos.r)*vY+Math.sin(pos.r)*vX;
-        double vR = Math.signum(dR)*Math.max(0,Math.min(Constants.MOTOR_DECELL_ROTDIST,Math.abs(dR)))/Constants.MOTOR_DECELL_ROTDIST;
+        double vR = Math.signum(dR)*Math.max(0,Math.min(Constants.MOTOR_DECELL_ROTDIST/hardware.getAccBoost(),Math.abs(dR)))/Constants.MOTOR_DECELL_ROTDIST*hardware.getAccBoost();
         //double vR = Math.signum(dR)*Math.min(1,Math.abs(dR)/Constants.MOTOR_DECELL_ROTDIST)/Constants.MOVE_SCALE_ROT;
 
         telemetry.addLine(String.format(Locale.ENGLISH,"%.2f %.2f %.2f",vX,vY,vR));
@@ -134,11 +134,11 @@ public class AutoController {
         Thread.sleep((long) (leaveDelay*1000));
     }
     public void goToPos(double x, double y, double r, float timeout) throws InterruptedException {
-        goToPos(x, y, r, timeout, 1.0f);
+        goToPos(x, y, r, timeout, 0.2f);
     }
 
-    public void goToNavTarget(int k) throws InterruptedException {
-        goToPos(navTargetStairingPos[k],2f,1f);
+    public void goToNavTarget(int targetId) throws InterruptedException {
+        goToPos(navTargetStairingPos[targetId],2f,0.5f);
         preventVisionUpdate = false;
         //setTarget(null);
         Thread.sleep(4000L);

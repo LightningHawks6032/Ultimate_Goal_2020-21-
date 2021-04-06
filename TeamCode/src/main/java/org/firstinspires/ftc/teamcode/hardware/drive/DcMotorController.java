@@ -31,7 +31,7 @@ public class DcMotorController {
         stepDisplacement = currentDist - lastDist;
 
         double pow = motor.getPower();
-        motor.setPower(pow+(vTarget-pow)*dt*Constants.MAX_MOTORACC);
+        motor.setPower(pow+(vTarget-pow)*dt*Constants.MAX_MOTORACC*hardware.getAccBoost());
         vTarget = motor.getPower();
     }
 

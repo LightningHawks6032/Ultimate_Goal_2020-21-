@@ -73,7 +73,7 @@ public class AutoOpMode extends LinearOpMode {
                 controller.update(t);
                 telemetry.update();
 
-                if (k) JavaHTTPServer.addPoint(null,controller.getPos(),visionPos);
+                if (!controller.preventVisionUpdate) JavaHTTPServer.addPoint(null,controller.getPos(),visionPos);
                 else JavaHTTPServer.addPoint(controller.getPos(),null,visionPos);
             }
             controller.driveController.setMotors_YXR(0,0,0);
@@ -86,53 +86,50 @@ public class AutoOpMode extends LinearOpMode {
             requestOpModeStop();
         }
     }
-    boolean k = false;
     private void run() throws InterruptedException {
         hardware.wobbleLifter.setPower(0.2);
         hardware.wobbleLifter.setPos(150);
         hardware.wobbleGrabber.setPosition(-0.7);
-        hardware.setMotorPowerModifiers(0.5,1.2,0.05,0.025);
+        hardware.setMotorPowerModifiers(1,1.2,0.08,0.04);
 
         controller.goToPos(-48,-48,0,2f);
         controller.goToPos(-48,-48,-0.7,1f,1.8f);
         final int nRings = vuforia.getRings();
         sounds.play("e-r"+nRings);
         controller.goToPos(-48,-48,0,1f);
+        controller.goToPos(-56,-48,0,1f);
 
-        controller.goToPos(-48,0,0,4f,0.4f);
+        hardware.setAccBoost(0.5);
+        controller.goToPos(-56,0,0,4f,0.4f);
         controller.goToPos(-42,0,0,2f);
-        k = true;
+        hardware.setAccBoost(1);
         controller.goToNavTarget(1);
-        k = false;
         controller.goToPos(-42,0,0,1f);
         controller.goToPos(-48,0,0,2f);
 
         // Move depending on how many rings there are
-        //*
         switch (nRings) {
             case 0:
                 controller.goToPos(-48,0,0,2f);
-                controller.goToPos(-60,0,0,2f,0f);
+                controller.goToPos(-44,0,0,2f,0f);
                 controller.putDownWobbleGoal();
+                controller.goToPos(-20,0,0,2f);
                 break;
             case 1:
                 controller.goToPos(-48,28,0,2f);
-                controller.goToPos(-36,28,0,2f,0f);
+                controller.goToPos(-20,28,0,2f,0f);
                 controller.putDownWobbleGoal();
+                controller.goToPos(-20,28,0,2f);
                 break;
             case 4:
                 controller.goToPos(-48,48,0,2f);
-                controller.goToPos(-60,48,0,2f,0f);
+                controller.setPos(new RobotPos(-41,47,-0.01));
+                controller.goToPos(-44,48,0,2f,0f);
                 controller.putDownWobbleGoal();
+                controller.goToPos(-20,48,0,2f);
                 break;
         }
-        //*/
-        /*
-        k = true;
-        controller.goToNavTarget(1);
-        k = false;
-        controller.goToPos(-48,12,0,3f);
+        controller.goToPos(-20,12,0,3f,1f);
 
-         */
     }
 }
