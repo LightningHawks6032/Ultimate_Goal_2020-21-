@@ -117,9 +117,9 @@ public class AutoOpMode extends LinearOpMode {
                 break;
             case 1:
                 controller.goToPos(-48,28,0,2f);
-                controller.goToPos(-20,28,0,2f,0f);
+                controller.goToPos(-28,28,0,2f,0f);
                 controller.putDownWobbleGoal();
-                controller.goToPos(-20,28,0,2f);
+                controller.goToPos(-28,28,0,2f);
                 break;
             case 4:
                 controller.goToPos(-48,48,0,2f);
