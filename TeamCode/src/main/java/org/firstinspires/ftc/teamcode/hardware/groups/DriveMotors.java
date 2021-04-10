@@ -54,7 +54,7 @@ public class DriveMotors {
         this.br.setPower(powerBR);
     }
 
-    public static enum MotorClipMode {
+    public enum MotorClipMode {
         UNRESTRAINED, SCALE, CLAMP
     }
 }
