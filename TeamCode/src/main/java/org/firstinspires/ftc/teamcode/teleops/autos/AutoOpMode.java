@@ -59,6 +59,7 @@ public class AutoOpMode extends LinearOpMode {
         controller.resetBasePos();
         controller.setPos(new RobotPos(-48,-63.75,0));
 
+        // This is the web server that track robot positions ~Mich
         new Thread(new Runnable() { @SuppressWarnings("BusyWait") @Override public void run() {
             double ts = getRuntime(), t = 0;
             while (t < 29.95 && !done) { //30 seconds
@@ -87,11 +88,13 @@ public class AutoOpMode extends LinearOpMode {
         }
     }
     private void run() throws InterruptedException {
+        // Setup stuff ~Mich
         hardware.wobbleLifter.setPower(0.2);
         hardware.wobbleLifter.setPos(150);
         hardware.wobbleGrabber.setPosition(-0.7);
         hardware.setMotorPowerModifiers(1,1.2,0.08,0.04);
 
+        // Moves to ring detection, detects rings, strafes(?) to moving position ~Mich
         controller.goToPos(-48,-48,0,2f);
         controller.goToPos(-48,-48,-0.7,1f,1.8f);
         final int nRings = vuforia.getRings();
@@ -99,6 +102,7 @@ public class AutoOpMode extends LinearOpMode {
         controller.goToPos(-48,-48,0,1f);
         controller.goToPos(-56,-48,0,1f);
 
+        // Drives to nav target, turns to it, detects position ~Mich
         hardware.setAccBoost(0.5);
         controller.goToPos(-56,0,0,4f,0.4f);
         controller.goToPos(-42,0,0,2f);
@@ -129,6 +133,7 @@ public class AutoOpMode extends LinearOpMode {
                 controller.goToPos(-20,48,0,2f);
                 break;
         }
+        // Park! ~Mich
         controller.goToPos(-20,12,0,3f,1f);
 
     }
