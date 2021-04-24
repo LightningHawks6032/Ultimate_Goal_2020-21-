@@ -91,7 +91,7 @@ public class AutoOpMode extends LinearOpMode {
         // Setup stuff ~Mich
         hardware.wobbleLifter.setPower(0.2);
         hardware.wobbleLifter.setPos(150);
-        hardware.wobbleGrabber.setPosition(-0.7);
+        hardware.wobbleGrabber.setPosition(-0.7); //TODO: Change position based on hardware capabilities
         hardware.setMotorPowerModifiers(1,1.2,0.08,0.04);
 
         // Moves to ring detection, detects rings, strafes(?) to moving position ~Mich
