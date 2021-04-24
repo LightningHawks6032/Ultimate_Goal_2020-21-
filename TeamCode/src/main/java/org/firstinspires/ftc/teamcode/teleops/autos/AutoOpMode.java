@@ -111,6 +111,8 @@ public class AutoOpMode extends LinearOpMode {
         controller.goToPos(-42,0,0,1f);
         controller.goToPos(-48,0,0,2f);
 
+        //TODO: ring shooting (if hardware permits)
+
         // Move depending on how many rings there are
         switch (nRings) {
             case 0:
@@ -133,8 +135,10 @@ public class AutoOpMode extends LinearOpMode {
                 controller.goToPos(-20,48,0,2f);
                 break;
         }
+
+        //TODO: second wobblegoal (if hardware permits)
+
         // Park! ~Mich
         controller.goToPos(-20,12,0,3f,1f);
-
     }
 }
