@@ -4,13 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Constants;
-import org.firstinspires.ftc.teamcode.RobotPos;
 import org.firstinspires.ftc.teamcode.debug.JavaHTTPServer;
 import org.firstinspires.ftc.teamcode.hardware.drive.DriveController;
 import org.firstinspires.ftc.teamcode.hardware.BotHardware;
-import org.firstinspires.ftc.teamcode.hardware.drive.PositionTracker;
 import org.firstinspires.ftc.teamcode.hardware.groups.DriveMotors;
-import org.firstinspires.ftc.teamcode.hardware.vision.VuforiaMethods;
 
 
 @TeleOp(name = "Drive", group = "drive")
@@ -19,8 +16,8 @@ public class DrivetrainTeleOp extends OpMode {
 
     DriveController driveController;
     BotHardware hardware;
-    PositionTracker tracker;
-    VuforiaMethods voof;
+    //PositionTracker tracker;
+    //VuforiaMethods voof;
 
     public void init(){
         oirj("A");
@@ -34,13 +31,13 @@ public class DrivetrainTeleOp extends OpMode {
         oirj("D");
         driveController.updateMotors(t);
         oirj("E");
-        tracker = new PositionTracker(hardware,telemetry,driveController);
+        //tracker = new PositionTracker(hardware,telemetry,driveController);
         oirj("F");
-        tracker.init(t);
+        //tracker.init(t);
         oirj("G");
-        voof = new VuforiaMethods(hardwareMap);
+        //voof = new VuforiaMethods(hardwareMap);
         oirj("H");
-        voof.initVuforia();
+        //voof.initVuforia();
         oirj("I");
 
         JavaHTTPServer.init();
@@ -65,28 +62,31 @@ public class DrivetrainTeleOp extends OpMode {
 
         double t = getRuntime();
 
+
         driveController.setMotors_LRX(powerL,powerR,triggerL-triggerR);
         driveController.updateMotors(t);
         hardware.outtakeMotor.setPower(Constants.OUTTAKE_POWER_FAC*outtake);
         hardware.intakeMotor.setPower(Constants.INTAKE_POWER_FAC*intake);
         hardware.outtakeAngle.update(t,dv);
-        tracker.updatePosition(t);
+        //tracker.updatePosition(t);
 
         hardware.launchServo.setPosition(launch);
 
-        if (gamepad2.a) hardware.wobbleGrabber.setPosition(-0.7);
-        if (gamepad2.b) hardware.wobbleGrabber.setPosition(-0.3);
+        hardware.wobbleGrabber.setPower(1f);
+        if (!gamepad2.a) hardware.wobbleGrabber.setPower(-1);
+        //if (gamepad2.b) hardware.wobbleGrabber.setPower(1);
 
-        hardware.wobbleLifter.setPower(1);
-        if (gamepad2.dpad_left) hardware.wobbleLifter.setPos(150);
-        if (gamepad2.dpad_right) hardware.wobbleLifter.setPos(300);
+        hardware.wobbleLifter.setPower(0.1f);
+        int pos = hardware.wobbleLifter.getPos();
+        if (gamepad2.dpad_left) hardware.wobbleLifter.setPos(pos-10);
+        if (gamepad2.dpad_right) hardware.wobbleLifter.setPos(pos+10);
         telemetry.addLine(gamepad2.dpad_left+","+gamepad2.dpad_right);
 
-        JavaHTTPServer.addPoint(tracker.getPos(),voof.getPosition());
+        //JavaHTTPServer.addPoint(tracker.getPos(),voof.getPosition());
 
-        if(voof.getPosition() != null){telemetry.addData("Voof rotation", voof.getPosition().r);}
+        //if(voof.getPosition() != null){telemetry.addData("Voof rotation", voof.getPosition().r);}
 
-        telemetry.addLine(tracker.getPos().toString());
+        //telemetry.addLine(tracker.getPos().toString());
 
         telemetry.update();
     }

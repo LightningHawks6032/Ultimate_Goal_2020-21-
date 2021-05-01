@@ -117,13 +117,14 @@ public class AutoController {
 
 
     public void putDownWobbleGoal() throws InterruptedException {
-        hardware.wobbleLifter.setPos(300);
+        hardware.wobbleLifter.setPos(200);
         Thread.sleep(1000);
-        hardware.wobbleGrabber.setPosition(-0.3);
+        hardware.wobbleGrabber.setPower(-1);
         Thread.sleep(300);
-        hardware.wobbleLifter.setPos(150);
+        hardware.wobbleLifter.setPos(100);
         Thread.sleep(200);
-        hardware.wobbleGrabber.setPosition(-0.7);
+        hardware.wobbleGrabber.setPower(1);
+        Thread.sleep(200);
     }
     public void goToPos(double x, double y, double r, float timeout, float leaveDelay) throws InterruptedException {
         goToPos(new RobotPos(x,y,r),timeout,leaveDelay);

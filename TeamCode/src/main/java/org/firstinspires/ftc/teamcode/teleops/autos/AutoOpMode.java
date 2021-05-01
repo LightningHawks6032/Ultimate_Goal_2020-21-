@@ -88,9 +88,9 @@ public class AutoOpMode extends LinearOpMode {
     }
     private void run() throws InterruptedException {
         hardware.wobbleLifter.setPower(0.2);
-        hardware.wobbleLifter.setPos(150);
-        hardware.wobbleGrabber.setPosition(-0.7);
+        hardware.wobbleLifter.setPos(100);
         hardware.setMotorPowerModifiers(1,1.2,0.08,0.04);
+        hardware.wobbleGrabber.setPower(1);
 
         controller.goToPos(-48,-48,0,2f);
         controller.goToPos(-48,-48,-0.7,1f,1.8f);
@@ -129,7 +129,7 @@ public class AutoOpMode extends LinearOpMode {
                 controller.goToPos(-20,48,0,2f);
                 break;
         }
+        hardware.wobbleLifter.setPos(0);
         controller.goToPos(-20,12,0,3f,1f);
-
     }
 }

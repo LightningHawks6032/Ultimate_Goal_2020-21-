@@ -77,8 +77,8 @@ public class FieldcentricDrivetrainTeleOp extends OpMode {
         RobotPos currentPos = tracker.getPos();
         if (gamepad1.x) tracker.setPos(new RobotPos(currentPos.x,currentPos.y,0));
 
-        if (gamepad2.a) hardware.wobbleGrabber.setPosition(-0.7);
-        if (gamepad2.b) hardware.wobbleGrabber.setPosition(-0.3);
+        if (gamepad2.a) hardware.wobbleGrabber.setPower(-1);
+        if (gamepad2.b) hardware.wobbleGrabber.setPower(1);
 
         hardware.wobbleLifter.setPower(1);
         if (gamepad2.dpad_left) hardware.wobbleLifter.setPos(150);

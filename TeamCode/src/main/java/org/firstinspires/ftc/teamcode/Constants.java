@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -71,7 +72,7 @@ public class Constants {
         public static final Servo.Direction LAUNCH_SERVO = Servo.Direction.FORWARD;
 
         public static final Servo.Direction OUTTAKE_ANGLE = Servo.Direction.FORWARD;
-        public static final Servo.Direction WOBBLE_GRABBER_ANGLE = Servo.Direction.FORWARD;
+        public static final CRServo.Direction WOBBLE_GRABBER_ANGLE = CRServo.Direction.FORWARD;
         //public static final Servo.Direction OUTTAKE_ANGLE_BAK = Servo.Direction.REVERSE;
     }
 }

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -26,7 +27,7 @@ public class BotHardware {
     public final TandemMotors outtakeMotor;
     public final AngleDcMotor wobbleLifter;
     public final AngleServo outtakeAngle;
-    public final Servo wobbleGrabber;
+    public final CRServo wobbleGrabber;
     public final Servo launchServo;
 
     public final BNO055IMU imu;
@@ -53,7 +54,9 @@ public class BotHardware {
         outtakeMotor = new TandemMotors(MOTOR_OUTTAKE_1,MOTOR_OUTTAKE_0);
 
         wobbleLifter = new AngleDcMotor(getMotor(Constants.MapKeys.MOTOR_WOBBLE_LIFTER, Constants.MotorDirections.WOBBLE_LIFTER),0);
-        wobbleGrabber = getServo(Constants.MapKeys.SERVO_WOBBLE_GRABBER, Constants.MotorDirections.WOBBLE_GRABBER_ANGLE);
+        wobbleGrabber = getServoCont(Constants.MapKeys.SERVO_WOBBLE_GRABBER, Constants.MotorDirections.WOBBLE_GRABBER_ANGLE);
+
+        wobbleLifter.setPower(0.2);
 
         outtakeAngle = new AngleServo(//new TandemServos(
                 getServo(Constants.MapKeys.SERVO_OUTTAKE_ANGLE, Constants.MotorDirections.OUTTAKE_ANGLE)
@@ -84,6 +87,11 @@ public class BotHardware {
     }
     public Servo getServo(String id, Servo.Direction direction) {
         Servo motor = hardwareMap.get(Servo.class, id);
+        motor.setDirection(direction);
+        return motor;
+    }
+    public CRServo getServoCont(String id, CRServo.Direction direction) {
+        CRServo motor = hardwareMap.get(CRServo.class, id);
         motor.setDirection(direction);
         return motor;
     }
